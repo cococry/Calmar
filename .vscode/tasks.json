@@ -1,0 +1,59 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Engine Build",
+            "windows": {
+                "command": "${workspaceFolder}/engine/build.bat"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/engine/build.sh"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/engine"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Debugger created this task."
+        },
+        {
+            "type": "shell",
+            "label": "Tests Build",
+            "windows": {
+                "command": "${workspaceFolder}/editor/build.bat"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/editor/build.sh"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/editor"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+        },
+        {
+            "type": "shell",
+            "label": "Engine & Editor Build",
+            "windows": {
+                "command": "${workspaceFolder}/scripts/build_calmar.bat"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/scripts/build_calmar.sh"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
