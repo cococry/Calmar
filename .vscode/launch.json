@@ -11,16 +11,6 @@
             "cwd": "${workspaceFolder}/bin/",
             "environment": [],
             "console": "externalTerminal",
-        },
-        {
-            "name": "(Linux) Launch",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/bin/editor",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/bin/",
-            "environment": [],
-        },
+        }
     ]
 }

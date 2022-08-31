@@ -6,7 +6,7 @@
 calmar::application* calmar::application::mInstance = nullptr;
 
 namespace calmar {
-    application::application() {
+    application::application(const windowProperties& props) {
         logging::init();
 
         CALMAR_ASSERT_MSG(mInstance == nullptr, "Tried to instantiate application more than once.");
@@ -14,7 +14,7 @@ namespace calmar {
         mInstance = this;
         mRunning = true;
 
-        CALMAR_DEBUG("Running application");
+        mWindow = window::createScoped(props);
     }
 
     application::~application() {
@@ -23,6 +23,9 @@ namespace calmar {
 
     void application::run() {
         while (mRunning) {
+            if (mWindow->closeRequested())
+                close();
+            mWindow->update();
         }
     }
 

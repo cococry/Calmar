@@ -21,4 +21,4 @@ set preDefinedMacros=-D_DEBUG -DCALMAR_EXPORT -D_CRT_SECURE_NO_WARNINGS -DGLFW_I
 echo Starting Calmar Engine build process...
 
 clang++ %sourceFiles% %thirdpartyFiles% %includeDirs% %linkerFlags% %preDefinedMacros% %compilerFlags%
-popd
+                                                                                                                                                                                                   popd

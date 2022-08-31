@@ -6,9 +6,6 @@
             "windows": {
                 "command": "${workspaceFolder}/engine/build.bat"
             },
-            "linux": {
-                "command": "${workspaceFolder}/engine/build.sh"
-            },
             "options": {
                 "cwd": "${workspaceFolder}/engine"
             },
@@ -20,12 +17,9 @@
         },
         {
             "type": "shell",
-            "label": "Tests Build",
+            "label": "Editor Build",
             "windows": {
                 "command": "${workspaceFolder}/editor/build.bat"
-            },
-            "linux": {
-                "command": "${workspaceFolder}/editor/build.sh"
             },
             "options": {
                 "cwd": "${workspaceFolder}/editor"
@@ -40,9 +34,6 @@
             "label": "Engine & Editor Build",
             "windows": {
                 "command": "${workspaceFolder}/scripts/build_calmar.bat"
-            },
-            "linux": {
-                "command": "${workspaceFolder}/scripts/build_calmar.sh"
             },
             "options": {
                 "cwd": "${workspaceFolder}"
