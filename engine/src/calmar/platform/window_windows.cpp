@@ -4,7 +4,11 @@
 
 #include "calmar/core/global_state.hpp"
 
+#include "calmar/core/application.hpp"
+
 #include "calmar/platform/opengl/wgl_load.hpp"
+
+#include "calmar/event_system/window_events.hpp"
 
 #include <glad/glad_wgl.h>
 namespace calmar {
@@ -242,7 +246,7 @@ namespace calmar {
             case WM_ERASEBKGND:
                 return 1;
             case WM_CLOSE:
-                // TODO: Dispatch event
+                application::getInstance()->evDispatcher.dispatch(windowCloseEvent());
                 return 0;
             case WM_DESTROY:
                 PostQuitMessage(0);

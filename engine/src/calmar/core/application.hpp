@@ -8,6 +8,8 @@
 #include "defines.hpp"
 #include "window.hpp"
 
+#include "calmar/event_system/event_dispatcher.hpp"
+
 namespace calmar {
 
     class CALMAR_API application {
@@ -29,6 +31,11 @@ namespace calmar {
         inline const std::shared_ptr<window>& getWindow() const {
             return mWindow;
         }
+
+        eventDispatcher evDispatcher;
+
+       private:
+        void handleEvents(const event& ev);
 
        private:
         bool mRunning = false;

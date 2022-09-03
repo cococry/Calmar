@@ -5,7 +5,9 @@
 
 #include "global_state.hpp"
 
-#include <gl/GL.h>
+#include "calmar/event_system/window_events.hpp"
+
+#include <glad/glad.h>
 
 calmar::application* calmar::application::mInstance = nullptr;
 
@@ -22,6 +24,8 @@ namespace calmar {
         gState.windowBackend = windowProps.backened;
 
         mWindow = window::createScoped(windowProps);
+
+        evDispatcher.listen(windowCloseEvent::evType, EVENT_CALLBACK(application::handleEvents));
     }
 
     application::~application() {
@@ -30,8 +34,10 @@ namespace calmar {
 
     void application::run() {
         while (mRunning) {
-            if (mWindow->closeRequested())
+            if (mWindow->closeRequested()) {
+                evDispatcher.dispatch(windowCloseEvent());
                 close();
+            }
 
             glClear(GL_COLOR_BUFFER_BIT);
             glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
@@ -39,4 +45,11 @@ namespace calmar {
             mWindow->update();
         }
     }
+
+    void application::handleEvents(const event& ev) {
+        if (COMPARE_EVENTS(ev, windowCloseEvent)) {
+            mRunning = false;
+        }
+    }
+
 }  // namespace calmar
