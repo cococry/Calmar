@@ -1,2 +1,5 @@
 call build_calmar.bat
-..\bin\calmar_editor.exe
+
+pushd ..\bin
+calmar_editor.exe
+popd
