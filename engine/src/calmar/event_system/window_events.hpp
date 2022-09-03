@@ -6,6 +6,7 @@
 
 namespace calmar {
     class windowResizeEvent : public event {
+       public:
         windowResizeEvent(u32 width, u32 height)
             : mWidth(width), mHeight(height) {
         }

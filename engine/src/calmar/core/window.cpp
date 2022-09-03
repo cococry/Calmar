@@ -1,7 +1,8 @@
 #include "window.hpp"
 
-#include "calmar/platform/window_glfw.hpp"
-#include "calmar/platform/window_windows.hpp"
+#include "calmar/platform/glfw/window_glfw.hpp"
+#include "calmar/platform/windows/window_windows.hpp"
+
 namespace calmar {
     window window::create(const windowProperties& props) {
         switch (props.backened) {

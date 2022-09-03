@@ -7,6 +7,12 @@
 
 #include "calmar/event_system/window_events.hpp"
 
+#include "calmar/input/input.hpp"
+
+#include "calmar/input/mouse_codes.hpp"
+
+#include "calmar/input/key_codes.hpp"
+
 #include <glad/glad.h>
 
 calmar::application* calmar::application::mInstance = nullptr;
@@ -26,6 +32,8 @@ namespace calmar {
         mWindow = window::createScoped(windowProps);
 
         evDispatcher.listen(windowCloseEvent::evType, EVENT_CALLBACK(application::handleEvents));
+
+        evDispatcher.listen(windowResizeEvent::evType, EVENT_CALLBACK(application::handleEvents));
     }
 
     application::~application() {
@@ -35,9 +43,10 @@ namespace calmar {
     void application::run() {
         while (mRunning) {
             if (mWindow->closeRequested()) {
-                evDispatcher.dispatch(windowCloseEvent());
                 close();
             }
+
+            CALMAR_INFO("{0}, {1}", input::getMouseX(), input::getMouseY());
 
             glClear(GL_COLOR_BUFFER_BIT);
             glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
@@ -49,6 +58,10 @@ namespace calmar {
     void application::handleEvents(const event& ev) {
         if (COMPARE_EVENTS(ev, windowCloseEvent)) {
             mRunning = false;
+        }
+        if (COMPARE_EVENTS(ev, windowResizeEvent)) {
+            const windowResizeEvent& resizeEvent = static_cast<const windowResizeEvent&>(ev);
+            glViewport(0, 0, resizeEvent.getWidth(), resizeEvent.getHeight());
         }
     }
 
