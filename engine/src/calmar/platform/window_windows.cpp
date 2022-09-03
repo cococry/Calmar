@@ -154,9 +154,10 @@ namespace calmar {
         u32 windowExStyle = WS_EX_APPWINDOW;
 
         mWindowStyle |= WS_MINIMIZEBOX;
-        mWindowStyle |= WS_MAXIMIZEBOX;
-        if (mProps.resizable)
+        if (mProps.resizable) {
+            mWindowStyle |= WS_MAXIMIZEBOX;
             mWindowStyle |= WS_THICKFRAME;
+        }
 
         RECT borderRect = {0, 0, 0, 0};
         AdjustWindowRectEx(&borderRect, mWindowStyle, 0, windowExStyle);
