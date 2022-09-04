@@ -2,8 +2,6 @@
 
 #include "calmar/core/asserting.hpp"
 
-#include "calmar/core/global_state.hpp"
-
 #include "calmar/core/application.hpp"
 
 #include "calmar/platform/opengl/wgl_load.hpp"

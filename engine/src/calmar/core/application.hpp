@@ -3,12 +3,13 @@
 
 #include <memory>
 
-#include "calmar/renderer/rendering_backend.hpp"
-
 #include "defines.hpp"
 #include "window.hpp"
 
+#include "calmar/renderer/rendering_backend.hpp"
 #include "calmar/event_system/event_dispatcher.hpp"
+
+#include "calmar/renderer/renderer.hpp"
 
 namespace calmar {
 
@@ -33,6 +34,8 @@ namespace calmar {
         }
 
         eventDispatcher evDispatcher;
+
+        renderer appRenderer;
 
        private:
         void handleEvents(const event& ev);

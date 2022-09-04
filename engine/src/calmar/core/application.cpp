@@ -3,13 +3,11 @@
 #include "logging.hpp"
 #include "asserting.hpp"
 
-#include "global_state.hpp"
-
 #include "calmar/event_system/window_events.hpp"
 
 #include "calmar/input/input.hpp"
 
-#include <glad/glad.h>
+#include "calmar/renderer/render_command.hpp"
 
 calmar::application* calmar::application::mInstance = nullptr;
 
@@ -22,9 +20,6 @@ namespace calmar {
         mInstance = this;
         mRunning = true;
 
-        gState.renderBackend = windowProps.renderBackend;
-        gState.windowBackend = windowProps.backened;
-
         mWindow = window::createScoped(windowProps);
 
         evDispatcher.listen(windowCloseEvent::evType, EVENT_CALLBACK(application::handleEvents));
@@ -32,6 +27,8 @@ namespace calmar {
         evDispatcher.listen(windowResizeEvent::evType, EVENT_CALLBACK(application::handleEvents));
 
         input::init(windowProps.backened);
+
+        appRenderer.initSubsystems(windowProps.renderBackend);
     }
 
     application::~application() {
@@ -44,8 +41,8 @@ namespace calmar {
                 close();
             }
 
-            glClear(GL_COLOR_BUFFER_BIT);
-            glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
+            renderCommand::clearBuffers(clearBuffers::colorBuffer);
+            renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
 
             mWindow->update();
 

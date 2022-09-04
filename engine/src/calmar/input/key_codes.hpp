@@ -2,8 +2,6 @@
 
 #include "calmar/core/defines.hpp"
 
-#include "calmar/core/global_state.hpp"
-
 using keyCode = u32;
 
 #define DEFINE_KEY(name, code) name = code

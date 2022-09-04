@@ -3,8 +3,6 @@
 #include "calmar/platform/glfw/glfw_input.hpp"
 #include "calmar/platform/windows/windows_input.hpp"
 
-#include "calmar/core/global_state.hpp"
-
 #include "calmar/core/logging.hpp"
 
 namespace calmar {

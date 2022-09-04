@@ -5,8 +5,6 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
-#include "calmar/core/global_state.hpp"
-
 #include "calmar/event_system/window_events.hpp"
 
 #include "calmar/core/application.hpp"
