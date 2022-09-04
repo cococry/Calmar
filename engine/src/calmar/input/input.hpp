@@ -2,9 +2,14 @@
 
 #include "calmar/core/defines.hpp"
 
+#include "calmar/core/window.hpp"
+
 namespace calmar {
+
     class input {
        public:
+        static void init(const windowingBackend& backend);
+
         static bool keyWentDown(u32 key);
 
         static bool isKeyDown(u32 key);
@@ -21,18 +26,21 @@ namespace calmar {
 
         static bool mouseButtonChanged(u32 button);
 
-        static u32 getMouseX();
+        static i32 getMouseX();
 
-        static u32 getMouseY();
+        static i32 getMouseY();
 
-        static u32 getMouseScrollX();
+        static i32 getMouseScrollX();
 
-        static u32 getMouseScrollY();
+        static i32 getMouseScrollY();
 
-        static u32 getMouseXDelta();
+        static i32 getMouseXDelta();
 
-        static u32 getMouseYDelta();
+        static i32 getMouseYDelta();
+
+        static void update();
 
        private:
+        static windowingBackend mBackend;
     };
 }  // namespace calmar

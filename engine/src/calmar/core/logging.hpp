@@ -9,15 +9,15 @@
 
 namespace calmar {
     class CALMAR_API logging {
-        public:
-            static void init();
+       public:
+        static void init();
 
-            static inline const std::shared_ptr<spdlog::logger>& getLogger() {
-                return mLogger;
-            }
+        static inline const std::shared_ptr<spdlog::logger>& getLogger() {
+            return mLogger;
+        }
 
-        private:
-            static std::shared_ptr<spdlog::logger> mLogger;
+       private:
+        static std::shared_ptr<spdlog::logger> mLogger;
     };
 }  // namespace calmar
 

@@ -9,10 +9,6 @@
 
 #include "calmar/input/input.hpp"
 
-#include "calmar/input/mouse_codes.hpp"
-
-#include "calmar/input/key_codes.hpp"
-
 #include <glad/glad.h>
 
 calmar::application* calmar::application::mInstance = nullptr;
@@ -34,6 +30,8 @@ namespace calmar {
         evDispatcher.listen(windowCloseEvent::evType, EVENT_CALLBACK(application::handleEvents));
 
         evDispatcher.listen(windowResizeEvent::evType, EVENT_CALLBACK(application::handleEvents));
+
+        input::init(windowProps.backened);
     }
 
     application::~application() {
@@ -46,12 +44,12 @@ namespace calmar {
                 close();
             }
 
-            CALMAR_INFO("{0}, {1}", input::getMouseX(), input::getMouseY());
-
             glClear(GL_COLOR_BUFFER_BIT);
             glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
 
             mWindow->update();
+
+            input::update();
         }
     }
 

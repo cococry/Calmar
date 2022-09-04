@@ -5,19 +5,19 @@
 #include <GLFW/glfw3.h>
 
 namespace calmar {
-    struct keyboardStruct {
+    struct glfwKeyboardStruct {
         bool keys[GLFW_KEY_LAST];
         bool keysChanged[GLFW_KEY_LAST];
     };
 
-    struct mouseStruct {
+    struct glfwMouseStruct {
         bool activeButtons[GLFW_KEY_LAST];
         bool changedButtons[GLFW_KEY_LAST];
 
-        double ypos = 0, xpos = 0;
-        double scrollDeltaX = 0, scrollDeltaY = 0;
-        double lastXpos = 0, lastYpos = 0;
-        double xposDelta = 0, yposDelta = 0;
+        i32 ypos = 0, xpos = 0;
+        i32 scrollDeltaX = 0, scrollDeltaY = 0;
+        i32 lastXpos = 0, lastYpos = 0;
+        i32 xposDelta = 0, yposDelta = 0;
 
         bool firstMouse = true;
     };
@@ -39,17 +39,17 @@ namespace calmar {
 
         static bool mouseButtonChanged(u32 buton);
 
-        static u32 getMouseX();
+        static i32 getMouseX();
 
-        static u32 getMouseY();
+        static i32 getMouseY();
 
-        static u32 getMouseScrollX();
+        static i32 getMouseScrollX();
 
-        static u32 getMouseScrollY();
+        static i32 getMouseScrollY();
 
-        static u32 getMouseXDelta();
+        static i32 getMouseXDelta();
 
-        static u32 getMouseYDelta();
+        static i32 getMouseYDelta();
 
         static void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -59,8 +59,10 @@ namespace calmar {
 
         static void glfwCursorCallback(GLFWwindow* window, double xpos, double ypos);
 
+        static void update();
+
        private:
-        static keyboardStruct mKeyboard;
-        static mouseStruct mMouse;
+        static glfwKeyboardStruct mKeyboard;
+        static glfwMouseStruct mMouse;
     };
 }  // namespace calmar

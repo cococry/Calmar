@@ -5,8 +5,8 @@
 #include "calmar/core/application.hpp"
 
 namespace calmar {
-    mouseStruct glfwInput::mMouse;
-    keyboardStruct glfwInput::mKeyboard;
+    glfwMouseStruct glfwInput::mMouse;
+    glfwKeyboardStruct glfwInput::mKeyboard;
 
     bool glfwInput::keyWentDown(u32 key) {
         return keyChanged(key) && mKeyboard.keys[key];
@@ -44,27 +44,27 @@ namespace calmar {
         return ret;
     }
 
-    u32 glfwInput::getMouseX() {
+    i32 glfwInput::getMouseX() {
         return mMouse.xpos;
     }
 
-    u32 glfwInput::getMouseY() {
+    i32 glfwInput::getMouseY() {
         return mMouse.ypos;
     }
 
-    u32 glfwInput::getMouseScrollX() {
+    i32 glfwInput::getMouseScrollX() {
         return mMouse.scrollDeltaX;
     }
 
-    u32 glfwInput::getMouseScrollY() {
+    i32 glfwInput::getMouseScrollY() {
         return mMouse.scrollDeltaY;
     }
 
-    u32 glfwInput::getMouseXDelta() {
+    i32 glfwInput::getMouseXDelta() {
         return mMouse.xposDelta;
     }
 
-    u32 glfwInput::getMouseYDelta() {
+    i32 glfwInput::getMouseYDelta() {
         return mMouse.xposDelta;
     }
 
@@ -131,6 +131,9 @@ namespace calmar {
         mMouse.lastYpos = ypos;
 
         application::getInstance()->evDispatcher.dispatch(mouseMovedEvent(xpos, ypos));
+    }
+
+    void glfwInput::update() {
     }
 
 }  // namespace calmar

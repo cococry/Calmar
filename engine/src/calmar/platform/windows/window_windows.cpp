@@ -10,6 +10,8 @@
 
 #include "calmar/event_system/window_events.hpp"
 
+#include "windows_input.hpp"
+
 #include <glad/glad_wgl.h>
 namespace calmar {
     windowsWindow::windowsWindow() {
@@ -264,13 +266,26 @@ namespace calmar {
             case WM_SYSKEYDOWN:
             case WM_KEYUP:
             case WM_SYSKEYUP: {
-                // TODO: Dispatch events
+                bool pressed = (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN);
+
+                u32 key = (u32)wParam;
+
+                windowsInput::processKey(key, pressed);
+
             } break;
             case WM_MOUSEMOVE: {
-                // TODO: Input
+                u32 xpos = GET_X_LPARAM(lParam);
+                u32 ypos = GET_Y_LPARAM(lParam);
+
+                windowsInput::processMouseMove(xpos, ypos);
             } break;
             case WM_MOUSEWHEEL: {
-                // TODO: Input
+                u32 yDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+                if (yDelta != 0) {
+                    yDelta = (yDelta < 0) ? -1 : 1;
+
+                    windowsInput::processMouseWheel(yDelta);
+                }
             } break;
             case WM_LBUTTONDOWN:
             case WM_RBUTTONDOWN:
@@ -278,7 +293,27 @@ namespace calmar {
             case WM_LBUTTONUP:
             case WM_RBUTTONUP:
             case WM_MBUTTONUP: {
-                // TODO: Input
+                bool pressed = msg == WM_LBUTTONDOWN || msg == WM_RBUTTONDOWN || msg == WM_MBUTTONDOWN;
+                u32 button = button::windows::Max;
+                switch (msg) {
+                    case WM_LBUTTONDOWN:
+                    case WM_LBUTTONUP:
+                        button = button::windows::Left;
+                        break;
+                    case WM_MBUTTONDOWN:
+                    case WM_MBUTTONUP:
+                        button = button::windows::Middle;
+                        break;
+                    case WM_RBUTTONDOWN:
+                    case WM_RBUTTONUP:
+                        button = button::windows::Right;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (button != button::windows::Max)
+                    windowsInput::processButton(button, pressed);
             } break;
         }
 

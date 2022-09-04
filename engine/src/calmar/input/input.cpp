@@ -5,10 +5,16 @@
 
 #include "calmar/core/global_state.hpp"
 
+#include "calmar/core/logging.hpp"
+
 namespace calmar {
+    windowingBackend input::mBackend;
+    void input::init(const windowingBackend& backend) {
+        mBackend = backend;
+    }
 
     bool input::keyWentDown(u32 key) {
-        switch (gState.windowBackend) {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::keyWentDown(key);
                 break;
@@ -21,7 +27,7 @@ namespace calmar {
     }
 
     bool input::isKeyDown(u32 key) {
-        switch (gState.windowBackend) {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::isKeyDown(key);
                 break;
@@ -34,7 +40,7 @@ namespace calmar {
     }
 
     bool input::isKeyReleased(u32 key) {
-        switch (gState.windowBackend) {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::isKeyReleased(key);
                 break;
@@ -47,7 +53,7 @@ namespace calmar {
     }
 
     bool input::keyChanged(u32 key) {
-        switch (gState.windowBackend) {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::keyChanged(key);
                 break;
@@ -60,7 +66,7 @@ namespace calmar {
     }
 
     bool input::mouseButtonWentDown(u32 button) {
-        switch (gState.windowBackend) {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::mouseButtonWentDown(button);
                 break;
@@ -73,7 +79,7 @@ namespace calmar {
     }
 
     bool input::isMouseButtonDown(u32 button) {
-        switch (gState.windowBackend) {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::isMouseButtonDown(button);
                 break;
@@ -86,7 +92,7 @@ namespace calmar {
     }
 
     bool input::isMouseButtonReleased(u32 button) {
-        switch (gState.windowBackend) {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::isMouseButtonReleased(button);
                 break;
@@ -99,7 +105,7 @@ namespace calmar {
     }
 
     bool input::mouseButtonChanged(u32 button) {
-        switch (gState.windowBackend) {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::mouseButtonChanged(button);
                 break;
@@ -111,8 +117,8 @@ namespace calmar {
         }
     }
 
-    u32 input::getMouseX() {
-        switch (gState.windowBackend) {
+    i32 input::getMouseX() {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseX();
                 break;
@@ -124,8 +130,8 @@ namespace calmar {
         }
     }
 
-    u32 input::getMouseY() {
-        switch (gState.windowBackend) {
+    i32 input::getMouseY() {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseY();
                 break;
@@ -137,8 +143,8 @@ namespace calmar {
         }
     }
 
-    u32 input::getMouseScrollX() {
-        switch (gState.windowBackend) {
+    i32 input::getMouseScrollX() {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseScrollX();
                 break;
@@ -150,8 +156,8 @@ namespace calmar {
         }
     }
 
-    u32 input::getMouseScrollY() {
-        switch (gState.windowBackend) {
+    i32 input::getMouseScrollY() {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseScrollY();
                 break;
@@ -163,8 +169,8 @@ namespace calmar {
         }
     }
 
-    u32 input::getMouseXDelta() {
-        switch (gState.windowBackend) {
+    i32 input::getMouseXDelta() {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseXDelta();
                 break;
@@ -176,13 +182,26 @@ namespace calmar {
         }
     }
 
-    u32 input::getMouseYDelta() {
-        switch (gState.windowBackend) {
+    i32 input::getMouseYDelta() {
+        switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseYDelta();
                 break;
             case windowingBackend::WINDOWS:
                 return windowsInput::getMouseYDelta();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void input::update() {
+        switch (mBackend) {
+            case windowingBackend::GLFW:
+                glfwInput::update();
+                break;
+            case windowingBackend::WINDOWS:
+                windowsInput::update();
                 break;
             default:
                 break;
