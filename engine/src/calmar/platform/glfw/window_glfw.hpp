@@ -33,10 +33,16 @@ namespace calmar {
 
         virtual bool closeRequested() const override;
 
+        virtual double getAbsoluteTime() const override;
+
        private:
         GLFWwindow* mBackendHandle;
 
-        virtual void initBackend() override;
+        double mAbsoluteTime = 0.0;
+
+       private:
+        virtual void
+        initBackend() override;
 
         virtual void shutdownBackend() override;
     };

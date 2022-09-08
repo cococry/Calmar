@@ -15,35 +15,44 @@ namespace calmar {
     application::application(const windowProperties& windowProps) {
         logging::init();
 
+        /* Singelton setup */
         CALMAR_ASSERT_MSG(mInstance == nullptr, "Tried to instantiate application more than once.");
 
         mInstance = this;
         mRunning = true;
 
+        // Creating the windowing context
         mWindow = window::createScoped(windowProps);
 
+        /* Listening to events to be handled in the "handleEvents()" method. */
         evDispatcher.listen(windowCloseEvent::evType, EVENT_CALLBACK(application::handleEvents));
 
         evDispatcher.listen(windowResizeEvent::evType, EVENT_CALLBACK(application::handleEvents));
 
+        /* Initializing backend specifc subsystems */
         input::init(windowProps.backened);
 
         appRenderer.initSubsystems(windowProps.renderBackend);
     }
 
     application::~application() {
+        // Breaking out of the application loop by calling "close()"
         close();
     }
 
     void application::run() {
+        /* Main application loop */
         while (mRunning) {
+            // Breaking out of the loop if the window is closed
             if (mWindow->closeRequested()) {
                 close();
             }
 
+            /* Temporary testing code */
             renderCommand::clearBuffers(clearBuffers::colorBuffer);
             renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
 
+            /* Updating subsystems */
             mWindow->update();
 
             input::update();
@@ -51,12 +60,16 @@ namespace calmar {
     }
 
     void application::handleEvents(const event& ev) {
+        // Checking the type of the event and handling it
         if (COMPARE_EVENTS(ev, windowCloseEvent)) {
+            // Closing the window if a close event was recived
             mRunning = false;
         }
         if (COMPARE_EVENTS(ev, windowResizeEvent)) {
+            // Setting the rendering APIs viewport to the new size of the window
+            // if a resize event was recived
             const windowResizeEvent& resizeEvent = static_cast<const windowResizeEvent&>(ev);
-            glViewport(0, 0, resizeEvent.getWidth(), resizeEvent.getHeight());
+            renderCommand::setViewport(resizeEvent.getWidth(), resizeEvent.getHeight());
         }
     }
 

@@ -5,6 +5,8 @@
 #include "event.hpp"
 
 namespace calmar {
+    /* This class is a subclass of the class "event". It is intended to be instantiated
+        if the window has been resized */
     class windowResizeEvent : public event {
        public:
         windowResizeEvent(u32 width, u32 height)

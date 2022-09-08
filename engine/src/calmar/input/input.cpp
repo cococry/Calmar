@@ -8,6 +8,7 @@
 namespace calmar {
     windowingBackend input::mBackend;
     void input::init(const windowingBackend& backend) {
+        // Setting the windowing backend or input
         mBackend = backend;
     }
 

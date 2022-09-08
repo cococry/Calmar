@@ -51,4 +51,15 @@ namespace calmar {
         }
     }
 
+    void renderCommand::setViewport(u32 width, u32 height) {
+        switch (mBackend) {
+            case renderingBackend::NONE:
+                return;
+            case renderingBackend::OPENGL:
+                glRenderCommand::setViewport(width, height);
+                break;
+            default:
+                break;
+        }
+    }
 }  // namespace calmar

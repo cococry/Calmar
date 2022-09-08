@@ -26,6 +26,8 @@ namespace calmar {
     void glfwWindow::update() {
         glfwPollEvents();
         glfwSwapBuffers(mBackendHandle);
+
+        mAbsoluteTime += glfwGetTime();
     }
 
     void glfwWindow::initBackend() {
@@ -131,6 +133,10 @@ namespace calmar {
 
     bool glfwWindow::closeRequested() const {
         return glfwWindowShouldClose(mBackendHandle);
+    }
+
+    double glfwWindow::getAbsoluteTime() const {
+        return mAbsoluteTime;
     }
 
 }  // namespace calmar

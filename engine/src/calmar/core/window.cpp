@@ -5,16 +5,21 @@
 
 namespace calmar {
     window window::create(const windowProperties& props) {
+        /* Checking the windowing backend */
         switch (props.backened) {
+            // Instantiating and returning a glfwWindow for the GLFW backend
             case windowingBackend::GLFW:
                 return glfwWindow(props);
                 break;
+            // Instantiating and returning a windowsWindow for the Win-API backend
             case windowingBackend::WINDOWS:
                 return windowsWindow(props);
             default:
+                // Returning a undefined window if no vaild windowing backend is used
                 return windowUndefined();
                 break;
         }
+        // Returning a undefined window if no vaild windowing backend is used
         return windowUndefined();
     }
 
