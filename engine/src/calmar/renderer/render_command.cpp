@@ -19,6 +19,9 @@ namespace calmar {
                 stencilBuffer = 0x00000400;
                 break;
             default:
+                colorBuffer = 0;
+                depthBuffer = 0;
+                stencilBuffer = 0;
                 break;
         }
     }

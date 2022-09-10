@@ -10,6 +10,8 @@
 
 #include "calmar/renderer/renderer.hpp"
 
+#include "calmar/renderer/rendering_backend.hpp"
+
 namespace calmar {
 
     /*  This class defines the entry point and program loop of the engine.
@@ -57,6 +59,10 @@ namespace calmar {
 
         /// @brief The universal instance of the renderer class
         renderer appRenderer;
+
+        /// @brief This variable is used to universally define
+        /// which rendering backend the application uses
+        renderingBackend renderBackend;
 
        private:
         /// @brief This method handles general events which are specific to the application like window resizing

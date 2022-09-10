@@ -21,6 +21,8 @@ namespace calmar {
         mInstance = this;
         mRunning = true;
 
+        renderBackend = windowProps.renderBackend;
+
         // Creating the windowing context
         mWindow = window::createScoped(windowProps);
 
