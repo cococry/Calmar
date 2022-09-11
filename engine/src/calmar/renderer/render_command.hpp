@@ -4,9 +4,13 @@
 
 #include "rendering_backend.hpp"
 
+#include "vertex_array.hpp"
+
 #include <glm/glm.hpp>
 
 #include <glad/glad.h>
+
+#include <memory>
 
 namespace calmar {
     /*  This struct stores definitions of clear buffers. The purpose of it is
@@ -15,7 +19,7 @@ namespace calmar {
     struct clearBuffers {
         /// @brief Initializes clearing buffers for a specific rendering backend
         /// @param backend The rendering backend to use
-        static void init(const renderingBackend& backend);
+        static void init();
 
         static u32 colorBuffer;
         static u32 depthBuffer;
@@ -43,6 +47,10 @@ namespace calmar {
         /// @param width The width of the viewport
         /// @param height The height of the viewport
         static void setViewport(u32 width, u32 height);
+
+        static void drawIndexed(u32 count);
+
+        static void drawIndexed(const std::shared_ptr<vertexArray>& va);
 
        private:
         static renderingBackend mBackend;

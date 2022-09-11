@@ -35,6 +35,26 @@ namespace calmar {
         input::init(windowProps.backened);
 
         appRenderer.initSubsystems(windowProps.renderBackend);
+
+        /* TODO: Temporary */
+
+        float vertices[] = {
+            -0.5f, -0.5f, 0.0f,
+            -0.5f, 0.5f, 0.0f,
+            0.5f, 0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f};
+
+        u32 indices[] = {0, 1, 2, 2, 3, 0};
+
+        mVertexArray = vertexArray::createRef(sizeof(float) * 3);
+
+        std::shared_ptr<vertexBuffer> vb = vertexBuffer::createRef(vertices, sizeof(vertices));
+
+        mVertexArray->addVertexBuffer(vb);
+
+        std::shared_ptr<indexBuffer> ib = indexBuffer::createRef(indices, sizeof(indices) / sizeof(u32));
+
+        mVertexArray->setIndexBuffer(ib);
     }
 
     application::~application() {
@@ -53,6 +73,8 @@ namespace calmar {
             /* Temporary testing code */
             renderCommand::clearBuffers(clearBuffers::colorBuffer);
             renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
+
+            renderCommand::drawIndexed(mVertexArray);
 
             /* Updating subsystems */
             mWindow->update();

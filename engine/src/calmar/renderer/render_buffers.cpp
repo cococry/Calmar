@@ -4,12 +4,14 @@
 
 #include "calmar/platform/opengl/gl_render_buffers.hpp"
 
+#include "calmar/core/application.hpp"
+
 namespace calmar {
     u32 renderBufferFlags::dynamicDraw;
     u32 renderBufferFlags::staticDraw;
 
-    void renderBufferFlags::init(const renderingBackend& backend) {
-        switch (backend) {
+    void renderBufferFlags::init() {
+        switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 dynamicDraw = 0x88E4;
                 staticDraw = 0x88E5;
@@ -20,7 +22,7 @@ namespace calmar {
         }
     }
 
-    const vertexBuffer& vertexBuffer::create(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw) {
+    const vertexBuffer& vertexBuffer::create(float* data, u32 size, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return glVertexBuffer(data, size, bufferFlags);
@@ -29,7 +31,7 @@ namespace calmar {
                 break;
         }
     }
-    const vertexBuffer& vertexBuffer::create(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw) {
+    const vertexBuffer& vertexBuffer::create(u32 size, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return glVertexBuffer(size, bufferFlags);
@@ -38,7 +40,7 @@ namespace calmar {
                 break;
         }
     }
-    const std::shared_ptr<vertexBuffer>& vertexBuffer::createRef(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw) {
+    const std::shared_ptr<vertexBuffer>& vertexBuffer::createRef(float* data, u32 size, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return std::make_shared<glVertexBuffer>(data, size, bufferFlags);
@@ -47,7 +49,7 @@ namespace calmar {
                 break;
         }
     }
-    const std::shared_ptr<vertexBuffer>& vertexBuffer::createRef(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw) {
+    const std::shared_ptr<vertexBuffer>& vertexBuffer::createRef(u32 size, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return std::make_shared<glVertexBuffer>(size, bufferFlags);
@@ -56,7 +58,7 @@ namespace calmar {
                 break;
         }
     }
-    const std::unique_ptr<vertexBuffer>& vertexBuffer::createScoped(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw) {
+    const std::unique_ptr<vertexBuffer>& vertexBuffer::createScoped(float* data, u32 size, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return std::make_unique<glVertexBuffer>(data, size, bufferFlags);
@@ -65,7 +67,7 @@ namespace calmar {
                 break;
         }
     }
-    const std::unique_ptr<vertexBuffer>& vertexBuffer::createScoped(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw) {
+    const std::unique_ptr<vertexBuffer>& vertexBuffer::createScoped(u32 size, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return std::make_unique<glVertexBuffer>(size, bufferFlags);
@@ -75,7 +77,7 @@ namespace calmar {
         }
     }
 
-    const indexBuffer& indexBuffer::create(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw) {
+    const indexBuffer& indexBuffer::create(u32* data, u32 count, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return glIndexBuffer(data, count, bufferFlags);
@@ -85,7 +87,7 @@ namespace calmar {
         }
     }
 
-    const std::shared_ptr<indexBuffer>& indexBuffer::createRef(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw) {
+    const std::shared_ptr<indexBuffer>& indexBuffer::createRef(u32* data, u32 count, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return std::make_shared<glIndexBuffer>(data, count, bufferFlags);
@@ -95,7 +97,7 @@ namespace calmar {
         }
     }
 
-    const std::unique_ptr<indexBuffer>& indexBuffer::createScoped(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw) {
+    const std::unique_ptr<indexBuffer>& indexBuffer::createScoped(u32* data, u32 count, u32 bufferFlags) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return std::make_unique<glIndexBuffer>(data, count, bufferFlags);

@@ -4,61 +4,84 @@
 
 #include "render_buffers.hpp"
 
+#include "render_data_types.hpp"
+
 #include <memory>
 
 #include <vector>
 
 #include <glad/glad.h>
 
-#define GL_BYTE 0x1400
-#define GL_UNSIGNED_BYTE 0x1401
-#define GL_SHORT 0x1402
-#define GL_UNSIGNED_SHORT 0x1403
-#define GL_INT 0x1404
-#define GL_UNSIGNED_INT 0x1405
-#define GL_FLOAT 0x1406
-
 namespace calmar {
-    struct renderDataTypes {
-       public:
-        static void init();
 
-       private:
-    };
+    /* This class is used to abstract away the render API specific process of creating a vertex array */
     class vertexArray {
        public:
-        static const vertexArray& create();
+        /// @brief This static function creates a renderer API specific vertex array
+        /// @param vertexStride The stride of one vertex in the vertices data in bytes
+        /// @return Returns a newly stack allocated vertex array
+        static const vertexArray& create(u32 vertexStride);
 
-        static const std::shared_ptr<vertexArray>& createRef();
+        /// @brief This static function creates a renderer API specific vertex array
+        /// @param vertexStride The stride of one vertex in the vertices data in bytes
+        /// @return Returns a newly allocated shared pointer vertex array
+        static const std::shared_ptr<vertexArray>& createRef(u32 vertexStride);
 
-        static const std::unique_ptr<vertexArray>& createScoped();
+        /// @brief This static function creates a renderer API specific vertex array
+        /// @param vertexStride The stride of one vertex in the vertices data in bytes
+        /// @return Returns a newly allocated unique pointer vertex array
+        static const std::unique_ptr<vertexArray>& createScoped(u32 vertexStride);
 
+        /// @brief This virtual member function is intended to be overwritten by subclasses.
+        /// It is used to bind the renderer ID of the vertex array in order to use it
         virtual void bind() {}
 
+        /// @brief This virtual member function is intended to be overwritten by subclasses.
+        /// It is used to unbind the renderer ID of the vertex array in order to unuse it
         virtual void unbind() {}
 
+        /// @brief This virtual member function is intended to be overwritten by subclasses.
+        /// It is used to delete the renderer ID of the vertex array which makes it unusable
         virtual void deleteId() {}
 
-        virtual void setVertexLayoutAttribute(u32 index);
+        /// @brief This virtual member function is intended to be overwritten by subclassses.
+        /// it is used to set a layout attribute of the vertex data of the assotiated vertex buffer.
+        /// @param size The count of elements in the attribute
+        /// @param stride The stride of a single vertex
+        /// @param type The type of the data in the attribute
+        /// @param normalized Defines if the data is normalized (lin alg. only)
+        virtual void setVertexLayoutAttribute(u32 size, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) {}
 
+        /// @brief This constant member function returns the list of vertex buffer assotiated with this vertex array
+        /// @return Returns the private member variable "VertexBuffers"
         inline const std::vector<std::shared_ptr<vertexBuffer>>& getVertexBuffers() const {
             return mVertexBuffers;
         }
 
+        /// @brief This constatnt member function returns the index buffer assotiated with this vertex array
+        /// @return Returns the private member variable "IndexBuffer"
         inline const std::shared_ptr<indexBuffer>& getIndexBuffer() const {
             return mIndexBufer;
         }
 
-        inline u32 getAttribOffset() const {
-            return mAttribOffset;
+        /// @brief This member function adds a vertex buffer to the vertex buffers assotiated
+        /// to this vertex array
+        /// @param buffer The vertex buffer to add to the vertex array
+        inline void addVertexBuffer(const std::shared_ptr<vertexBuffer>& buffer) {
+            mVertexBuffers.push_back(buffer);
         }
 
-        inline u32 getAttribIndex() const {
-            return mAttribIndex;
+        /// @brief This member function sets a index buffer to the assotiated index buffer
+        /// with this vertex array
+        /// @param buffer The index buffer to set to the vertex array
+        inline void setIndexBuffer(const std::shared_ptr<indexBuffer>& buffer) {
+            mIndexBufer = buffer;
         }
 
-        inline u32 geVertexStride() const {
-            return mVertexStride;
+        /// @brief This constant member function returns the renderer Id of this vertex array.
+        /// @return Returns the private member variable "Id" which is used to define the renderer Id of the vertex array
+        inline render_id getId() const {
+            return mId;
         }
 
        protected:
@@ -66,9 +89,5 @@ namespace calmar {
 
         std::vector<std::shared_ptr<vertexBuffer>> mVertexBuffers;
         std::shared_ptr<indexBuffer> mIndexBufer;
-
-        u32 mAttribOffset = 0;
-        u32 mAttribIndex = 0;
-        u32 mVertexStride = 0;
     };
 }  // namespace calmar

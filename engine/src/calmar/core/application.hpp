@@ -12,6 +12,9 @@
 
 #include "calmar/renderer/rendering_backend.hpp"
 
+// TODO: Temporary
+#include "calmar/renderer/vertex_array.hpp"
+
 namespace calmar {
 
     /*  This class defines the entry point and program loop of the engine.
@@ -79,5 +82,8 @@ namespace calmar {
         /// @brief The shared pointer window instance which represents the
         /// window in which the engine runs in.
         std::shared_ptr<window> mWindow;
+
+        // TODO: Temporary
+        std::shared_ptr<vertexArray> mVertexArray;
     };
 }  // namespace calmar

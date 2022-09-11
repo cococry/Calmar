@@ -2,6 +2,8 @@
 
 #include "calmar/platform/opengl/gl_render_command.hpp"
 
+#include "calmar/core/application.hpp"
+
 namespace calmar {
     renderingBackend renderCommand::mBackend;
 
@@ -9,8 +11,8 @@ namespace calmar {
     u32 clearBuffers::depthBuffer;
     u32 clearBuffers::stencilBuffer;
 
-    void clearBuffers::init(const renderingBackend& backend) {
-        switch (backend) {
+    void clearBuffers::init() {
+        switch (application::getInstance()->renderBackend) {
             case renderingBackend::NONE:
                 break;
             case renderingBackend::OPENGL:
@@ -64,5 +66,13 @@ namespace calmar {
             default:
                 break;
         }
+    }
+
+    void renderCommand::drawIndexed(u32 count) {
+        
+    }
+
+    void renderCommand::drawIndexed(const std::shared_ptr<vertexArray>& va) {
+
     }
 }  // namespace calmar

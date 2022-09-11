@@ -4,11 +4,14 @@
 
 #include "render_buffers.hpp"
 
+#include "render_data_types.hpp"
+
 namespace calmar {
     void renderer::initSubsystems(const renderingBackend& backend) {
-        clearBuffers::init(backend);
+        clearBuffers::init();
+        renderBufferFlags::init();
+        renderDataTypes::init();
         renderCommand::init(backend);
-        renderBufferFlags::init(backend);
     }
 
 }  // namespace calmar
