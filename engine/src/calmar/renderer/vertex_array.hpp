@@ -17,20 +17,23 @@ namespace calmar {
     /* This class is used to abstract away the render API specific process of creating a vertex array */
     class vertexArray {
        public:
+        vertexArray() {}
+        virtual ~vertexArray() {}
+
         /// @brief This static function creates a renderer API specific vertex array
         /// @param vertexStride The stride of one vertex in the vertices data in bytes
         /// @return Returns a newly stack allocated vertex array
-        static const vertexArray& create(u32 vertexStride);
+        static vertexArray create(u32 vertexStride);
 
         /// @brief This static function creates a renderer API specific vertex array
         /// @param vertexStride The stride of one vertex in the vertices data in bytes
         /// @return Returns a newly allocated shared pointer vertex array
-        static const std::shared_ptr<vertexArray>& createRef(u32 vertexStride);
+        static std::shared_ptr<vertexArray> createRef(u32 vertexStride);
 
         /// @brief This static function creates a renderer API specific vertex array
         /// @param vertexStride The stride of one vertex in the vertices data in bytes
         /// @return Returns a newly allocated unique pointer vertex array
-        static const std::unique_ptr<vertexArray>& createScoped(u32 vertexStride);
+        static std::unique_ptr<vertexArray> createScoped(u32 vertexStride);
 
         /// @brief This virtual member function is intended to be overwritten by subclasses.
         /// It is used to bind the renderer ID of the vertex array in order to use it

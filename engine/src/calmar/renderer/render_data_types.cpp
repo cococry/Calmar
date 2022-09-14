@@ -9,8 +9,10 @@ namespace calmar {
     u32 renderDataTypes::unsignedShort16;
     u32 renderDataTypes::int32;
     u32 renderDataTypes::unsignedInt32;
+    u32 renderDataTypes::float32;
 
-    void renderDataTypes::init() {
+    void
+    renderDataTypes::init() {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 byte8 = 0x1400;

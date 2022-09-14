@@ -5,7 +5,6 @@
 namespace calmar {
     /* This struct is used to abstract data types from renderer APIs*/
     struct renderDataTypes {
-       public:
         /// @brief Initializes the static member variables
         static void init();
 
@@ -16,7 +15,5 @@ namespace calmar {
         static u32 int32;
         static u32 unsignedInt32;
         static u32 float32;
-
-       private:
     };
 }  // namespace calmar

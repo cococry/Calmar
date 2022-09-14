@@ -18,20 +18,23 @@ namespace calmar {
     /* This class is used to abstract the rendering API specific process of createing a vertex buffer into a class. */
     class vertexBuffer {
        public:
+        vertexBuffer() {}
+        virtual ~vertexBuffer() {}
+
         /// @brief This static function creates a vertex buffer with the correct rendering APi that is used
         /// in the engine.
         /// @param data The data to pass into the vertex buffer
         /// @param size  The size of the data for the buffer
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly stack allocated allocated vertex buffer
-        static const vertexBuffer& create(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw);
+        static vertexBuffer create(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw);
 
         /// @brief This static function creates a vertex buffer with the correct rendering APi that is used
         /// in the engine.
         /// @param size  The size of the data for the buffer
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly stack allocated allocated vertex buffer
-        static const vertexBuffer& create(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw);
+        static vertexBuffer create(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw);
 
         /// @brief This static function creates a shared pointer vertex buffer with the correct rendering APi that is used
         /// in the engine.
@@ -39,21 +42,21 @@ namespace calmar {
         /// @param size  The size of the data for the buffer
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly allocated allocated shared pointer vertex buffer
-        static const std::shared_ptr<vertexBuffer>& createRef(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw);
+        static std::shared_ptr<vertexBuffer> createRef(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw);
 
         /// @brief This static function creates a shared pointer vertex buffer with the correct rendering APi that is used
         /// in the engine.
         /// @param size  The size of the data for the buffer
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly allocated allocated shared pointer vertex buffer
-        static const std::shared_ptr<vertexBuffer>& createRef(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw);
+        static std::shared_ptr<vertexBuffer> createRef(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw);
 
         /// @brief This static function creates a unique pointer buffer with the correct rendering APi that is used
         /// in the engine.
         /// @param size  The size of the data for the buffer
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly allocated allocated unique pointer vertex buffer
-        static const std::unique_ptr<vertexBuffer>& createScoped(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw);
+        static std::unique_ptr<vertexBuffer> createScoped(float* data, u32 size, u32 bufferFlags = renderBufferFlags::staticDraw);
 
         /// @brief This static function creates a unique pointer buffer with the correct rendering APi that is used
         /// in the engine.
@@ -61,7 +64,7 @@ namespace calmar {
         /// @param size  The size of the data for the buffer
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly allocated allocated unique pointer vertex buffer
-        static const std::unique_ptr<vertexBuffer>& createScoped(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw);
+        static std::unique_ptr<vertexBuffer> createScoped(u32 size, u32 bufferFlags = renderBufferFlags::dynamicDraw);
 
         /// @brief This virtual member function is intended to be overwritten by subclasses. It is used to bind the
         /// render ID of the vertex buffer to use it
@@ -95,13 +98,16 @@ namespace calmar {
 
     class indexBuffer {
        public:
+        indexBuffer() {}
+        virtual ~indexBuffer() {}
+
         /// @brief This static function creates a index buffer with the correct rendering APi that is used
         /// in the engine.
         /// @param data The data to pass into the index buffer
         /// @param size The count of the elements in the data
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly stack allocated allocated index buffer
-        static const indexBuffer& create(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw);
+        static indexBuffer create(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw);
 
         /// @brief This static function creates a shared pointer index buffer with the correct rendering APi that is used
         /// in the engine.
@@ -109,7 +115,7 @@ namespace calmar {
         /// @param size The count of the elements in the data
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly allocated allocated shared pointer index buffer
-        static const std::shared_ptr<indexBuffer>& createRef(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw);
+        static std::shared_ptr<indexBuffer> createRef(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw);
 
         /// @brief This static function creates a shared pointer index buffer with the correct rendering APi that is used
         /// in the engine.
@@ -117,7 +123,7 @@ namespace calmar {
         /// @param size The count of the elements in the data
         /// @param bufferFlags Flags for how to treat the buffer data
         /// @return Returns a newly allocated allocated unique pointer index buffer
-        static const std::unique_ptr<indexBuffer>& createScoped(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw);
+        static std::unique_ptr<indexBuffer> createScoped(u32* data, u32 count, u32 bufferFlags = renderBufferFlags::staticDraw);
 
         /// @brief This virtual member function is intended to be overwritten by subclasses. It is used to bind the
         /// render ID of the index buffer to use it

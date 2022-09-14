@@ -46,7 +46,7 @@ namespace calmar {
 
         u32 indices[] = {0, 1, 2, 2, 3, 0};
 
-        mVertexArray = vertexArray::createRef(sizeof(float) * 3);
+        mVertexArray = vertexArray::createRef(3);
 
         std::shared_ptr<vertexBuffer> vb = vertexBuffer::createRef(vertices, sizeof(vertices));
 
@@ -55,6 +55,8 @@ namespace calmar {
         std::shared_ptr<indexBuffer> ib = indexBuffer::createRef(indices, sizeof(indices) / sizeof(u32));
 
         mVertexArray->setIndexBuffer(ib);
+
+        mVertexArray->setVertexLayoutAttribute(3);
     }
 
     application::~application() {

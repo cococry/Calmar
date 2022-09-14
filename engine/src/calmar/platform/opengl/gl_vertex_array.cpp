@@ -1,5 +1,7 @@
 #include "gl_vertex_array.hpp"
 
+#include "calmar/core/asserting.hpp"
+
 namespace calmar {
     glVertexArray::glVertexArray(u32 vertexStride) {
         // Setting the member variable vertex stride
@@ -40,11 +42,13 @@ namespace calmar {
             finalOffset = mAttribOffset * sizeof(i16);
         } else if (type == renderDataTypes::int32 || type == renderDataTypes::unsignedInt32 || type == renderDataTypes::float32) {
             finalStride = _stride * sizeof(i32);
-            finalOffset = _stride * sizeof(i32);
+            finalOffset = mAttribOffset * sizeof(i32);
         } else {
+            CALMAR_ASSERT_MSG(false, "Tried to set vertex layout attribute with unknown data type");
         }
 
-        glVertexAttribPointer(mAttribIndex, size, type, normalized, finalStride, (void*)finalOffset);
+        void* finalOffsetGl = (void*)(uintptr_t)(finalOffset);
+        glVertexAttribPointer(mAttribIndex, size, type, normalized, finalStride, finalOffsetGl);
         glEnableVertexAttribArray(mAttribIndex++);
         mAttribOffset += size;
     }

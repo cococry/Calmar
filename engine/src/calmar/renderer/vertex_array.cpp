@@ -5,7 +5,7 @@
 #include "calmar/platform/opengl/gl_vertex_array.hpp"
 
 namespace calmar {
-    const vertexArray& vertexArray::create(u32 vertexStride) {
+    vertexArray vertexArray::create(u32 vertexStride) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return glVertexArray(vertexStride);
@@ -13,9 +13,10 @@ namespace calmar {
             default:
                 break;
         }
+        return vertexArray();
     }
 
-    const std::shared_ptr<vertexArray>& vertexArray::createRef(u32 vertexStride) {
+    std::shared_ptr<vertexArray> vertexArray::createRef(u32 vertexStride) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return std::make_shared<glVertexArray>(vertexStride);
@@ -23,9 +24,11 @@ namespace calmar {
             default:
                 break;
         }
+
+        return std::make_shared<vertexArray>();
     }
 
-    const std::unique_ptr<vertexArray>& vertexArray::createScoped(u32 vertexStride) {
+    std::unique_ptr<vertexArray> vertexArray::createScoped(u32 vertexStride) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
                 return std::make_unique<glVertexArray>(vertexStride);
@@ -33,5 +36,6 @@ namespace calmar {
             default:
                 break;
         }
+        return std::make_unique<vertexArray>();
     }
 }  // namespace calmar

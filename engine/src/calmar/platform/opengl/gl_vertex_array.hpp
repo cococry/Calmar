@@ -32,8 +32,8 @@ namespace calmar {
         }
 
        private:
-        u32 mAttribOffset;
-        u32 mAttribIndex;
-        u32 mVertexStride;
+        u32 mAttribOffset = 0;
+        u32 mAttribIndex = 0;
+        u32 mVertexStride = 0;
     };
 }  // namespace calmar
