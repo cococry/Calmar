@@ -14,6 +14,7 @@
 
 // TODO: Temporary
 #include "calmar/renderer/vertex_array.hpp"
+#include "calmar/renderer/shader.hpp"
 
 namespace calmar {
 
@@ -85,5 +86,7 @@ namespace calmar {
 
         // TODO: Temporary
         std::shared_ptr<vertexArray> mVertexArray;
+
+        std::shared_ptr<shader> mShader;
     };
 }  // namespace calmar

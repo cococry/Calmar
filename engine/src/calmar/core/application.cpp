@@ -57,6 +57,8 @@ namespace calmar {
         mVertexArray->setIndexBuffer(ib);
 
         mVertexArray->setVertexLayoutAttribute(3);
+
+        mShader = shader::createRef("../../../../editor/assets/shaders/default_vertex.glsl", "../../../../editor/assets/shaders/default_fragment.glsl");
     }
 
     application::~application() {
@@ -76,7 +78,9 @@ namespace calmar {
             renderCommand::clearBuffers(clearBuffers::colorBuffer);
             renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
 
+            mShader->bind();
             renderCommand::drawIndexed(mVertexArray);
+            mShader->unbind();
 
             /* Updating subsystems */
             mWindow->update();

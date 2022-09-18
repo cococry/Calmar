@@ -2,6 +2,8 @@
 
 #include "calmar/core/application.hpp"
 
+#include <glad/glad.h>
+
 namespace calmar {
     u32 renderDataTypes::byte8;
     u32 renderDataTypes::unsignedByte8;
