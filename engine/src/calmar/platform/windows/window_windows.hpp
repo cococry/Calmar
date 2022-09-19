@@ -19,7 +19,7 @@ namespace calmar {
 
         ~windowsWindow();
 
-        virtual void update() override;
+        virtual void update(bool updateAbsoulteTime = false) override;
 
         virtual void setWidth(u32 width) override;
 

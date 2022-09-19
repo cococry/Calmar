@@ -58,7 +58,7 @@ namespace calmar {
 
         mVertexArray->setVertexLayoutAttribute(3);
 
-        mShader = shader::createRef("../../../../editor/assets/shaders/default_vertex.glsl", "../../../../editor/assets/shaders/default_fragment.glsl");
+        mShader = shader::createRef("../engine/assets/shaders/default_vertex.glsl", "../engine/assets/shaders/default_fragment.glsl");
     }
 
     application::~application() {

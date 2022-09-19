@@ -70,10 +70,10 @@ namespace calmar {
         if (!compileSuccess) {
             glGetShaderInfoLog(shader, 512, nullptr, infoLog);
 
-            CALMAR_ERROR("Failed to compile {0} shader of program {1}", shaderName, mId);
+            CALMAR_ERROR("Failed to compile {0} shader", shaderName);
             CALMAR_TRACE("{0}", infoLog);
         } else {
-            CALMAR_INFO("Successfully compiled {0} shader of program {1}", shaderName, mId);
+            CALMAR_INFO("Successfully compiled {0} shader", shaderName);
         }
 
         return shader;

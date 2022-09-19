@@ -23,11 +23,12 @@ namespace calmar {
         shutdownBackend();
     }
 
-    void glfwWindow::update() {
+    void glfwWindow::update(bool updateAbsoulteTime) {
         glfwPollEvents();
         glfwSwapBuffers(mBackendHandle);
 
-        mAbsoluteTime += glfwGetTime();
+        if (updateAbsoulteTime)
+            mAbsoluteTime += glfwGetTime();
     }
 
     void glfwWindow::initBackend() {

@@ -25,7 +25,7 @@ namespace calmar {
         shutdownBackend();
     }
 
-    void windowsWindow::update() {
+    void windowsWindow::update(bool updateAbsoulteTime) {
         updateMessages();
 
         if (mProps.renderBackend == renderingBackend::OPENGL) {

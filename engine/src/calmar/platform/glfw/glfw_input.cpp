@@ -113,6 +113,8 @@ namespace calmar {
     void glfwInput::glfwScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
         mMouse.scrollDeltaX = xoffset;
         mMouse.scrollDeltaY = yoffset;
+
+        application::getInstance()->evDispatcher.dispatch(mouseScrolledEvent(xoffset, yoffset));
     }
 
     void glfwInput::glfwCursorCallback(GLFWwindow* window, double xpos, double ypos) {

@@ -15,7 +15,7 @@ namespace calmar {
 
         ~glfwWindow();
 
-        virtual void update() override;
+        virtual void update(bool updateAbsoluteTime = false) override;
 
         virtual void setWidth(u32 width) override;
 
