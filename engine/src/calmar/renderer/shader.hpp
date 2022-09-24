@@ -5,6 +5,8 @@
 #include <memory>
 #include <string>
 
+#include <glm/glm.hpp>
+
 namespace calmar {
     class shader {
        public:
@@ -22,6 +24,17 @@ namespace calmar {
         virtual void unbind() {}
 
         virtual void deleteId() {}
+
+        virtual void setMatrix4f(const std::string& name, const glm::mat4& value) {}
+        virtual void setMatrix3f(const std::string& name, const glm::mat3& value) {}
+        virtual void setMatrix2f(const std::string& name, const glm::mat2& value) {}
+
+        virtual void setVector4f(const std::string& name, const glm::vec4& value) {}
+        virtual void setVector3f(const std::string& name, const glm::vec3& value) {}
+        virtual void setVector2f(const std::string& name, const glm::vec2& value) {}
+
+        virtual void setInt(const std::string& name, int value) {}
+        virtual void setFloat(const std::string& name, float value) {}
 
         inline render_id getId() const {
             return mId;

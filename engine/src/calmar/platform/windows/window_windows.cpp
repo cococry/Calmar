@@ -256,11 +256,11 @@ namespace calmar {
                 PostQuitMessage(0);
                 return 0;
             case WM_SIZE: {
-                // RECT r;
-                // GetClientRect(window, &r);
-                // u32 width = r.right - r.left;
-                // u32 height = r.bottom - r.top;
-
+                RECT r;
+                GetClientRect(window, &r);
+                u32 width = r.right - r.left;
+                u32 height = r.bottom - r.top;
+                application::getInstance()->evDispatcher.dispatch(windowResizeEvent(width, height));
                 // TODO: Dispatch event
             } break;
             case WM_KEYDOWN:

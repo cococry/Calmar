@@ -4,6 +4,7 @@
 #include "calmar/core/logging.hpp"
 
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace calmar {
     glShader::glShader(const std::string& vertexPath, const std::string& fragmentPath, const std::string& geometryPath) {
@@ -37,6 +38,31 @@ namespace calmar {
     }
     void glShader::deleteId() {
         glDeleteProgram(mId);
+    }
+
+    void glShader::setMatrix4f(const std::string& name, const glm::mat4& value) {
+        glUniformMatrix4fv(glGetUniformLocation(mId, name.c_str()), 1, false, glm::value_ptr(value));
+    }
+    void glShader::setMatrix3f(const std::string& name, const glm::mat3& value) {
+        glUniformMatrix3fv(glGetUniformLocation(mId, name.c_str()), 1, false, glm::value_ptr(value));
+    }
+    void glShader::setMatrix2f(const std::string& name, const glm::mat2& value) {
+        glUniformMatrix2fv(glGetUniformLocation(mId, name.c_str()), 1, false, glm::value_ptr(value));
+    }
+    void glShader::setVector4f(const std::string& name, const glm::vec4& value) {
+        glUniform4fv(glGetUniformLocation(mId, name.c_str()), 1, glm::value_ptr(value));
+    }
+    void glShader::setVector3f(const std::string& name, const glm::vec3& value) {
+        glUniform3fv(glGetUniformLocation(mId, name.c_str()), 1, glm::value_ptr(value));
+    }
+    void glShader::setVector2f(const std::string& name, const glm::vec2& value) {
+        glUniform2fv(glGetUniformLocation(mId, name.c_str()), 1, glm::value_ptr(value));
+    }
+    void glShader::setInt(const std::string& name, int value) {
+        glUniform1i(glGetUniformLocation(mId, name.c_str()), value);
+    }
+    void glShader::setFloat(const std::string& name, float value) {
+        glUniform1f(glGetUniformLocation(mId, name.c_str()), value);
     }
 
     render_id glShader::compileShader(unsigned int shaderType, const std::string& shaderSource) {

@@ -15,11 +15,11 @@
 
 // Checks if a given condition is met and if t is not,
 // it breaks the debugger and prints out a given message
-#define CALMAR_ASSERT_MSG(cond, msg)                                                                                     \
-    {                                                                                                                    \
-        if (cond) {                                                                                                      \
-        } else {                                                                                                         \
-            CALMAR_CRITICAL("Assertion Failed: '{0}' in file '{1}' on line {2}. '{3}'", #cond, __FILE__, __LINE__, msg); \
-            __debugbreak();                                                                                              \
-        }                                                                                                                \
+#define CALMAR_ASSERT_MSG(cond, ...)                                                                                             \
+    {                                                                                                                            \
+        if (cond) {                                                                                                              \
+        } else {                                                                                                                 \
+            CALMAR_CRITICAL("Assertion Failed: '{0}' in file '{1}' on line {2}. '{3}'", #cond, __FILE__, __LINE__, __VA_ARGS__); \
+            __debugbreak();                                                                                                      \
+        }                                                                                                                        \
     }

@@ -5,6 +5,8 @@
 
 #include "calmar/core/logging.hpp"
 
+#include "key_codes.hpp"
+
 namespace calmar {
     windowingBackend input::mBackend;
     void input::init(const windowingBackend& backend) {
