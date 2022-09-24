@@ -10,6 +10,8 @@
 #include "calmar/core/application.hpp"
 #include "glfw_input.hpp"
 
+#include <stb_image.h>
+
 namespace calmar {
     glfwWindow::glfwWindow() {
         CALMAR_ASSERT_MSG(glfwInit(), "Failed to initialize GLFW.");
@@ -72,6 +74,11 @@ namespace calmar {
         glfwSetMouseButtonCallback(mBackendHandle, glfwInput::glfwButtonCallback);
         glfwSetCursorPosCallback(mBackendHandle, glfwInput::glfwCursorCallback);
         glfwSetScrollCallback(mBackendHandle, glfwInput::glfwScrollCallback);
+
+        GLFWimage images[1];
+        images[0].pixels = stbi_load("../git-assets/branding_logo.png", &images[0].width, &images[0].height, 0, 4);  // rgba channels
+        glfwSetWindowIcon(mBackendHandle, 1, images);
+        stbi_image_free(images[0].pixels);
 
         glfwSetWindowPos(mBackendHandle, mProps.xpos, mProps.ypos);
 
