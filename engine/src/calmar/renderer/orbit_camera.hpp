@@ -25,9 +25,11 @@ namespace calmar {
         float oribtDistance = 10.0f;
         float pitch = 0.0f, yaw = 0.0f;
 
-        float viewportWidth = 1920, viewportHeight = 1080;
+        float viewportWidth = 1280, viewportHeight = 720;
 
         float rotatationSpeed = 0.8f;
+
+        glm::vec2 initialMousePos = glm::vec2(0.0f);
     };
 
     class CALMAR_API orbitCamera {

@@ -26,11 +26,9 @@ namespace calmar {
 
     void orbitCamera::update() {
         if (input::isKeyDown(API_CODE(key::glfw::LeftAlt, key::windows::Lmenu))) {
-            glm::vec2 mouseDelta = {input::getMouseXDelta(), input::getMouseYDelta()};
-            if (mouseDelta.x != 0)
-                mouseDelta.x *= application::getInstance()->getDeltaTime();
-            if (mouseDelta.y != 0)
-                mouseDelta.y *= application::getInstance()->getDeltaTime();
+            glm::vec2 mousePos = {input::getMouseX(), input::getMouseY()};
+            glm::vec2 mouseDelta = (mousePos - mData.initialMousePos) * 0.009f;
+            mData.initialMousePos = mousePos;
 
             if (input::isMouseButtonDown(API_CODE(button::glfw::Middle, button::windows::Middle))) {
                 mousePan(mouseDelta);
@@ -93,9 +91,9 @@ namespace calmar {
 
     void orbitCamera::mouseZoom(float delta) {
         mData.oribtDistance -= delta * getZoomSpeed();
-        if (mData.oribtDistance < 1.0f) {
-            mData.focalPoint += getForwardDir();
-            mData.oribtDistance = 1.0f;
+
+        if (mData.oribtDistance < 0.5f) {
+            mData.oribtDistance = 0.5f;
         }
     }
 
