@@ -4,18 +4,15 @@
 
 #include "defines.hpp"
 #include "window.hpp"
+#include "application_attachment.hpp"
 
-#include "calmar/renderer/rendering_backend.hpp"
 #include "calmar/event_system/event_dispatcher.hpp"
 
 #include "calmar/renderer/renderer.hpp"
-
+#include "calmar/renderer/rendering_backend.hpp"
 #include "calmar/renderer/rendering_backend.hpp"
 
-// TODO: Temporary
-#include "calmar/renderer/vertex_array.hpp"
-#include "calmar/renderer/shader.hpp"
-#include "calmar/renderer/texture.hpp"
+#include <vector>
 
 namespace calmar {
 
@@ -40,6 +37,10 @@ namespace calmar {
         /// runs when the engine is running.
         void run();
 
+        void addAttachment(applicationAttachment* attachment);
+
+        void removeAttachment(applicationAttachment* attachment);
+
         /// @brief Closes the application by setting the "running" member variable to false and with that exits out
         /// of the main running loop.
         inline void close() {
@@ -57,6 +58,10 @@ namespace calmar {
         /// @return The member variable "window" which is a shared pointer.
         inline const std::shared_ptr<window>& getWindow() const {
             return mWindow;
+        }
+
+        inline float getDeltaTime() const {
+            return mDeltaTime;
         }
 
         /// @brief The universal instance of the event dispatcher to dispatch evnts in the engine
@@ -78,6 +83,9 @@ namespace calmar {
        private:
         bool mRunning = false;
 
+        float mLastFrameTime = 0.0f;
+        float mDeltaTime = 0.0f;
+
         /// @brief Instance of the application to handle singelton behaviour.
         static application* mInstance;
 
@@ -85,11 +93,6 @@ namespace calmar {
         /// window in which the engine runs in.
         std::shared_ptr<window> mWindow;
 
-        // TODO: Temporary
-        std::shared_ptr<vertexArray> mVertexArray;
-
-        std::shared_ptr<shader> mShader;
-
-        std::shared_ptr<texture2d> mTexture;
+        std::vector<applicationAttachment*> mAttachements;
     };
 }  // namespace calmar

@@ -13,7 +13,7 @@ namespace calmar {
         std::string filepath;
     };
 
-    class texture2d {
+    class CALMAR_API texture2d {
        public:
         static texture2d create(const std::string& filepath);
 

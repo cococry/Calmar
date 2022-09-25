@@ -8,7 +8,7 @@
 #include <glm/glm.hpp>
 
 namespace calmar {
-    class shader {
+    class CALMAR_API shader {
        public:
         shader() {}
         virtual ~shader() {}

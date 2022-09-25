@@ -16,7 +16,7 @@ namespace calmar {
     /*  This struct stores definitions of clear buffers. The purpose of it is
         rendering API abstraction
     */
-    struct clearBuffers {
+    struct CALMAR_API clearBuffers {
         /// @brief Initializes clearing buffers for a specific rendering backend
         /// @param backend The rendering backend to use
         static void init();
@@ -27,7 +27,7 @@ namespace calmar {
     };
     /* This class is used to abstract general functionality that does not need
         initialization or larger systems to implement. */
-    class renderCommand {
+    class CALMAR_API renderCommand {
        public:
         /// @brief Initializes the render commands by setting a rendering API to
         /// render with

@@ -6,7 +6,6 @@
 #include "calmar/event_system/window_events.hpp"
 
 #include "calmar/input/input.hpp"
-#include "calmar/input/key_codes.hpp"
 
 #include "calmar/renderer/render_command.hpp"
 
@@ -36,37 +35,6 @@ namespace calmar {
         input::init(windowProps.backened);
 
         appRenderer.initSubsystems(windowProps.renderBackend);
-
-        /* TODO: Temporary */
-
-        float vertices[] = {
-            -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-            0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-            0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
-
-        u32 indices[] = {0, 1, 2, 2, 3, 0};
-
-        mVertexArray = vertexArray::createRef(9);
-
-        std::shared_ptr<vertexBuffer> vb = vertexBuffer::createRef(vertices, sizeof(vertices));
-
-        mVertexArray->addVertexBuffer(vb);
-
-        std::shared_ptr<indexBuffer> ib = indexBuffer::createRef(indices, sizeof(indices) / sizeof(u32));
-
-        mVertexArray->setIndexBuffer(ib);
-
-        mVertexArray->setVertexLayoutAttribute(3);
-        mVertexArray->setVertexLayoutAttribute(4);
-        mVertexArray->setVertexLayoutAttribute(2);
-
-        mShader = shader::createRef("../engine/assets/shaders/default_vertex2d.glsl", "../engine/assets/shaders/default_fragment2d.glsl");
-        mShader->bind();
-        mShader->setInt("uTexture", 0);
-        mShader->unbind();
-
-        mTexture = texture2d::createRef("../engine/assets/textures/cpplogo.png");
     }
 
     application::~application() {
@@ -81,35 +49,31 @@ namespace calmar {
             if (mWindow->closeRequested()) {
                 close();
             }
+            mWindow->update(true);
 
-            /* Temporary testing code */
-            renderCommand::clearBuffers(clearBuffers::colorBuffer);
-            renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
+            float currentFrameTime = mWindow->getAbsoluteTime();
+            mDeltaTime = (currentFrameTime - mLastFrameTime);
 
-            mShader->bind();
-            mTexture->bind();
-            mTexture->activateSlot(0);
-            renderCommand::drawIndexed(mVertexArray);
-            mShader->unbind();
-            mTexture->unbind();
-
-            switch (mWindow->getProperties().backened) {
-                case windowingBackend::GLFW:
-                    if (input::isKeyDown(key::glfw::Escape)) {
-                        evDispatcher.dispatch(windowCloseEvent());
-                    }
-                    break;
-                case windowingBackend::WINDOWS:
-                    if (input::isKeyDown(key::windows::Escape)) {
-                        evDispatcher.dispatch(windowCloseEvent());
-                    }
-                    break;
+            for (applicationAttachment* attachemnt : mAttachements) {
+                attachemnt->update();
             }
 
-            /* Updating subsystems */
-            mWindow->update();
-
             input::update();
+            mLastFrameTime = currentFrameTime;
+        }
+    }
+
+    void application::addAttachment(applicationAttachment* attachment) {
+        mAttachements.push_back(attachment);
+        attachment->init();
+    }
+
+    void application::removeAttachment(applicationAttachment* attachment) {
+        auto iterator = std::find(mAttachements.begin(), mAttachements.end(), attachment);
+
+        attachment->shutdown();
+        if (iterator != mAttachements.end()) {
+            mAttachements.erase(iterator);
         }
     }
 
@@ -124,6 +88,9 @@ namespace calmar {
             // if a resize event was recived
             const windowResizeEvent& resizeEvent = static_cast<const windowResizeEvent&>(ev);
             renderCommand::setViewport(resizeEvent.getWidth(), resizeEvent.getHeight());
+        }
+        for (applicationAttachment* attachemnt : mAttachements) {
+            attachemnt->handleEvents(ev);
         }
     }
 

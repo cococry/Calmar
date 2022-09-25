@@ -65,7 +65,7 @@ namespace calmar {
     }
 
     i32 glfwInput::getMouseYDelta() {
-        return mMouse.xposDelta;
+        return mMouse.yposDelta;
     }
 
     void glfwInput::glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {

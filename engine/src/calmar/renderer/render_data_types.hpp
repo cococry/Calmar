@@ -4,7 +4,7 @@
 
 namespace calmar {
     /* This struct is used to abstract data types from renderer APIs*/
-    struct renderDataTypes {
+    struct CALMAR_API renderDataTypes {
         /// @brief Initializes the static member variables
         static void init();
 

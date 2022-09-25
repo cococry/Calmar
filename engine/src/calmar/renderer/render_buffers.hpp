@@ -8,7 +8,7 @@
 
 namespace calmar {
     /* This is struct is used to abstract render API specific buffer flags*/
-    struct renderBufferFlags {
+    struct CALMAR_API renderBufferFlags {
         static void init();
 
         static u32 dynamicDraw;
@@ -16,7 +16,7 @@ namespace calmar {
     };
 
     /* This class is used to abstract the rendering API specific process of createing a vertex buffer into a class. */
-    class vertexBuffer {
+    class CALMAR_API vertexBuffer {
        public:
         vertexBuffer() {}
         virtual ~vertexBuffer() {}
@@ -96,7 +96,7 @@ namespace calmar {
         render_id mId;
     };
 
-    class indexBuffer {
+    class CALMAR_API indexBuffer {
        public:
         indexBuffer() {}
         virtual ~indexBuffer() {}

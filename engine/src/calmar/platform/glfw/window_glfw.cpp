@@ -30,7 +30,7 @@ namespace calmar {
         glfwSwapBuffers(mBackendHandle);
 
         if (updateAbsoulteTime)
-            mAbsoluteTime += glfwGetTime();
+            mAbsoluteTime = glfwGetTime();
     }
 
     void glfwWindow::initBackend() {

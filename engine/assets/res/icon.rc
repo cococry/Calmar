@@ -1,0 +1,25 @@
+id ICON "branding_logo.ico"
+
+1 VERSIONINFO
+FILEVERSION     1,0,0,0
+PRODUCTVERSION  1,0,0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "080904E4"
+    BEGIN
+      VALUE "CompanyName", "Cococry"
+      VALUE "FileDescription", "Calmar"
+      VALUE "FileVersion", "1.0"
+      VALUE "InternalName", "calmar_editor"
+      VALUE "LegalCopyright", "Luca Machiedo"
+      VALUE "OriginalFilename", "calmar_editor.exe"
+      VALUE "ProductName", "Calmar Engine"
+      VALUE "ProductVersion", "1.0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x809, 1252
+  END
+END

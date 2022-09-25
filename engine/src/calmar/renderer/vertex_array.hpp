@@ -15,7 +15,7 @@
 namespace calmar {
 
     /* This class is used to abstract away the render API specific process of creating a vertex array */
-    class vertexArray {
+    class CALMAR_API vertexArray {
        public:
         vertexArray() {}
         virtual ~vertexArray() {}
