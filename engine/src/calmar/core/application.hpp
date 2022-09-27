@@ -83,7 +83,6 @@ namespace calmar {
        private:
         bool mRunning = false;
 
-        float mLastFrameTime = 0.0f;
         float mDeltaTime = 0.0f;
 
         /// @brief Instance of the application to handle singelton behaviour.

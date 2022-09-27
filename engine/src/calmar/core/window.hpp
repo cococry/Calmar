@@ -82,7 +82,7 @@ namespace calmar {
 
         /// @brief Virtual method which is overwritten by subclasses and handles window updating like
         /// swapping the windows's buffers.
-        virtual void update(bool updateAbsoluteTime = false) {}
+        virtual void update() {}
 
         /// @brief Virtual method which returns a windowing API specific handle that defines the window
         /// in the windowing API
@@ -124,7 +124,9 @@ namespace calmar {
 
         /// @brief Returns the absolute time which has passed since the initialization of the window
         /// @return
-        virtual double getAbsoluteTime() const { return 0.0; };
+        virtual double getDeltaTime() const { return 0.0; };
+
+        virtual void stopTiming() {}
 
        protected:
         windowProperties mProps;
@@ -146,7 +148,7 @@ namespace calmar {
 
         ~windowUndefined() {}
 
-        virtual void update(bool updateAbsoulteTime = false) override {}
+        virtual void update() override {}
 
         virtual void* getBackendHandle() const override {
             return nullptr;

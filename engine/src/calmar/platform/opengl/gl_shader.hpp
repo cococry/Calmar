@@ -27,6 +27,8 @@ namespace calmar {
         virtual void setInt(const std::string& name, int value) override;
         virtual void setFloat(const std::string& name, float value) override;
 
+        void setIntArray(const std::string& name, i32* values, u32 count) override;
+
        private:
         render_id compileShader(unsigned int shaderType, const std::string& shaderSource);
 

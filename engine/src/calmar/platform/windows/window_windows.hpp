@@ -6,6 +6,8 @@
 
 #include "calmar/core/window.hpp"
 
+#include <chrono>
+
 namespace calmar {
     struct windowsHandle {
         HINSTANCE instance;
@@ -19,7 +21,7 @@ namespace calmar {
 
         ~windowsWindow();
 
-        virtual void update(bool updateAbsoulteTime = false) override;
+        virtual void update() override;
 
         virtual void setWidth(u32 width) override;
 
@@ -37,7 +39,9 @@ namespace calmar {
 
         virtual bool closeRequested() const override;
 
-        virtual double getAbsoluteTime() const override;
+        virtual double getDeltaTime() const override;
+
+        virtual void stopTiming() override;
 
        private:
         virtual void initBackend() override;
@@ -47,10 +51,13 @@ namespace calmar {
         bool updateMessages() const;
 
        private:
+        double getMillis();
+
         windowsHandle* mBackendHandle;
 
-        double mClockFrequency;
-        LARGE_INTEGER mStartTime;
+        double mDeltaTime = 0.0f;
+        std::chrono::steady_clock::time_point mStartFrameTime;
+        std::chrono::steady_clock::time_point mEndFrameTime;
 
         u32 mWindowStyle = 0;
 

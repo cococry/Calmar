@@ -19,7 +19,7 @@ namespace calmar {
 
         virtual void deleteId() override;
 
-        virtual void setData(float* data, u32 size, u32 offset = 0) override;
+        virtual void setData(const void* data, u32 size, u32 offset = 0) override;
 
        private:
     };

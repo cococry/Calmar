@@ -13,6 +13,16 @@
 #include <glad/glad.h>
 
 namespace calmar {
+    enum class layoutAttributeType {
+        INTEGER = 0,
+        FLOAT,
+        VEC2,
+        VEC3,
+        VEC4,
+        MAT2,
+        MAT3,
+        MAT4
+    };
 
     /* This class is used to abstract away the render API specific process of creating a vertex array */
     class CALMAR_API vertexArray {
@@ -53,7 +63,7 @@ namespace calmar {
         /// @param stride The stride of a single vertex
         /// @param type The type of the data in the attribute
         /// @param normalized Defines if the data is normalized (lin alg. only)
-        virtual void setVertexLayoutAttribute(u32 size, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) {}
+        virtual void setVertexLayoutAttribute(layoutAttributeType dataTypeCount, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) {}
 
         /// @brief This constant member function returns the list of vertex buffer assotiated with this vertex array
         /// @return Returns the private member variable "VertexBuffers"

@@ -9,9 +9,9 @@ namespace calmar {
         namespace windows {
 
             enum : mouseCode {
-                Left,
-                Right,
-                Middle,
+                Left = 0x01,
+                Right = 0x02,
+                Middle = 0x04,
                 Max
             };
         }  // namespace windows

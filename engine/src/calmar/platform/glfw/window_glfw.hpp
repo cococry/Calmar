@@ -15,7 +15,7 @@ namespace calmar {
 
         ~glfwWindow();
 
-        virtual void update(bool updateAbsoluteTime = false) override;
+        virtual void update() override;
 
         virtual void setWidth(u32 width) override;
 
@@ -33,16 +33,18 @@ namespace calmar {
 
         virtual bool closeRequested() const override;
 
-        virtual double getAbsoluteTime() const override;
+        virtual double getDeltaTime() const override;
 
-       private:
+        virtual void stopTiming() override;
+
+            private:
         GLFWwindow* mBackendHandle;
 
-        double mAbsoluteTime = 0.0;
+        double mDeltaTime = 0.0;
+        double mLastFrameTime = 0.0f;
+        double mCurrentFrameTime = 0.0f;
 
-       private:
-        virtual void
-        initBackend() override;
+        virtual void initBackend() override;
 
         virtual void shutdownBackend() override;
     };

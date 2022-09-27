@@ -5,6 +5,7 @@
 #include "calmar/renderer/vertex_array.hpp"
 
 namespace calmar {
+
     class glVertexArray : public vertexArray {
        public:
         glVertexArray(u32 vertexStride);
@@ -17,7 +18,7 @@ namespace calmar {
 
         virtual void deleteId() override;
 
-        virtual void setVertexLayoutAttribute(u32 size, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) override;
+        virtual void setVertexLayoutAttribute(layoutAttributeType dataTypeCount, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) override;
 
         inline u32 getAttribOffset() const {
             return mAttribOffset;

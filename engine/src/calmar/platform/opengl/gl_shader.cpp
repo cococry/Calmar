@@ -132,4 +132,8 @@ namespace calmar {
         }
     }
 
+    void glShader::setIntArray(const std::string& name, i32* values, u32 count) {
+        glUniform1iv(glGetUniformLocation(mId, name.c_str()), count, values);
+    }
+
 }  // namespace calmar

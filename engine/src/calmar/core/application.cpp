@@ -9,6 +9,8 @@
 
 #include "calmar/renderer/render_command.hpp"
 
+#include "calmar/input/key_codes.hpp"
+
 calmar::application* calmar::application::mInstance = nullptr;
 
 namespace calmar {
@@ -49,17 +51,15 @@ namespace calmar {
             if (mWindow->closeRequested()) {
                 close();
             }
-            mWindow->update(true);
-
-            float currentFrameTime = mWindow->getAbsoluteTime();
-            mDeltaTime = (currentFrameTime - mLastFrameTime);
+            mWindow->update();
+            mDeltaTime = mWindow->getDeltaTime();
 
             for (applicationAttachment* attachemnt : mAttachements) {
                 attachemnt->update();
             }
 
             input::update();
-            mLastFrameTime = currentFrameTime;
+            mWindow->stopTiming();
         }
     }
 

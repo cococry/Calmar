@@ -29,7 +29,7 @@ namespace calmar {
         glDeleteVertexArrays(1, &mId);
     }
 
-    void glVertexArray::setVertexLayoutAttribute(u32 size, u32 stride, u32 type, bool normalized) {
+    void glVertexArray::setVertexLayoutAttribute(layoutAttributeType dataTypeCount, u32 stride, u32 type, bool normalized) {
         u32 _stride = (stride != 0) ? stride : mVertexStride;
         u32 finalStride = 0;
         u32 finalOffset = 0;
@@ -47,10 +47,40 @@ namespace calmar {
             CALMAR_ASSERT_MSG(false, "Tried to set vertex layout attribute with unknown data type");
         }
 
+        u32 attribElementCount = 0;
+        switch (dataTypeCount) {
+            case layoutAttributeType::FLOAT:
+                attribElementCount = 1;
+                break;
+            case layoutAttributeType::INTEGER:
+                attribElementCount = 1;
+                break;
+            case layoutAttributeType::VEC2:
+                attribElementCount = 2;
+                break;
+            case layoutAttributeType::VEC3:
+                attribElementCount = 3;
+                break;
+            case layoutAttributeType::VEC4:
+                attribElementCount = 4;
+                break;
+            case layoutAttributeType::MAT2:
+                attribElementCount = 8;
+                break;
+            case layoutAttributeType::MAT3:
+                attribElementCount = 12;
+                break;
+            case layoutAttributeType::MAT4:
+                attribElementCount = 16;
+                break;
+            default:
+                break;
+        }
+
         void* finalOffsetGl = (void*)(uintptr_t)(finalOffset);
-        glVertexAttribPointer(mAttribIndex, size, type, normalized, finalStride, finalOffsetGl);
+        glVertexAttribPointer(mAttribIndex, attribElementCount, type, normalized, finalStride, finalOffsetGl);
         glEnableVertexAttribArray(mAttribIndex++);
-        mAttribOffset += size;
+        mAttribOffset += attribElementCount;
     }
 
 }  // namespace calmar

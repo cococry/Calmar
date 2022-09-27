@@ -31,7 +31,7 @@ namespace calmar {
         glDeleteBuffers(1, &mId);
     }
 
-    void glVertexBuffer::setData(float* data, u32 size, u32 offset) {
+    void glVertexBuffer::setData(const void* data, u32 size, u32 offset) {
         glBindBuffer(GL_ARRAY_BUFFER, mId);
         glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
     }

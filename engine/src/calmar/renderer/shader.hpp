@@ -36,6 +36,8 @@ namespace calmar {
         virtual void setInt(const std::string& name, int value) {}
         virtual void setFloat(const std::string& name, float value) {}
 
+        virtual void setIntArray(const std::string& name, i32* values, u32 count) {}
+
         inline render_id getId() const {
             return mId;
         }

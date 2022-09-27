@@ -4,9 +4,10 @@ out vec4 oColor;
 
 in vec4 vColor;
 in vec2 vTexCoord;
+in flat float vTexIndex;
 
-uniform sampler2D uTexture;
+uniform sampler2D uTextures[32];
 
 void main() {
-    oColor = texture(uTexture, vTexCoord) * vColor;
+    oColor = texture(uTextures[int(vTexIndex)], vTexCoord) * vColor;
 }

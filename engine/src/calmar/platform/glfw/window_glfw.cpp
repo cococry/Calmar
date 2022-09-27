@@ -25,12 +25,12 @@ namespace calmar {
         shutdownBackend();
     }
 
-    void glfwWindow::update(bool updateAbsoulteTime) {
+    void glfwWindow::update() {
         glfwPollEvents();
         glfwSwapBuffers(mBackendHandle);
 
-        if (updateAbsoulteTime)
-            mAbsoluteTime = glfwGetTime();
+        mCurrentFrameTime = glfwGetTime();
+        mDeltaTime = (mCurrentFrameTime - mLastFrameTime);
     }
 
     void glfwWindow::initBackend() {
@@ -143,8 +143,12 @@ namespace calmar {
         return glfwWindowShouldClose(mBackendHandle);
     }
 
-    double glfwWindow::getAbsoluteTime() const {
-        return mAbsoluteTime;
+    void glfwWindow::stopTiming() {
+        mLastFrameTime = mCurrentFrameTime;
+    }
+
+    double glfwWindow::getDeltaTime() const {
+        return mDeltaTime;
     }
 
 }  // namespace calmar

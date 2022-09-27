@@ -11,6 +11,7 @@
 #include "windows_input.hpp"
 
 #include <glad/glad_wgl.h>
+
 namespace calmar {
     windowsWindow::windowsWindow() {
     }
@@ -25,7 +26,9 @@ namespace calmar {
         shutdownBackend();
     }
 
-    void windowsWindow::update(bool updateAbsoulteTime) {
+    void windowsWindow::update() {
+        mStartFrameTime = std::chrono::high_resolution_clock::now();
+
         updateMessages();
 
         if (mProps.renderBackend == renderingBackend::OPENGL) {
@@ -104,10 +107,8 @@ namespace calmar {
         return !updateMessages();
     }
 
-    double windowsWindow::getAbsoluteTime() const {
-        LARGE_INTEGER currentTime;
-        QueryPerformanceCounter(&currentTime);
-        return (double)currentTime.QuadPart * mClockFrequency;
+    double windowsWindow::getDeltaTime() const {
+        return mDeltaTime;
     }
     void windowsWindow::initBackend() {
         switch (mProps.renderBackend) {
@@ -234,10 +235,6 @@ namespace calmar {
 
             wglMakeCurrent(mDeviceContext, mRenderContext);
         }
-        LARGE_INTEGER frequency;
-        QueryPerformanceFrequency(&frequency);
-        mClockFrequency = 1.0 / (double)frequency.QuadPart;
-        QueryPerformanceCounter(&mStartTime);
     }
     void windowsWindow::shutdownBackend() {
         DestroyWindow(mBackendHandle->window);
@@ -261,7 +258,6 @@ namespace calmar {
                 u32 width = r.right - r.left;
                 u32 height = r.bottom - r.top;
                 application::getInstance()->evDispatcher.dispatch(windowResizeEvent(width, height));
-                // TODO: Dispatch event
             } break;
             case WM_KEYDOWN:
             case WM_SYSKEYDOWN:
@@ -329,6 +325,12 @@ namespace calmar {
         }
 
         return true;
+    }
+
+    void windowsWindow::stopTiming() {
+        mEndFrameTime = std::chrono::high_resolution_clock::now();
+
+        mDeltaTime = std::chrono::duration<double, std::milli>(mEndFrameTime - mStartFrameTime).count() / 1000.0f;
     }
 
 }  // namespace calmar

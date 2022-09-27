@@ -47,7 +47,27 @@ namespace calmar {
         glTextureSubImage2D(mId, 0, 0, 0, mTextureData.width, mTextureData.height, dataFormat, GL_UNSIGNED_BYTE, data);
 
         CALMAR_TRACE("Successsfully loaded texture at filepath'{0}' (channels: {1} size: {2}x{3}) with stb_image/OpenGL.", filepath, channels, mTextureData.width, mTextureData.height);
+
         stbi_image_free(data);
+    }
+
+    glTexture2d::glTexture2d(u32 width, u32 height) {
+        mTextureData.width = width;
+        mTextureData.height = height;
+
+        mTextureData.internalFormat = GL_RGBA8;
+        mTextureData.dataFormat = GL_RGBA;
+
+        glCreateTextures(GL_TEXTURE_2D, 1, &mId);
+        glTextureStorage2D(mId, 1, mTextureData.internalFormat, mTextureData.width, mTextureData.height);
+
+        glTextureParameteri(mId, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTextureParameteri(mId, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+        glTextureParameteri(mId, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTextureParameteri(mId, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+        CALMAR_TRACE("Created texture object with width, height: {0}x{1} successfully.", width, height);
     }
     glTexture2d::~glTexture2d() {
         glDeleteTextures(1, &mId);
@@ -63,5 +83,19 @@ namespace calmar {
     }
     void glTexture2d::deleteId() {
         glDeleteTextures(1, &mId);
+    }
+
+    void glTexture2d::setData(void* data, u32 size) {
+        u32 bytesPerPixel = mTextureData.dataFormat == GL_RGBA ? 4 : 3;
+        CALMAR_ASSERT_MSG(mTextureData.width * mTextureData.height * bytesPerPixel == size, "Can only set texture data for the entire texture.");
+
+        glTextureSubImage2D(mId, 0, 0, 0, mTextureData.width, mTextureData.height, mTextureData.dataFormat, GL_UNSIGNED_BYTE, data);
+    }
+    bool glTexture2d::operator==(const texture2d& other) const {
+        return mId == other.getId();
+    }
+
+    void glTexture2d::bindUnit(u32 slot) {
+        glBindTextureUnit(slot, mId);
     }
 }  // namespace calmar

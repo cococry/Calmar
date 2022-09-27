@@ -4,10 +4,7 @@
 
 #include "calmar/core/application_attachment.hpp"
 
-#include "calmar/renderer/vertex_array.hpp"
-#include "calmar/renderer/shader.hpp"
 #include "calmar/renderer/texture.hpp"
-#include "calmar/renderer/render_command.hpp"
 
 #include "calmar/renderer/orbit_camera.hpp"
 
@@ -29,13 +26,11 @@ namespace calmarEd {
         virtual void handleEvents(const event& ev) override;
 
        private:
-        std::shared_ptr<vertexArray> mVertexArray;
-
-        std::shared_ptr<shader> mShader;
-
-        std::shared_ptr<texture2d> mTexture;
-
         orbitCamera mEditorCamera;
+
+        std::shared_ptr<texture2d> mCppLogoTexture;
+        std::shared_ptr<texture2d> mCalmarLogoTexture;
+        std::shared_ptr<texture2d> mFoliageTexture;
     };
 
 }  // namespace calmarEd

@@ -6,39 +6,16 @@
 
 #include "calmar/event_system/mouse_events.hpp"
 
+#include "calmar/renderer/batch_renderer_2d.hpp"
+#include "calmar/renderer/render_command.hpp"
+
 namespace calmarEd {
 
     void editorAttachment::init() {
         application::getInstance()->evDispatcher.listen(mouseScrolledEvent::evType, std::bind(&editorAttachment::handleEvents, this, std::placeholders::_1));
-        float vertices[] = {
-            -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-            0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-            0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
 
-        u32 indices[] = {0, 1, 2, 2, 3, 0};
-
-        mVertexArray = vertexArray::createRef(9);
-
-        std::shared_ptr<vertexBuffer> vb = vertexBuffer::createRef(vertices, sizeof(vertices));
-
-        mVertexArray->addVertexBuffer(vb);
-
-        std::shared_ptr<indexBuffer> ib = indexBuffer::createRef(indices, sizeof(indices) / sizeof(u32));
-
-        mVertexArray->setIndexBuffer(ib);
-
-        mVertexArray->setVertexLayoutAttribute(3);
-        mVertexArray->setVertexLayoutAttribute(4);
-        mVertexArray->setVertexLayoutAttribute(2);
-
-        mShader = shader::createRef("../engine/assets/shaders/default_vertex2d.glsl", "../engine/assets/shaders/default_fragment2d.glsl");
-        mShader->bind();
-        mShader->setInt("uTexture", 0);
-        mShader->unbind();
-
-        mTexture = texture2d::createRef("../engine/assets/textures/cpplogo.png");
-
+        mCppLogoTexture = texture2d::createRef("../engine/assets/textures/cpplogo.png");
+        mCalmarLogoTexture = texture2d::createRef("../engine/assets/textures/calmarlogo.png");
         mEditorCamera = orbitCamera(cameraProperties());
     }
 
@@ -46,14 +23,13 @@ namespace calmarEd {
         renderCommand::clearBuffers(clearBuffers::colorBuffer);
         renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
 
-        mShader->bind();
-        mShader->setMatrix4f("uViewProj", mEditorCamera.getViewProjection());
-        mTexture->bind();
-        mTexture->activateSlot(0);
-        renderCommand::drawIndexed(mVertexArray);
-        mShader->unbind();
-        mTexture->unbind();
-
+        batchRenderer2d::beginRender(mEditorCamera);
+        for (u32 y = 0; y < 25; y++) {
+            for (u32 x = 0; x < 25; x++) {
+                batchRenderer2d::renderQuad(glm::vec2(x, y), glm::vec2(1.0f), x % 2 == 0 ? mCppLogoTexture : mCalmarLogoTexture);
+            }
+        }
+        batchRenderer2d::endRender();
         mEditorCamera.update();
     }
 

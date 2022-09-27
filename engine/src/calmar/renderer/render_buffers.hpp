@@ -90,7 +90,7 @@ namespace calmar {
         /// @param data The data to pass in to the buffer
         /// @param size The size of the data to pass in
         /// @param offset The offset to which to insert the data to in bytes
-        virtual void setData(float* data, u32 size, u32 offset = 0) {}
+        virtual void setData(const void* data, u32 size, u32 offset = 0) {}
 
        protected:
         render_id mId;
