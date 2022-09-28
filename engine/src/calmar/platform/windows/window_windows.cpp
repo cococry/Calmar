@@ -196,8 +196,8 @@ namespace calmar {
 
         DestroyIcon(icon);
         DestroyIcon(iconSm);
-        iconSm = (HICON)LoadImage(GetModuleHandle(NULL), TEXT("D:\\Dev\\calmar\\engine\\assets\\res\\branding_logo.ico"), IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
-        icon = (HICON)LoadImage(GetModuleHandle(NULL), TEXT("D:\\Dev\\calmar\\engine\\assets\\res\\branding_logo.ico"), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+        iconSm = (HICON)LoadImage(GetModuleHandle(NULL), TEXT("..\\engine\\assets\\res\\branding_logo.ico"), IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
+        icon = (HICON)LoadImage(GetModuleHandle(NULL), TEXT("..\\engine\\assets\\res\\branding_logo.ico"), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
         SendMessage(mBackendHandle->window, WM_SETICON, ICON_SMALL, (LPARAM)iconSm);
         SendMessage(mBackendHandle->window, WM_SETICON, ICON_BIG, (LPARAM)icon);
 
