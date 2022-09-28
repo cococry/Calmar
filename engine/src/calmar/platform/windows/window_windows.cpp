@@ -27,7 +27,9 @@ namespace calmar {
     }
 
     void windowsWindow::update() {
-        mStartFrameTime = std::chrono::high_resolution_clock::now();
+        mCurrentFrameTime = std::chrono::high_resolution_clock::now();
+        mDeltaTime = std::chrono::duration<double, std::milli>(mCurrentFrameTime - mLastFrameTime).count() / 1000.0f;
+        mFrameCounter++;
 
         updateMessages();
 
@@ -129,19 +131,23 @@ namespace calmar {
 
         mBackendHandle->instance = GetModuleHandleA(0);
 
-        HICON icon = LoadIcon(mBackendHandle->instance, IDI_APPLICATION);
-        WNDCLASSA windowClass;
+        HICON icon = LoadIcon(NULL, IDI_APPLICATION);
+        HICON iconSm = LoadIcon(NULL, IDI_APPLICATION);
+        WNDCLASSEX windowClass;
+        windowClass.cbSize = sizeof(WNDCLASSEX);
         windowClass.style = CBN_DBLCLK;
         windowClass.lpfnWndProc = updateMessagesWindowsWindow;
         windowClass.cbWndExtra = 0;
         windowClass.cbClsExtra = 0;
         windowClass.hInstance = mBackendHandle->instance;
         windowClass.hIcon = icon;
+        windowClass.hIconSm = iconSm;
         windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
         windowClass.hbrBackground = NULL;
-        windowClass.lpszClassName = "calmarWindowsWindow";
+        windowClass.lpszMenuName = NULL;
+        windowClass.lpszClassName = TEXT("calmarWindowsWindow");
 
-        CALMAR_ASSERT_MSG(RegisterClassA(&windowClass), "Failed to register windows window.");
+        CALMAR_ASSERT_MSG(RegisterClassEx(&windowClass), "Failed to register windows window.");
 
         u32 clientX = mProps.xpos;
         u32 clientY = mProps.ypos;
@@ -187,6 +193,13 @@ namespace calmar {
         i32 showWindowFlags = activate ? SW_SHOW : SW_SHOWNOACTIVATE;
 
         ShowWindow(mBackendHandle->window, showWindowFlags);
+
+        DestroyIcon(icon);
+        DestroyIcon(iconSm);
+        iconSm = (HICON)LoadImage(GetModuleHandle(NULL), TEXT("D:\\Dev\\calmar\\engine\\assets\\res\\branding_logo.ico"), IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
+        icon = (HICON)LoadImage(GetModuleHandle(NULL), TEXT("D:\\Dev\\calmar\\engine\\assets\\res\\branding_logo.ico"), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+        SendMessage(mBackendHandle->window, WM_SETICON, ICON_SMALL, (LPARAM)iconSm);
+        SendMessage(mBackendHandle->window, WM_SETICON, ICON_BIG, (LPARAM)icon);
 
         CALMAR_INFO("Created Windows-API Window: '{0}' ({1}x{2}), Position on screen: {3}x{4}\t Vsync: {5} | Resizable: {6} | Fullscreen {7}",
                     mProps.title,
@@ -328,9 +341,15 @@ namespace calmar {
     }
 
     void windowsWindow::stopTiming() {
-        mEndFrameTime = std::chrono::high_resolution_clock::now();
+        if (mDeltaTime >= 1.0f / 30.0f) {
+            mFps = (1.0f / mDeltaTime) * mFrameCounter;
+            mLastFrameTime = mCurrentFrameTime;
+            mFrameCounter = 0;
+        }
+    }
 
-        mDeltaTime = std::chrono::duration<double, std::milli>(mEndFrameTime - mStartFrameTime).count() / 1000.0f;
+    float windowsWindow::getFps() const {
+        return mFps;
     }
 
 }  // namespace calmar

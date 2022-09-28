@@ -84,6 +84,7 @@ namespace calmar {
         bool mRunning = false;
 
         float mDeltaTime = 0.0f;
+        float mFps = 0.0f;
 
         /// @brief Instance of the application to handle singelton behaviour.
         static application* mInstance;

@@ -126,8 +126,7 @@ namespace calmar {
                 DEFINE_KEY(Rshift, 0xA1),
                 DEFINE_KEY(Lcontrol, 0xA2),
                 DEFINE_KEY(Rcontrol, 0xA3),
-                DEFINE_KEY(Ltab, 0x12),
-                DEFINE_KEY(Rtab, 0xA5),
+                DEFINE_KEY(LeftAlt, 0x12),
 
                 DEFINE_KEY(Semicolon, 0xBA),
                 DEFINE_KEY(Plus, 0xBB),

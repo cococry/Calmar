@@ -52,7 +52,6 @@ namespace calmar {
                 close();
             }
             mWindow->update();
-            mDeltaTime = mWindow->getDeltaTime();
 
             for (applicationAttachment* attachemnt : mAttachements) {
                 attachemnt->update();
@@ -60,6 +59,9 @@ namespace calmar {
 
             input::update();
             mWindow->stopTiming();
+            mFps = mWindow->getFps();
+            mDeltaTime = mWindow->getDeltaTime();
+            CALMAR_INFO("FPS: {0}", mFps);
         }
     }
 

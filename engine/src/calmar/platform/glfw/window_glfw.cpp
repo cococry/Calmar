@@ -31,6 +31,7 @@ namespace calmar {
 
         mCurrentFrameTime = glfwGetTime();
         mDeltaTime = (mCurrentFrameTime - mLastFrameTime);
+        mFrameCounter++;
     }
 
     void glfwWindow::initBackend() {
@@ -144,11 +145,19 @@ namespace calmar {
     }
 
     void glfwWindow::stopTiming() {
-        mLastFrameTime = mCurrentFrameTime;
+        if (mDeltaTime >= 1.0f / 30.0f) {
+            mFps = (1.0f / mDeltaTime) * mFrameCounter;
+            mLastFrameTime = mCurrentFrameTime;
+            mFrameCounter = 0;
+        }
     }
 
     double glfwWindow::getDeltaTime() const {
         return mDeltaTime;
+    }
+
+    float glfwWindow::getFps() const {
+        return mFps;
     }
 
 }  // namespace calmar

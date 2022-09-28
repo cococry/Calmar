@@ -128,6 +128,8 @@ namespace calmar {
 
         virtual void stopTiming() {}
 
+        virtual float getFps() const { return 0.0f; }
+
        protected:
         windowProperties mProps;
 

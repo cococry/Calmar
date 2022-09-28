@@ -43,6 +43,8 @@ namespace calmar {
 
         virtual void stopTiming() override;
 
+        virtual float getFps() const override;
+
        private:
         virtual void initBackend() override;
 
@@ -56,8 +58,10 @@ namespace calmar {
         windowsHandle* mBackendHandle;
 
         double mDeltaTime = 0.0f;
-        std::chrono::steady_clock::time_point mStartFrameTime;
-        std::chrono::steady_clock::time_point mEndFrameTime;
+        std::chrono::steady_clock::time_point mLastFrameTime;
+        std::chrono::steady_clock::time_point mCurrentFrameTime;
+        float mFps = 0.0f;
+        u32 mFrameCounter = 0;
 
         u32 mWindowStyle = 0;
 

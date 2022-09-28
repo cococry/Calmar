@@ -37,12 +37,16 @@ namespace calmar {
 
         virtual void stopTiming() override;
 
-            private:
+        virtual float getFps() const override;
+
+       private:
         GLFWwindow* mBackendHandle;
 
         double mDeltaTime = 0.0;
         double mLastFrameTime = 0.0f;
         double mCurrentFrameTime = 0.0f;
+        u32 mFrameCounter = 0;
+        float mFps = 0;
 
         virtual void initBackend() override;
 
