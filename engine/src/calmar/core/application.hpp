@@ -54,12 +54,6 @@ namespace calmar {
             return mInstance;
         }
 
-        /// @brief This method returns the application returns the window of the application (const).
-        /// @return The member variable "window" which is a shared pointer.
-        inline const std::shared_ptr<window>& getWindow() const {
-            return mWindow;
-        }
-
         inline float getDeltaTime() const {
             return mDeltaTime;
         }
@@ -73,6 +67,10 @@ namespace calmar {
         /// @brief This variable is used to universally define
         /// which rendering backend the application uses
         renderingBackend renderBackend;
+
+        /// @brief The shared pointer window instance which represents the
+        /// window in which the engine runs in.
+        std::shared_ptr<window> display;
 
        private:
         /// @brief This method handles general events which are specific to the application like window resizing
@@ -89,10 +87,8 @@ namespace calmar {
         /// @brief Instance of the application to handle singelton behaviour.
         static application* mInstance;
 
-        /// @brief The shared pointer window instance which represents the
-        /// window in which the engine runs in.
-        std::shared_ptr<window> mWindow;
-
         std::vector<applicationAttachment*> mAttachements;
     };
 }  // namespace calmar
+
+#define USING_COMPATABLE_RENDERING_API calmar::application::getInstance()->renderBackend == calmar::renderingBackend::OPENGL

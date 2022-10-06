@@ -39,6 +39,8 @@ namespace calmar {
 
         virtual float getFps() const override;
 
+        virtual void initRenderBackend() override;
+
        private:
         GLFWwindow* mBackendHandle;
 

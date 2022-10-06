@@ -32,6 +32,8 @@ namespace calmar {
 
         CALMAR_ASSERT_MSG(gladLoadingWindow, "Failed to create Glad-loading window.");
 
+        CALMAR_TRACE("Successfully intitialized Win32 window for loading OpenGL");
+
         HDC gladLoadingDC = GetDC(gladLoadingWindow);
 
         PIXELFORMATDESCRIPTOR pfd = {};
@@ -54,9 +56,13 @@ namespace calmar {
         bool res = wglMakeCurrent(gladLoadingDC, gladLoadingContext);
         CALMAR_ASSERT_MSG(res, "Failed to set Glad-loading rendering context.");
 
+        CALMAR_TRACE("Succesfully initialized OpenGL rendering context with Win-API");
+
         CALMAR_ASSERT_MSG(gladLoadWGL(gladLoadingDC), "Failed to initialize Glad with WGL.");
 
         CALMAR_ASSERT_MSG(gladLoadGL(), "Failed to load Glad.");
+
+        CALMAR_TRACE("Successfully initialized Glad with Win-API");
 
         wglMakeCurrent(gladLoadingDC, 0);
         wglDeleteContext(gladLoadingContext);

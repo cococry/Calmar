@@ -11,6 +11,8 @@
 
 #include "calmar/input/key_codes.hpp"
 
+#include "calmar/platform/glfw/window_glfw.hpp"
+
 calmar::application* calmar::application::mInstance = nullptr;
 
 namespace calmar {
@@ -26,7 +28,8 @@ namespace calmar {
         renderBackend = windowProps.renderBackend;
 
         // Creating the windowing context
-        mWindow = window::createScoped(windowProps);
+        display = window::createScoped(windowProps);
+        display->initRenderBackend();
 
         /* Listening to events to be handled in the "handleEvents()" method. */
         evDispatcher.listen(windowCloseEvent::evType, EVENT_CALLBACK(application::handleEvents));
@@ -48,20 +51,19 @@ namespace calmar {
         /* Main application loop */
         while (mRunning) {
             // Breaking out of the loop if the window is closed
-            if (mWindow->closeRequested()) {
+            if (display->closeRequested()) {
                 close();
             }
-            mWindow->update();
+            display->update();
 
             for (applicationAttachment* attachemnt : mAttachements) {
                 attachemnt->update();
             }
 
             input::update();
-            mWindow->stopTiming();
-            mFps = mWindow->getFps();
-            mDeltaTime = mWindow->getDeltaTime();
-            CALMAR_INFO("FPS: {0}", mFps);
+            display->stopTiming();
+            mFps = display->getFps();
+            mDeltaTime = display->getDeltaTime();
         }
     }
 

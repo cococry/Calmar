@@ -130,6 +130,8 @@ namespace calmar {
 
         virtual float getFps() const { return 0.0f; }
 
+        virtual void initRenderBackend() {}
+
        protected:
         windowProperties mProps;
 

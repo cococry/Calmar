@@ -9,6 +9,8 @@
 #define CALMAR_API
 #endif
 
+#define arraySize(arr) sizeof((arr)) / sizeof((arr[0]))
+
 // Simple alias for an unsinged char
 using u8 = unsigned char;
 // Simple alias for an unsinged short

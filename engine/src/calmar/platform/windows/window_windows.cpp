@@ -5,7 +5,7 @@
 #include "calmar/core/application.hpp"
 
 #include "calmar/platform/opengl/wgl_load.hpp"
-
+#include "calmar/platform/vulkan/vulkan_renderer.hpp"
 #include "calmar/event_system/window_events.hpp"
 
 #include "windows_input.hpp"
@@ -113,20 +113,21 @@ namespace calmar {
         return mDeltaTime;
     }
     void windowsWindow::initBackend() {
-        switch (mProps.renderBackend) {
-            case renderingBackend::OPENGL:
-                wglLoad::init();
-                CALMAR_INFO("Initializing Win-API window with OpenGL rendering backend.");
-                break;
-            case renderingBackend::DIRECT3D:
-                CALMAR_WARN("Direct3D is currently not supported as a Win-API rendering backend. Intializing Win-API window without rendering backend.");
-                break;
-            case renderingBackend::VULKAN:
-                CALMAR_WARN("Vulkan is currently not supported as a Win-API rendering backend. Intializing Win-API window without rendering backend.");
-                break;
-            default:
-                CALMAR_WARN("Initializing Win-API window without rendering backend.");
+        if (mProps.renderBackend == renderingBackend::NONE) {
+            CALMAR_WARN("Initializing Win-API window without rendering backend.");
+        } else if (mProps.renderBackend == renderingBackend::OPENGL) {
+            wglLoad::init();
+            CALMAR_INFO("Initializing Win-API window with OpenGL rendering backend.");
+        } else if (mProps.renderBackend == renderingBackend::DIRECT3D) {
+            CALMAR_WARN("Direct3D is currently not supported as a Win-API rendering backend. Intializing Win-API window without rendering backend.");
+        } else if (mProps.renderBackend == renderingBackend::VULKAN) {
+            CALMAR_INFO("Initializing Win-API window with Vulkan rendering backend.");
+            vulkanContext context = {};
+            if (!vulkan::initWithWin32(&context, &mBackendHandle->window).first) {
+                CALMAR_ERROR("Failed to initialize Vulkan with Win-API.");
+            }
         }
+
         mBackendHandle = new windowsHandle();
 
         mBackendHandle->instance = GetModuleHandleA(0);

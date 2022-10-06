@@ -10,6 +10,8 @@
 #include "calmar/core/application.hpp"
 #include "glfw_input.hpp"
 
+#include "calmar/platform/vulkan/vulkan_renderer.hpp"
+
 #include <stb_image.h>
 
 namespace calmar {
@@ -37,27 +39,17 @@ namespace calmar {
     void glfwWindow::initBackend() {
         CALMAR_ASSERT_MSG(glfwInit(), "Failed to initialize GLFW.");
 
+        if (mProps.renderBackend == renderingBackend::VULKAN) {
+            glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+        }
         glfwWindowHint(GLFW_RESIZABLE, mProps.resizable);
 
         mBackendHandle = glfwCreateWindow(mProps.width, mProps.height, mProps.title, mProps.fullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 
         CALMAR_ASSERT_MSG(mBackendHandle, "Failed to create GLFW Window.");
 
-        glfwMakeContextCurrent(mBackendHandle);
-
-        switch (mProps.renderBackend) {
-            case renderingBackend::OPENGL:
-                CALMAR_ASSERT_MSG(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "Failed to initialize Glad with GLFW.");
-                CALMAR_INFO("Initializing GLFW window with OpenGL rendering backend.");
-                break;
-            case renderingBackend::DIRECT3D:
-                CALMAR_WARN("Direct3D is currently not supported as a GLFW rendering backend. Intializing GLFW window without rendering backend.");
-                break;
-            case renderingBackend::VULKAN:
-                CALMAR_WARN("Vulkan is currently not supported as a GLFW rendering backend. Intializing GLFW window without rendering backend.");
-                break;
-            default:
-                CALMAR_WARN("Initializing GLFW window without rendering backend.");
+        if (mProps.renderBackend == renderingBackend::OPENGL) {
+            glfwMakeContextCurrent(mBackendHandle);
         }
 
         glfwSetWindowUserPointer(mBackendHandle, &mProps);
@@ -97,6 +89,9 @@ namespace calmar {
     }
 
     void glfwWindow::shutdownBackend() {
+        if (mProps.renderBackend == renderingBackend::VULKAN) {
+            vulkan::shutdown();
+        }
         glfwDestroyWindow(mBackendHandle);
         glfwTerminate();
     }
@@ -160,4 +155,19 @@ namespace calmar {
         return mFps;
     }
 
+    void glfwWindow::initRenderBackend() {
+        if (mProps.backened == windowingBackend::GLFW) {
+            if (mProps.renderBackend == renderingBackend::OPENGL) {
+                CALMAR_ASSERT_MSG(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "Failed to initialize Glad with GLFW.");
+                CALMAR_INFO("Initializing GLFW window with OpenGL rendering backend.");
+            } else if (mProps.renderBackend == renderingBackend::VULKAN) {
+                CALMAR_INFO("Initializing GLFW window with Vulkan rendering backend.");
+                vulkan::initWithGLFW(false);
+            } else if (mProps.renderBackend == renderingBackend::DIRECT3D) {
+                CALMAR_WARN("Direct3D is currently not supported as a GLFW rendering backend. Intializing GLFW window without rendering backend.");
+            } else {
+                CALMAR_WARN("Initializing GLFW window without rendering backend.");
+            }
+        }
+    }
 }  // namespace calmar

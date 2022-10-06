@@ -4,6 +4,8 @@
 
 #include "calmar/core/logging.hpp"
 
+#include "calmar/core/application.hpp"
+
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace calmar {
@@ -63,17 +65,21 @@ namespace calmar {
     void batchRenderer2d::shutdown() {
     }
     void batchRenderer2d::beginRender(const orbitCamera& camera) {
-        mData.quadShader->bind();
-        mData.quadShader->setMatrix4f("uViewProj", camera.getViewProjection());
+        if (USING_COMPATABLE_RENDERING_API) {
+            mData.quadShader->bind();
+            mData.quadShader->setMatrix4f("uViewProj", camera.getViewProjection());
 
-        mData.quadIndexCount = 0;
-        mData.quadVertexBufferPointer = mData.quadVertexBufferBase;
+            mData.quadIndexCount = 0;
+            mData.quadVertexBufferPointer = mData.quadVertexBufferBase;
 
-        mData.textureSlotIndex = 1;
-        resetStats();
+            mData.textureSlotIndex = 1;
+            resetStats();
+        }
     }
     void batchRenderer2d::endRender() {
-        drawData();
+        if (USING_COMPATABLE_RENDERING_API) {
+            drawData();
+        }
     }
     void batchRenderer2d::drawData() {
         if (mData.quadIndexCount == 0)
@@ -90,113 +96,123 @@ namespace calmar {
         mData.stats.drawCalls++;
     }
     void batchRenderer2d::renderQuad(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color, float rotation) {
-        renderQuad({position.x, position.y, 0.0f}, scale, color, rotation);
+        if (USING_COMPATABLE_RENDERING_API)
+            renderQuad({position.x, position.y, 0.0f}, scale, color, rotation);
     }
     void batchRenderer2d::renderQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec4& color, float rotation) {
-        glm::mat4 transform = glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f)) * glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
+        if (USING_COMPATABLE_RENDERING_API) {
+            glm::mat4 transform = glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f)) * glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
 
-        renderQuad(transform, color);
+            renderQuad(transform, color);
+        }
     }
     void batchRenderer2d::renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint, float rotation) {
-        renderQuad({position.x, position.y, 0.0f}, scale, texture, tint, rotation);
+        if (USING_COMPATABLE_RENDERING_API)
+            renderQuad({position.x, position.y, 0.0f}, scale, texture, tint, rotation);
     }
     void batchRenderer2d::renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint, float rotation) {
-        constexpr u32 quadVertexCount = 4;
-        constexpr glm::vec2 textureCoords[] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
+        if (USING_COMPATABLE_RENDERING_API) {
+            constexpr u32 quadVertexCount = 4;
+            constexpr glm::vec2 textureCoords[] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
 
-        if (mData.quadIndexCount >= renderData::maxIndicesBatch) {
-            drawReset();
-        }
-
-        float textureIndex = 0.0f;
-
-        for (u32 i = 1; i < mData.textureSlotIndex; i++) {
-            if (*mData.textures[i].get() == *texture.get()) {
-                textureIndex = (float)i;
-                break;
+            if (mData.quadIndexCount >= renderData::maxIndicesBatch) {
+                drawReset();
             }
+
+            float textureIndex = 0.0f;
+
+            for (u32 i = 1; i < mData.textureSlotIndex; i++) {
+                if (*mData.textures[i].get() == *texture.get()) {
+                    textureIndex = (float)i;
+                    break;
+                }
+            }
+
+            if (textureIndex == 0.0f) {
+                textureIndex = (float)mData.textureSlotIndex;
+                mData.textures[mData.textureSlotIndex] = texture;
+                mData.textureSlotIndex++;
+            }
+
+            glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
+
+            for (u32 i = 0; i < quadVertexCount; i++) {
+                mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
+                mData.quadVertexBufferPointer->tint = tint;
+                mData.quadVertexBufferPointer->texCoord = textureCoords[i];
+                mData.quadVertexBufferPointer->texSlotIndex = textureIndex;
+                mData.quadVertexBufferPointer++;
+            }
+            mData.quadIndexCount += 6;
+
+            mData.stats.numberOfQuads++;
         }
-
-        if (textureIndex == 0.0f) {
-            textureIndex = (float)mData.textureSlotIndex;
-            mData.textures[mData.textureSlotIndex] = texture;
-            mData.textureSlotIndex++;
-        }
-
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
-
-        for (u32 i = 0; i < quadVertexCount; i++) {
-            mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
-            mData.quadVertexBufferPointer->tint = tint;
-            mData.quadVertexBufferPointer->texCoord = textureCoords[i];
-            mData.quadVertexBufferPointer->texSlotIndex = textureIndex;
-            mData.quadVertexBufferPointer++;
-        }
-        mData.quadIndexCount += 6;
-
-        mData.stats.numberOfQuads++;
     }
 
     void batchRenderer2d::renderQuad(const glm::mat4& transform, const glm::vec4& color) {
-        if (mData.quadIndexCount >= mData.maxIndicesBatch)
-            drawReset();
+        if (USING_COMPATABLE_RENDERING_API) {
+            if (mData.quadIndexCount >= mData.maxIndicesBatch)
+                drawReset();
 
-        const float texIndex = 0.0f;
-        constexpr size_t quadVertexCount = 4;
-        constexpr glm::vec2 textureCoords[] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
+            const float texIndex = 0.0f;
+            constexpr size_t quadVertexCount = 4;
+            constexpr glm::vec2 textureCoords[] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
 
-        for (u32 i = 0; i < quadVertexCount; i++) {
-            mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
-            mData.quadVertexBufferPointer->tint = color;
-            mData.quadVertexBufferPointer->texCoord = textureCoords[i];
-            mData.quadVertexBufferPointer->texSlotIndex = texIndex;
-            mData.quadVertexBufferPointer++;
+            for (u32 i = 0; i < quadVertexCount; i++) {
+                mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
+                mData.quadVertexBufferPointer->tint = color;
+                mData.quadVertexBufferPointer->texCoord = textureCoords[i];
+                mData.quadVertexBufferPointer->texSlotIndex = texIndex;
+                mData.quadVertexBufferPointer++;
+            }
+
+            mData.quadIndexCount += 6;
+
+            mData.stats.numberOfQuads++;
         }
-
-        mData.quadIndexCount += 6;
-
-        mData.stats.numberOfQuads++;
     }
 
     void batchRenderer2d::renderQuad(const glm::mat4& transform, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint) {
-        if (mData.quadIndexCount >= mData.maxIndicesBatch)
-            drawReset();
+        if (USING_COMPATABLE_RENDERING_API) {
+            if (mData.quadIndexCount >= mData.maxIndicesBatch)
+                drawReset();
 
-        constexpr glm::vec4 color = {1.0f, 1.0f, 1.0f, 1.0f};
-        constexpr uint32_t quadVertexCount = 4;
-        constexpr glm::vec2 textureCoords[] = {{
-                                                   0.0f,
-                                                   0.0f,
-                                               },
-                                               {1.0f, 0.0f},
-                                               {1.0f, 1.0f},
-                                               {0.0f, 1.0f}};
+            constexpr glm::vec4 color = {1.0f, 1.0f, 1.0f, 1.0f};
+            constexpr uint32_t quadVertexCount = 4;
+            constexpr glm::vec2 textureCoords[] = {{
+                                                       0.0f,
+                                                       0.0f,
+                                                   },
+                                                   {1.0f, 0.0f},
+                                                   {1.0f, 1.0f},
+                                                   {0.0f, 1.0f}};
 
-        float textureIndex = 0.0f;
+            float textureIndex = 0.0f;
 
-        for (uint32_t i = 1; i < mData.textureSlotIndex; i++) {
-            if (*mData.textures[i].get() == *texture.get()) {
-                textureIndex = (float)i;
-                break;
+            for (uint32_t i = 1; i < mData.textureSlotIndex; i++) {
+                if (*mData.textures[i].get() == *texture.get()) {
+                    textureIndex = (float)i;
+                    break;
+                }
             }
-        }
 
-        if (textureIndex == 0.0f) {
-            textureIndex = (float)mData.textureSlotIndex;
-            mData.textures[mData.textureSlotIndex] = texture;
-            mData.textureSlotIndex++;
-        }
+            if (textureIndex == 0.0f) {
+                textureIndex = (float)mData.textureSlotIndex;
+                mData.textures[mData.textureSlotIndex] = texture;
+                mData.textureSlotIndex++;
+            }
 
-        for (uint32_t i = 0; i < quadVertexCount; i++) {
-            mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
-            mData.quadVertexBufferPointer->tint = color;
-            mData.quadVertexBufferPointer->texCoord = textureCoords[i];
-            mData.quadVertexBufferPointer->texSlotIndex = textureIndex;
-            mData.quadVertexBufferPointer++;
-        }
-        mData.quadIndexCount += 6;
+            for (uint32_t i = 0; i < quadVertexCount; i++) {
+                mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
+                mData.quadVertexBufferPointer->tint = color;
+                mData.quadVertexBufferPointer->texCoord = textureCoords[i];
+                mData.quadVertexBufferPointer->texSlotIndex = textureIndex;
+                mData.quadVertexBufferPointer++;
+            }
+            mData.quadIndexCount += 6;
 
-        mData.stats.numberOfQuads++;
+            mData.stats.numberOfQuads++;
+        }
     }
 
     batchRenderer2d::renderStats batchRenderer2d::getStats() {

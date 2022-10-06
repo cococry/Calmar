@@ -16,6 +16,8 @@
 #include "calmar/core/logging.hpp"
 #include "calmar/core/application.hpp"
 
+#include <algorithm>
+
 namespace calmar {
     orbitCamera::orbitCamera(const cameraProperties& props) {
         mProps = props;
@@ -102,10 +104,10 @@ namespace calmar {
     }
 
     glm::vec2 orbitCamera::getPanSpeed() const {
-        float x = std::min(mData.viewportWidth / 1000.0f, 2.4f);
+        float x = (mData.viewportWidth / 1000.0f) < (2.4f) ? (mData.viewportWidth / 1000.0f) : 2.4f;
         float xFactor = 0.0366f * (x * x) - 0.1778f * x + 0.3021f;
 
-        float y = std::min(mData.viewportHeight / 1000.0f, 2.4f);
+        float y = (mData.viewportHeight / 1000.0f) < (2.4f) ? (mData.viewportHeight / 1000.0f) : 2.4f;
         float yFactor = 0.0366f * (y * y) - 0.1778f * y + 0.3021f;
 
         return {xFactor, yFactor};
@@ -113,9 +115,10 @@ namespace calmar {
 
     float orbitCamera::getZoomSpeed() const {
         float distance = mData.oribtDistance * 0.2f;
-        distance = std::max(distance, 0.0f);
+        //((a) > (b)) ? (a) : (b)
+        distance = distance > 0.0f ? distance : 0.0f;
         float speed = distance * distance;
-        speed = std::min(speed, 100.0f);
+        speed = speed < 100.0f ? speed : 100.0f;
         return speed;
     }
 }  // namespace calmar
