@@ -20,6 +20,7 @@ namespace calmar {
         VkQueue graphicsQueue;
         VkQueue presentQueue;
         VkSurfaceKHR surface;
+        VkSwapchainKHR swapChain;
     };
 
     class vulkan {
@@ -33,8 +34,15 @@ namespace calmar {
             }
         };
 
+        struct swapChainSupportDetails {
+            VkSurfaceCapabilitiesKHR capabilities;
+            std::vector<VkSurfaceFormatKHR> formats;
+            std::vector<VkPresentModeKHR> presentModes;
+        };
+
        public:
-        static std::pair<bool, i32> initWithWin32(vulkanContext* context, HWND* window);
+        static std::pair<bool, i32>
+        initWithWin32(vulkanContext* context, HWND* window);
 
         static void initWithGLFW(bool useValidationLayers);
 
@@ -69,8 +77,22 @@ namespace calmar {
 
         static void createSurfaceGLFW();
 
+        static bool checkDeviceExtensionSupport(VkPhysicalDevice device);
+
+        static swapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+
+        static VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+
+        static VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+
+        static VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
+
+        static void createSwapChain();
+
        private:
         static const std::vector<const char*> validationLayers;
+
+        static const std::vector<const char*> deviceExtensions;
 
         static bool enableValidationLayers;
     };
