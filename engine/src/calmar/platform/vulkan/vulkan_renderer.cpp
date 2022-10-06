@@ -1,6 +1,8 @@
 #include "vulkan_renderer.hpp"
 #include "calmar/core/asserting.hpp"
 #include "calmar/core/application.hpp"
+#include "calmar/core/util.hpp"
+#include "calmar/platform/glfw/window_glfw.hpp"
 
 #define VK_USE_PLATFORM_WIN32_KHR
 #define GLFW_INCLUDE_VULKAN
@@ -8,8 +10,6 @@
 #include <vulkan/vulkan_win32.h>
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
-
-#include "calmar/platform/glfw/window_glfw.hpp"
 
 #include <map>
 #include <set>
@@ -58,6 +58,8 @@ namespace calmar {
         pickPhysicalDevice();
         createLogicalDevice();
         createSwapChain();
+        createImageViews();
+        createGraphicsPipeline();
     }
     void vulkan::createInstanceGLFW(bool useValidationLayers) {
         enableValidationLayers = useValidationLayers;
@@ -174,6 +176,9 @@ namespace calmar {
     }
 
     void vulkan::shutdown() {
+        for (auto imageView : context.swapChainImageViews) {
+            vkDestroyImageView(context.logicalDevice, imageView, nullptr);
+        }
         vkDestroySwapchainKHR(context.logicalDevice, context.swapChain, nullptr);
         vkDestroyDevice(context.logicalDevice, nullptr);
         if (enableValidationLayers)
@@ -455,6 +460,137 @@ namespace calmar {
 
         ASSERT_MAKE_VULKAN_ERROR(vkCreateSwapchainKHR(context.logicalDevice, &createInfo, nullptr, &context.swapChain), "Failed to create swap chain.");
 
+        vkGetSwapchainImagesKHR(context.logicalDevice, context.swapChain, &imageCount, nullptr);
+        context.swapChainImages.resize(imageCount);
+        vkGetSwapchainImagesKHR(context.logicalDevice, context.swapChain, &imageCount, context.swapChainImages.data());
+
+        context.swapChainImageFormat = surfaceFormat.format;
+        context.swapChainExtent = extent;
+
         CALMAR_TRACE("Vulkan: Sucessfully created swap chain.");
+    }
+
+    void vulkan::createImageViews() {
+        context.swapChainImageViews.resize(context.swapChainImages.size());
+        for (u64 i = 0; i < context.swapChainImages.size(); i++) {
+            VkImageViewCreateInfo createInfo{};
+            createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+            createInfo.image = context.swapChainImages[i];
+            createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+            createInfo.format = context.swapChainImageFormat;
+            createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+            createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+            createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+            createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+            createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+            createInfo.subresourceRange.baseMipLevel = 0;
+            createInfo.subresourceRange.levelCount = 1;
+            createInfo.subresourceRange.baseArrayLayer = 0;
+            createInfo.subresourceRange.layerCount = 1;
+
+            ASSERT_MAKE_VULKAN_ERROR(vkCreateImageView(context.logicalDevice, &createInfo, nullptr, &context.swapChainImageViews[i]), "Failed to create image view.");
+        }
+    }
+
+    void vulkan::createGraphicsPipeline() {
+        auto vertShaderCode = util::getFileContentsBinary("../engine/assets/shaders/vulkan/bin/default2d_vert.spv");
+        auto fragShaderCode = util::getFileContentsBinary("../engine/assets/shaders/vulkan/bin/default2d_frag.spv");
+
+        VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
+        CALMAR_INFO("Vulkan: Created vertex shader module successfully.");
+
+        VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
+        CALMAR_INFO("Vulkan: Created fragment shader module successfully.");
+
+        VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
+        vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+        vertShaderStageInfo.module = vertShaderModule;
+        vertShaderStageInfo.pName = "main";
+
+        VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
+        fragShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+        fragShaderStageInfo.module = fragShaderModule;
+        fragShaderStageInfo.pName = "main";
+
+        // VkPipelineShaderStageCreateInfo shaderStages[] = {vertShaderStageInfo, fragShaderStageInfo};
+
+        VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
+        vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+        vertexInputInfo.vertexBindingDescriptionCount = 0;
+        vertexInputInfo.vertexAttributeDescriptionCount = 0;
+
+        VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
+        inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+        inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+        inputAssembly.primitiveRestartEnable = VK_FALSE;
+
+        VkPipelineViewportStateCreateInfo viewportState{};
+        viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+        viewportState.viewportCount = 1;
+        viewportState.scissorCount = 1;
+
+        VkPipelineRasterizationStateCreateInfo rasterizer{};
+        rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+        rasterizer.depthClampEnable = VK_FALSE;
+        rasterizer.rasterizerDiscardEnable = VK_FALSE;
+        rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
+        rasterizer.lineWidth = 1.0f;
+        rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
+        rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
+        rasterizer.depthBiasEnable = VK_FALSE;
+
+        VkPipelineMultisampleStateCreateInfo multisampling{};
+        multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+        multisampling.sampleShadingEnable = VK_FALSE;
+        multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+
+        VkPipelineColorBlendAttachmentState colorBlendAttachment{};
+        colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+        colorBlendAttachment.blendEnable = VK_FALSE;
+
+        VkPipelineColorBlendStateCreateInfo colorBlending{};
+        colorBlending.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+        colorBlending.logicOpEnable = VK_FALSE;
+        colorBlending.logicOp = VK_LOGIC_OP_COPY;
+        colorBlending.attachmentCount = 1;
+        colorBlending.pAttachments = &colorBlendAttachment;
+        colorBlending.blendConstants[0] = 0.0f;
+        colorBlending.blendConstants[1] = 0.0f;
+        colorBlending.blendConstants[2] = 0.0f;
+        colorBlending.blendConstants[3] = 0.0f;
+
+        std::vector<VkDynamicState> dynamicStates = {
+            VK_DYNAMIC_STATE_VIEWPORT,
+            VK_DYNAMIC_STATE_SCISSOR};
+        VkPipelineDynamicStateCreateInfo dynamicState{};
+        dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+        dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
+        dynamicState.pDynamicStates = dynamicStates.data();
+
+        VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
+        pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+        pipelineLayoutInfo.setLayoutCount = 0;
+        pipelineLayoutInfo.pushConstantRangeCount = 0;
+
+        ASSERT_MAKE_VULKAN_ERROR(vkCreatePipelineLayout(context.logicalDevice, &pipelineLayoutInfo, nullptr, &context.pipelineLayout), "Failed to create graphics pipeline.");
+
+        vkDestroyShaderModule(context.logicalDevice, fragShaderModule, nullptr);
+        vkDestroyShaderModule(context.logicalDevice, vertShaderModule, nullptr);
+
+        CALMAR_TRACE("Vulkan: Created graphics pipeline.");
+    }
+
+    VkShaderModule vulkan::createShaderModule(const std::vector<char>& code) {
+        VkShaderModuleCreateInfo createInfo{};
+        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        createInfo.codeSize = code.size();
+        createInfo.pCode = reinterpret_cast<const u32*>(code.data());
+
+        VkShaderModule shaderModule;
+        ASSERT_MAKE_VULKAN_ERROR(vkCreateShaderModule(context.logicalDevice, &createInfo, nullptr, &shaderModule), "Failed to create shader module.");
+
+        return shaderModule;
     }
 }  // namespace calmar

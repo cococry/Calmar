@@ -24,4 +24,22 @@ namespace calmar {
 
         return source;
     }
+
+    std::vector<char> util::getFileContentsBinary(const std::string& filepath) {
+        std::ifstream file(filepath, std::ios::ate | std::ios::binary);
+
+        if (!file.is_open()) {
+            CALMAR_ERROR("Failed to open & read file at location '{0}'.", filepath);
+        }
+
+        u64 fileSize = (u64)file.tellg();
+        std::vector<char> buffer(fileSize);
+
+        file.seekg(0);
+        file.read(buffer.data(), fileSize);
+
+        file.close();
+
+        return buffer;
+    }
 }  // namespace calmar

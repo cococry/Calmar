@@ -20,7 +20,14 @@ namespace calmar {
         VkQueue graphicsQueue;
         VkQueue presentQueue;
         VkSurfaceKHR surface;
+
         VkSwapchainKHR swapChain;
+        std::vector<VkImage> swapChainImages;
+        VkFormat swapChainImageFormat;
+        VkExtent2D swapChainExtent;
+        std::vector<VkImageView> swapChainImageViews;
+
+        VkPipelineLayout pipelineLayout;
     };
 
     class vulkan {
@@ -88,6 +95,12 @@ namespace calmar {
         static VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
         static void createSwapChain();
+
+        static void createImageViews();
+
+        static void createGraphicsPipeline();
+
+        static VkShaderModule createShaderModule(const std::vector<char>& code);
 
        private:
         static const std::vector<const char*> validationLayers;
