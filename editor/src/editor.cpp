@@ -16,6 +16,7 @@ namespace calmarEd {
 
         mCppLogoTexture = texture2d::createRef("../engine/assets/textures/cpplogo.png");
         mCalmarLogoTexture = texture2d::createRef("../engine/assets/textures/calmarlogo.png");
+        mFoliageTexture = texture2d::createRef("../engine/assets/textures/foliage.jpg");
         mEditorCamera = orbitCamera(cameraProperties());
     }
 
@@ -26,7 +27,7 @@ namespace calmarEd {
         batchRenderer2d::beginRender(mEditorCamera);
         for (u32 y = 0; y < 25; y++) {
             for (u32 x = 0; x < 25; x++) {
-                batchRenderer2d::renderQuad(glm::vec2(x, y), glm::vec2(1.0f), x % 2 == 0 ? mCppLogoTexture : mCalmarLogoTexture);
+                batchRenderer2d::renderQuad(glm::vec2(x, y), glm::vec2(1.0f), x % 2 == 0 ? mFoliageTexture : mCalmarLogoTexture);
             }
         }
         batchRenderer2d::endRender();

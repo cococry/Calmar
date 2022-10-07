@@ -10,8 +10,6 @@
 #include "calmar/core/application.hpp"
 #include "glfw_input.hpp"
 
-#include "calmar/platform/vulkan/vulkan_renderer.hpp"
-
 #include <stb_image.h>
 
 namespace calmar {
@@ -89,9 +87,6 @@ namespace calmar {
     }
 
     void glfwWindow::shutdownBackend() {
-        if (mProps.renderBackend == renderingBackend::VULKAN) {
-            vulkan::shutdown();
-        }
         glfwDestroyWindow(mBackendHandle);
         glfwTerminate();
     }
@@ -160,8 +155,7 @@ namespace calmar {
             CALMAR_ASSERT_MSG(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "Failed to initialize Glad with GLFW.");
             CALMAR_INFO("Initializing GLFW window with OpenGL rendering backend.");
         } else if (mProps.renderBackend == renderingBackend::VULKAN) {
-            CALMAR_INFO("Initializing GLFW window with Vulkan rendering backend.");
-            vulkan::initWithGLFW(false);
+            CALMAR_WARN("Vulkan is currently not supported as a GLFW rendering backend. Intializing GLFW window without rendering backend.");
         } else if (mProps.renderBackend == renderingBackend::DIRECT3D) {
             CALMAR_WARN("Direct3D is currently not supported as a GLFW rendering backend. Intializing GLFW window without rendering backend.");
         } else {

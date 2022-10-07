@@ -51,7 +51,7 @@ namespace calmar {
         for (u32 i = 0; i < mData.maxTextureSlotsBatch; i++)
             samplers[i] = i;
 
-        mData.quadShader = shader::createRef("../engine/assets/shaders/default_vertex2d.glsl", "../engine/assets/shaders/default_fragment2d.glsl");
+        mData.quadShader = shader::createRef("../engine/assets/shaders/opengl/default_vertex2d.glsl", "../engine/assets/shaders/opengl/default_fragment2d.glsl");
 
         mData.quadShader->bind();
         mData.quadShader->setIntArray("uTextures", samplers, mData.maxTextureSlotsBatch);
