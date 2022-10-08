@@ -11,6 +11,8 @@
 #include "calmar/ecs/ecs.hpp"
 #include "calmar/ecs/components.hpp"
 
+#include <imgui.h>
+
 namespace calmarEd {
 
     void editorAttachment::init() {
@@ -65,8 +67,6 @@ namespace calmarEd {
     void editorAttachment::update() {
         mEditorCamera.update();
 
-        renderCommand::clearBuffers(clearBuffers::colorBuffer);
-        renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
         batchRenderer2d::beginRender(mEditorCamera);
         mRenderingSystem->render();
         batchRenderer2d::endRender();
@@ -81,5 +81,8 @@ namespace calmarEd {
             mEditorCamera.resize(resizeEvent.getWidth(), resizeEvent.getHeight());
         }
         mEditorCamera.handleEvents(ev);
+    }
+
+    void editorAttachment::renderImGui() {
     }
 }  // namespace calmarEd

@@ -72,11 +72,22 @@ namespace calmar {
         appRenderer.initSubsystems(windowProps.renderBackend);
 
         entityComponentSystem.init();
+
+        mImGuiHandler = new imGuiHandler();
+        addAttachment(mImGuiHandler);
+
+        mSceneHirarchyPanel = sceneHirarchyPanel();
+        addAttachment(&mSceneHirarchyPanel);
     }
 
     application::~application() {
         // Breaking out of the application loop by calling "close()"
         close();
+
+        for (applicationAttachment* attachment : mAttachements) {
+            attachment->shutdown();
+        }
+        delete mImGuiHandler;
     }
 
     void application::run() {
@@ -86,16 +97,25 @@ namespace calmar {
             if (display->closeRequested()) {
                 close();
             }
-            display->update();
+            renderCommand::clearBuffers(clearBuffers::colorBuffer);
+            renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
 
-            for (applicationAttachment* attachemnt : mAttachements) {
-                attachemnt->update();
+            for (applicationAttachment* attachment : mAttachements) {
+                attachment->update();
             }
+
+            mImGuiHandler->beginImGui();
+            for (applicationAttachment* attachment : mAttachements) {
+                attachment->renderImGui();
+            }
+            mImGuiHandler->endImGui();
 
             input::update();
             display->stopTiming();
             mFps = display->getFps();
             mDeltaTime = display->getDeltaTime();
+
+            display->update();
         }
     }
 

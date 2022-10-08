@@ -15,6 +15,8 @@ namespace calmar {
 
         virtual void handleEvents(const event& ev) {}
 
+        virtual void renderImGui() {}
+
        private:
     };
 }  // namespace calmar

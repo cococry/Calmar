@@ -14,6 +14,9 @@
 #include "calmar/ecs/ecs.hpp"
 #include "calmar/ecs/components.hpp"
 
+#include "calmar/imgui/imgui_handler.hpp"
+#include "calmar/panels/scene_hirarchy.hpp"
+
 #include <vector>
 
 namespace calmar {
@@ -93,6 +96,9 @@ namespace calmar {
         static application* mInstance;
 
         std::vector<applicationAttachment*> mAttachements;
+
+        imGuiHandler* mImGuiHandler;
+        sceneHirarchyPanel mSceneHirarchyPanel;
     };
 }  // namespace calmar
 

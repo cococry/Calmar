@@ -42,6 +42,8 @@ namespace calmarEd {
 
         virtual void handleEvents(const event& ev) override;
 
+        virtual void renderImGui() override;
+
        private:
         std::shared_ptr<texture2d> mGrassTexture;
         std::shared_ptr<texture2d> mPlayerTexture;
