@@ -10,7 +10,9 @@
 
 #include "calmar/renderer/renderer.hpp"
 #include "calmar/renderer/rendering_backend.hpp"
-#include "calmar/renderer/rendering_backend.hpp"
+#include "calmar/renderer/batch_renderer_2d.hpp"
+#include "calmar/ecs/ecs.hpp"
+#include "calmar/ecs/components.hpp"
 
 #include <vector>
 
@@ -22,6 +24,7 @@ namespace calmar {
         varios systems in the engines runtime. The class also keeps track of the applications
         window and handles functionaly of it like rezise events and swaping its buffers.
     */
+    class renderSystem;
     class CALMAR_API application {
        public:
         /// @brief Instantiates the application and subsystems like the renderer and more.
@@ -71,6 +74,8 @@ namespace calmar {
         /// @brief The shared pointer window instance which represents the
         /// window in which the engine runs in.
         std::shared_ptr<window> display;
+
+        ecs entityComponentSystem;
 
        private:
         /// @brief This method handles general events which are specific to the application like window resizing

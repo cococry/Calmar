@@ -32,4 +32,8 @@ using i64 = signed long long;
 // Simple alias for an unsinged int
 using render_id = unsigned int;
 
+namespace calmar {
+    static const char* engineVersion = "0.1";
+}  // namespace calmar
+
 #endif
