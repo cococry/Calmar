@@ -17,7 +17,7 @@ namespace calmar {
         glm::vec2 texCoord;
         float texSlotIndex;
     };
-    class CALMAR_API batchRenderer2d {
+    class batchRenderer2d {
        public:
         static void init();
 

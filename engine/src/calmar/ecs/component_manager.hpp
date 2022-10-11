@@ -9,7 +9,7 @@
 #include <memory>
 
 namespace calmar {
-    class CALMAR_API componentManager {
+    class componentManager {
        public:
         template <typename T>
         void registerComponent() {
@@ -44,6 +44,11 @@ namespace calmar {
         template <typename T>
         T& getComponent(entity entty) {
             return getComponentList<T>()->getData(entty);
+        }
+
+        template <typename T>
+        bool hasComponent(entity entty) {
+            return getComponentList<T>()->hasData(entty);
         }
 
         void entityDestroyed(entity entty);

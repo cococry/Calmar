@@ -6,7 +6,7 @@
 #include <array>
 
 namespace calmar {
-    class CALMAR_API entityManager {
+    class entityManager {
        public:
         entityManager();
 

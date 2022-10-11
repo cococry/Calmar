@@ -10,15 +10,14 @@
 namespace calmar {
     /* An enumaration to define different kinds of backends for windowing*/
     enum class windowingBackend {
-        GLFW = 0,
-        WINDOWS
+        GLFW = 0
     };
 
     /*A structure which contains information about the application's window like
       it's width, height and title. It also contains general information which effect the
       runtime of the application like the rendering and windowing backend in which the engine
       starts in.*/
-    struct CALMAR_API windowProperties {
+    struct windowProperties {
         /// @brief Default constructor which does not initialize any member variables
         windowProperties() {}
 
@@ -55,7 +54,7 @@ namespace calmar {
         bool fullscreen = false;
         bool resizable = false;
     };
-    class CALMAR_API window {
+    class window {
        public:
         /// @brief Creates a window with the given parameters. It creates it
         /// with the given windowing backend which is a subclass f this class

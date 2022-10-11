@@ -1,7 +1,6 @@
 #include "window.hpp"
 
 #include "calmar/platform/glfw/window_glfw.hpp"
-#include "calmar/platform/windows/window_windows.hpp"
 
 namespace calmar {
     window window::create(const windowProperties& props) {
@@ -11,9 +10,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwWindow(props);
                 break;
-            // Instantiating and returning a windowsWindow for the Win-API backend
-            case windowingBackend::WINDOWS:
-                return windowsWindow(props);
             default:
                 // Returning a undefined window if no vaild windowing backend is used
                 return windowUndefined();
@@ -28,8 +24,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return std::make_shared<glfwWindow>(props);
                 break;
-            case windowingBackend::WINDOWS:
-                return std::make_shared<windowsWindow>(props);
             default:
                 return std::make_shared<windowUndefined>();
                 break;
@@ -41,9 +35,6 @@ namespace calmar {
         switch (props.backened) {
             case windowingBackend::GLFW:
                 return std::make_unique<glfwWindow>(props);
-                break;
-            case windowingBackend::WINDOWS:
-                return std::make_unique<windowsWindow>(props);
                 break;
             default:
                 return std::make_unique<windowUndefined>();

@@ -5,7 +5,7 @@
 #include <random>
 
 namespace calmar {
-    class CALMAR_API random {
+    class random {
        public:
         random(uint_least32_t seed);
         random() : random(std::_Random_device()){};

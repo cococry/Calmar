@@ -7,7 +7,7 @@
 #include <memory>
 
 namespace calmar {
-    struct CALMAR_API transformComponent {
+    struct transformComponent {
         transformComponent() {
             position = glm::vec3(1.0f);
             rotation = glm::vec3(0.0f),
@@ -22,7 +22,7 @@ namespace calmar {
         glm::vec3 scale;
     };
 
-    struct CALMAR_API spriteRendererComponent {
+    struct spriteRendererComponent {
         spriteRendererComponent() {
             texture = std::make_shared<texture2d>();
             tint = glm::vec4(1.0f);

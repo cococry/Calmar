@@ -2,9 +2,9 @@
 #define CALMAR_DEFINES_INCLUDED
 
 #ifdef CALMAR_EXPORT
-#define CALMAR_API __declspec(dllexport)
+#define __declspec(dllexport)
 #elif defined(CALMAR_IMPORT)
-#define CALMAR_API __declspec(dllimport)
+#define __declspec(dllimport)
 #else
 #define CALMAR_API
 #endif

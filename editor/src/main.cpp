@@ -8,7 +8,7 @@ int main(void) {
         1280, 720, "Calmar Editor", calmar::windowingBackend::GLFW, calmar::renderingBackend::OPENGL));
 
     application.addAttachment(new calmarEd::editorAttachment());
-
+    
     application.run();
 
     return 0;

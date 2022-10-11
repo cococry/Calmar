@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 namespace calmar {
-    class CALMAR_API systemManager {
+    class systemManager {
        public:
         template <typename T>
         std::shared_ptr<T> registerSystem() {

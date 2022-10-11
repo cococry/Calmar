@@ -49,6 +49,10 @@ namespace calmar {
             return mComponentArray[mEntityToIndexMap[entty]];
         }
 
+        bool hasData(entity entty) {
+            return mEntityToIndexMap.find(entty) != mEntityToIndexMap.end();
+        }
+
         virtual void entityDestroyed(entity entty) override {
             if (mEntityToIndexMap.find(entty) != mEntityToIndexMap.end()) {
                 removeData(entty);

@@ -32,7 +32,7 @@ namespace calmar {
         glm::vec2 initialMousePos = glm::vec2(0.0f);
     };
 
-    class CALMAR_API orbitCamera {
+    class orbitCamera {
        public:
         orbitCamera() = default;
         orbitCamera(const cameraProperties& props);

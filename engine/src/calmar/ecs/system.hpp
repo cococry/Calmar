@@ -5,7 +5,7 @@
 #include <set>
 
 namespace calmar {
-    class CALMAR_API systemEcs {
+    class systemEcs {
        public:
         std::set<entity> mEntities;
     };

@@ -17,7 +17,7 @@ namespace calmar {
         event callback. The "listen()" method adds a element to this map. The dispatch method
         takes in an event and checks if the event is being listened. If it is, it executes the
         the callback which is linked with the event type of the given event.*/
-    class CALMAR_API eventDispatcher {
+    class eventDispatcher {
        public:
         /// @brief Listens to a given type of event and links a given function with it. In summary, The
         /// method adds a new elment to the events which the class is listening to.

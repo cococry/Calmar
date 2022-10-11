@@ -15,7 +15,8 @@
 #include "calmar/ecs/components.hpp"
 
 #include "calmar/imgui/imgui_handler.hpp"
-#include "calmar/panels/scene_hirarchy.hpp"
+
+#include "../../editor/src/editor.hpp"
 
 #include <vector>
 
@@ -28,7 +29,7 @@ namespace calmar {
         window and handles functionaly of it like rezise events and swaping its buffers.
     */
     class renderSystem;
-    class CALMAR_API application {
+    class application {
        public:
         /// @brief Instantiates the application and subsystems like the renderer and more.
         /// @param windowProps The struct that defines properties of the window like its width and height
@@ -64,6 +65,11 @@ namespace calmar {
             return mDeltaTime;
         }
 
+        inline calmarEd::editorAttachment* getEditorAttachment() const {
+            // attachments at index 1 is reserved for the editor attachment
+            calmarEd::editorAttachment* editor = static_cast<calmarEd::editorAttachment*>(mAttachements[1]);
+            return editor;
+        }
         /// @brief The universal instance of the event dispatcher to dispatch evnts in the engine
         eventDispatcher evDispatcher;
 
@@ -98,8 +104,9 @@ namespace calmar {
         std::vector<applicationAttachment*> mAttachements;
 
         imGuiHandler* mImGuiHandler;
-        sceneHirarchyPanel mSceneHirarchyPanel;
     };
 }  // namespace calmar
 
 #define USING_COMPATABLE_RENDERING_API calmar::application::getInstance()->renderBackend == calmar::renderingBackend::OPENGL
+
+#define ECS application::getInstance()->entityComponentSystem

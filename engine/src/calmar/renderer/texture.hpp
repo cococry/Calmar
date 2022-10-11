@@ -13,7 +13,7 @@ namespace calmar {
         std::string filepath;
     };
 
-    class CALMAR_API texture2d {
+    class texture2d {
        public:
         static texture2d create(const std::string& filepath);
 
@@ -41,7 +41,8 @@ namespace calmar {
 
         virtual void setData(void* data, u32 size) {}
 
-        virtual bool operator==(const texture2d& other) const { return false; 
+        virtual bool operator==(const texture2d& other) const {
+            return false;
         }
 
         inline render_id getId() const {

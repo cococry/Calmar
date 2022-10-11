@@ -1,7 +1,6 @@
 #include "input.hpp"
 
 #include "calmar/platform/glfw/glfw_input.hpp"
-#include "calmar/platform/windows/windows_input.hpp"
 
 #include "calmar/core/logging.hpp"
 
@@ -19,9 +18,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwInput::keyWentDown(key);
                 break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::keyWentDown(key);
-                break;
             default:
                 break;
         }
@@ -31,9 +27,6 @@ namespace calmar {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::isKeyDown(key);
-                break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::isKeyDown(key);
                 break;
             default:
                 break;
@@ -45,9 +38,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwInput::isKeyReleased(key);
                 break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::isKeyReleased(key);
-                break;
             default:
                 break;
         }
@@ -57,9 +47,6 @@ namespace calmar {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::keyChanged(key);
-                break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::keyChanged(key);
                 break;
             default:
                 break;
@@ -71,9 +58,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwInput::mouseButtonWentDown(button);
                 break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::mouseButtonWentDown(button);
-                break;
             default:
                 break;
         }
@@ -83,9 +67,6 @@ namespace calmar {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::isMouseButtonDown(button);
-                break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::isMouseButtonDown(button);
                 break;
             default:
                 break;
@@ -97,9 +78,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwInput::isMouseButtonReleased(button);
                 break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::isMouseButtonReleased(button);
-                break;
             default:
                 break;
         }
@@ -109,9 +87,6 @@ namespace calmar {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::mouseButtonChanged(button);
-                break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::mouseButtonChanged(button);
                 break;
             default:
                 break;
@@ -123,9 +98,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseX();
                 break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::getMouseX();
-                break;
             default:
                 break;
         }
@@ -135,9 +107,6 @@ namespace calmar {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseY();
-                break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::getMouseY();
                 break;
             default:
                 break;
@@ -149,9 +118,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseScrollX();
                 break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::getMouseScrollX();
-                break;
             default:
                 break;
         }
@@ -161,9 +127,6 @@ namespace calmar {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseScrollY();
-                break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::getMouseScrollY();
                 break;
             default:
                 break;
@@ -175,9 +138,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseXDelta();
                 break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::getMouseXDelta();
-                break;
             default:
                 break;
         }
@@ -188,9 +148,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseYDelta();
                 break;
-            case windowingBackend::WINDOWS:
-                return windowsInput::getMouseYDelta();
-                break;
             default:
                 break;
         }
@@ -200,9 +157,6 @@ namespace calmar {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 glfwInput::update();
-                break;
-            case windowingBackend::WINDOWS:
-                windowsInput::update();
                 break;
             default:
                 break;

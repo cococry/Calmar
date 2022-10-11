@@ -12,6 +12,7 @@
 
 #include "calmar/ecs/ecs.hpp"
 #include "calmar/ecs/components.hpp"
+#include "calmar/ecs/scene.hpp"
 
 #include "calmar/platform/opengl/gl_rendering.hpp"
 
@@ -40,8 +41,6 @@ namespace calmar {
             case windowingBackend::GLFW:
                 windowTitle += " GLFW Windowing,";
                 break;
-            case windowingBackend::WINDOWS:
-                windowTitle += " Win32 Windowing,";
             default:
                 break;
         };
@@ -73,11 +72,11 @@ namespace calmar {
 
         entityComponentSystem.init();
 
+        entityComponentSystem.registerComponent<transformComponent>();
+        entityComponentSystem.registerComponent<spriteRendererComponent>();
+
         mImGuiHandler = new imGuiHandler();
         addAttachment(mImGuiHandler);
-
-        mSceneHirarchyPanel = sceneHirarchyPanel();
-        addAttachment(&mSceneHirarchyPanel);
     }
 
     application::~application() {
@@ -98,7 +97,7 @@ namespace calmar {
                 close();
             }
             renderCommand::clearBuffers(clearBuffers::colorBuffer);
-            renderCommand::clearColor({0.2f, 0.3f, 0.8f, 1.0f});
+            renderCommand::clearColor({0.1f, 0.1f, 0.1f, 1.0f});
 
             for (applicationAttachment* attachment : mAttachements) {
                 attachment->update();

@@ -6,8 +6,6 @@
 
 #include "calmar/core/application.hpp"
 
-#define API_CODE(glfwCode, winApiCode) calmar::application::getInstance()->display->getProperties().backened == calmar::windowingBackend::GLFW ? glfwCode : winApiCode
-
 namespace calmar {
 
     class input {

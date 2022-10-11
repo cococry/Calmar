@@ -11,7 +11,7 @@ namespace calmar {
     /*  This static class handles logging in the engine. The logging backend which is
         used is spdlog. The static "init()" method has to be called before any functionality
         of the class is used in order to prevent undefined behaviour.*/
-    class CALMAR_API logging {
+    class logging {
        public:
         /// @brief Initializes the logging subsystem of the engine by setting a spdlog logging pattern
         // and intializing the "logger" member variable

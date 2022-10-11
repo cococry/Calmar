@@ -27,14 +27,14 @@ namespace calmar {
     }
 
     void orbitCamera::update() {
-        if (input::isKeyDown(API_CODE(key::glfw::LeftAlt, key::windows::LeftAlt))) {
+        if (input::isKeyDown(key::LeftAlt)) {
             glm::vec2 mousePos = {input::getMouseX(), input::getMouseY()};
             glm::vec2 mouseDelta = (mousePos - mData.initialMousePos) * 0.009f;
             mData.initialMousePos = mousePos;
 
-            if (input::isMouseButtonDown(API_CODE(button::glfw::Middle, button::windows::Middle))) {
+            if (input::isMouseButtonDown(button::Middle)) {
                 mousePan(mouseDelta);
-            } else if (input::isMouseButtonDown(API_CODE(button::glfw::Right, button::windows::Right))) {
+            } else if (input::isMouseButtonDown(button::Right)) {
                 mouseZoom(mouseDelta.y);
             }
         }

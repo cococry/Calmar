@@ -19,5 +19,5 @@ set preDefinedMacros=-DCALMAR_IMPORT -D_CRT_SECURE_NO_WARNINGS -DGLFW_INCLUDE_NO
 
 echo Starting Calmar Editor build process...
 
-clang++ %sourceFiles% ../engine/vendor/imgui/*.cpp %thirdpartyFiles% %includeDirs% %linkerFlags% %preDefinedMacros% %compilerFlags% ../engine/assets/res/icon.res
+clang++ %sourceFiles% %thirdpartyFiles% %includeDirs% %linkerFlags% %preDefinedMacros% %compilerFlags% ../engine/assets/res/icon.res
 popd
