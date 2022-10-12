@@ -5,7 +5,7 @@
 #include <bitset>
 
 namespace calmar {
-    using entity = u32;
+    using entity = i32;
 
     const entity MAX_ENTITIES = 16000;
 

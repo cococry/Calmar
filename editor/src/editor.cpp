@@ -8,6 +8,7 @@ namespace calmarEd {
 
         sceneHirarchy = sceneHirarchyPanel();
         sceneHirarchy.init();
+        imguiStatsPanel.init();
     }
 
     void editorAttachment::update() {
@@ -24,5 +25,6 @@ namespace calmarEd {
 
     void editorAttachment::renderImGui() {
         sceneHirarchy.renderImGui();
+        imguiStatsPanel.renderImGui();
     }
 }  // namespace calmarEd

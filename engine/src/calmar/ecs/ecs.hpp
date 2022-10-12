@@ -41,7 +41,7 @@ namespace calmar {
             componentSet.set(mComponentManager->getComponentType<T>(), false);
             mEntityManager->setComponentSet(entty, componentSet);
 
-            mSystemManager->EntitySignatureChanged(entty, componentSet);
+            mSystemManager->entityComponentSetChanged(entty, componentSet);
         }
 
         template <typename T>

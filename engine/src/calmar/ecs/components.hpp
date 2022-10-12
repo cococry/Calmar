@@ -5,11 +5,23 @@
 
 #include <glm/glm.hpp>
 #include <memory>
+#include <string>
 
 namespace calmar {
+    struct tagComponent {
+        tagComponent()
+            : tag("Entity") {
+        }
+
+        tagComponent(const std::string& tag)
+            : tag(tag) {
+        }
+
+        std::string tag;
+    };
     struct transformComponent {
         transformComponent() {
-            position = glm::vec3(1.0f);
+            position = glm::vec3(0.0f);
             rotation = glm::vec3(0.0f),
             scale = glm::vec3(1.0f);
         }
@@ -24,7 +36,7 @@ namespace calmar {
 
     struct spriteRendererComponent {
         spriteRendererComponent() {
-            texture = std::make_shared<texture2d>();
+            texture = nullptr;
             tint = glm::vec4(1.0f);
         }
 

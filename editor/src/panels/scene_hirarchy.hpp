@@ -6,6 +6,8 @@
 #include <calmar/ecs/scene.hpp>
 
 #include <memory>
+#include <string>
+#include <glm/glm.hpp>
 
 using namespace calmar;
 
@@ -19,8 +21,15 @@ namespace calmarEd {
         void renderImGui();
 
        private:
+        void renderImGuiEntityNode(entity entty);
+
+        void renderImGuiEntityComponents(entity entty);
+
+        void renderImGuiVec3Slider(const std::string& label, glm::vec3& vec, entity entty, float resetValue = 0.0f);
+
         std::shared_ptr<scene> mScene;
 
         entity mSelectedEntity = -1;
+        entity mDeletedEntity = 1;
     };
 }  // namespace calmarEd

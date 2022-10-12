@@ -27,9 +27,11 @@ namespace calmar {
 
                 if (spriteRenderer.texture != nullptr)
                     batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.texture, spriteRenderer.tint, transform.rotation.z);
-                else
+                else {
                     batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.tint, transform.rotation.z);
+                 }
             }
         }
+        batchRenderer2d::endRender();
     }
 }  // namespace calmar

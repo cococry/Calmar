@@ -22,6 +22,6 @@ namespace calmar {
         std::queue<entity> mAvailableEntities{};
         std::array<componentSet, MAX_ENTITIES> mComponentSets{};
 
-        u32 mEntityCount = 0;
+        i32 mEntityCount = 0;
     };
 }  // namespace calmar

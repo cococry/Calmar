@@ -65,10 +65,9 @@ namespace calmar {
             return mDeltaTime;
         }
 
-        inline calmarEd::editorAttachment* getEditorAttachment() const {
+        inline calmarEd::editorAttachment* getEditorAttachment() {
             // attachments at index 1 is reserved for the editor attachment
-            calmarEd::editorAttachment* editor = static_cast<calmarEd::editorAttachment*>(mAttachements[1]);
-            return editor;
+            return static_cast<calmarEd::editorAttachment*>(mAttachements[1]);
         }
         /// @brief The universal instance of the event dispatcher to dispatch evnts in the engine
         eventDispatcher evDispatcher;

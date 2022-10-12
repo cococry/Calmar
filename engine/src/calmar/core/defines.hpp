@@ -11,6 +11,8 @@
 
 #define arraySize(arr) sizeof((arr)) / sizeof((arr[0]))
 
+#define RGBA_COLOR(r, g, b, a) r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f
+
 // Simple alias for an unsinged char
 using u8 = unsigned char;
 // Simple alias for an unsinged short

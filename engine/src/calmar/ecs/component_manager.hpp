@@ -38,7 +38,7 @@ namespace calmar {
 
         template <typename T>
         void removeComponent(entity entty) {
-            getComponentList<T>()->removeData(entity);
+            getComponentList<T>()->removeData(entty);
         }
 
         template <typename T>

@@ -5,6 +5,7 @@
 #include "calmar/renderer/orbit_camera.hpp"
 
 #include "panels/scene_hirarchy.hpp"
+#include "panels/stats_panel.hpp"
 
 #include <memory>
 
@@ -26,6 +27,7 @@ namespace calmarEd {
         orbitCamera camera;
 
         sceneHirarchyPanel sceneHirarchy;
+        statsPanel imguiStatsPanel;
 
        private:
     };
