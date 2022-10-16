@@ -16,6 +16,7 @@
 
 #include "calmar/platform/opengl/gl_rendering.hpp"
 
+
 #include <sstream>
 
 calmar::application* calmar::application::mInstance = nullptr;
@@ -97,9 +98,6 @@ namespace calmar {
             if (display->closeRequested()) {
                 close();
             }
-            renderCommand::clearBuffers(clearBuffers::colorBuffer);
-            renderCommand::clearColor({0.1f, 0.1f, 0.1f, 1.0f});
-
             for (applicationAttachment* attachment : mAttachements) {
                 attachment->update();
             }
@@ -114,8 +112,9 @@ namespace calmar {
             display->stopTiming();
             mFps = display->getFps();
             mDeltaTime = display->getDeltaTime();
-
+            
             display->update();
+
         }
     }
 
