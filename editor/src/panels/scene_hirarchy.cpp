@@ -3,7 +3,8 @@
 #include <calmar/core/application.hpp>
 #include <calmar/input/input.hpp>
 #include <calmar/input/mouse_codes.hpp>
-
+#include <calmar/renderer/resource_handler.hpp>
+#include <calmar/core/asset_pool.hpp>
 #include <imgui.h>
 #include <imgui_internal.h>
 
@@ -28,6 +29,9 @@ namespace calmarEd {
                 entity entty = ECS.createEntity();
                 ECS.addComponent(entty, transformComponent());
                 ECS.addComponent(entty, tagComponent());
+                auto texture = resourceHandler::createTexture("../engine/assets/textures/calmarlogo.png");
+                CALMAR_INFO(assetPool::textures.size());
+                ECS.addComponent(entty, spriteRendererComponent(texture));
                 mSelectedEntity = entty;
             }
             ImGui::EndPopup();

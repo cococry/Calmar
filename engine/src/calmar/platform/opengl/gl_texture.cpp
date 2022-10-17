@@ -4,6 +4,7 @@
 
 #include "calmar/core/logging.hpp"
 #include "calmar/core/asserting.hpp"
+#include "calmar/core/asset_pool.hpp"
 
 #include <glad/glad.h>
 

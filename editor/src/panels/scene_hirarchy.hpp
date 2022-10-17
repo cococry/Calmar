@@ -2,7 +2,7 @@
 
 #include <calmar/core/defines.hpp>
 #include <calmar/core/application_attachment.hpp>
-
+#include <calmar/renderer/texture.hpp>
 #include <calmar/ecs/scene.hpp>
 
 #include <memory>
@@ -31,5 +31,8 @@ namespace calmarEd {
 
         entity mSelectedEntity = -1;
         entity mDeletedEntity = 1;
+
+        // TODO: Temporary
+        std::shared_ptr<texture2d> mTexture;
     };
 }  // namespace calmarEd
