@@ -28,11 +28,9 @@ namespace calmarEd {
         void renderImGuiVec3Slider(const std::string& label, glm::vec3& vec, entity entty, float resetValue = 0.0f);
 
         std::shared_ptr<scene> mScene;
+        std::shared_ptr<texture2d> mDefaultTexture;
 
         entity mSelectedEntity = -1;
         entity mDeletedEntity = 1;
-
-        // TODO: Temporary
-        std::shared_ptr<texture2d> mTexture;
     };
 }  // namespace calmarEd

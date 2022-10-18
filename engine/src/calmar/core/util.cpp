@@ -5,7 +5,18 @@
 
 #include "calmar/core/logging.hpp"
 
+#include "calmar/platform/windows/windows_util.hpp"
+
 namespace calmar {
+    namespace platform {
+        std::string fileDialogs::openFile(const char* filter, const char* dir) {
+#ifdef CALMAR_PLATFORM_WINDOWS
+            return platform::windowsFileDialogs::openFile(filter, dir);
+#else
+            return std::string("");
+#endif
+        }
+    }  // namespace platform
     std::string util::getFileContents(const std::string& filepath) {
         std::string source = "";
         std::stringstream stringBuf;

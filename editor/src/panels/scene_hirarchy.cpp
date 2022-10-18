@@ -1,6 +1,7 @@
 #include "scene_hirarchy.hpp"
 
 #include <calmar/core/application.hpp>
+#include <calmar/core/util.hpp>
 #include <calmar/input/input.hpp>
 #include <calmar/input/mouse_codes.hpp>
 #include <calmar/renderer/resource_handler.hpp>
@@ -15,6 +16,8 @@ namespace calmarEd {
         mScene = ECS.registerSystem<scene>();
 
         mScene->init();
+
+        mDefaultTexture = resourceHandler::createTexture("../engine/assets/textures/checkerboardicon.png");
     }
     void sceneHirarchyPanel::update() {
         mScene->update();
@@ -29,9 +32,6 @@ namespace calmarEd {
                 entity entty = ECS.createEntity();
                 ECS.addComponent(entty, transformComponent());
                 ECS.addComponent(entty, tagComponent());
-                auto texture = resourceHandler::createTexture("../engine/assets/textures/calmarlogo.png");
-                CALMAR_INFO(assetPool::textures.size());
-                ECS.addComponent(entty, spriteRendererComponent(texture));
                 mSelectedEntity = entty;
             }
             ImGui::EndPopup();
@@ -145,6 +145,28 @@ namespace calmarEd {
                 ImGui::ColorEdit4("Color", glm::value_ptr(spriteRenderer.tint));
                 ImGui::PopItemWidth();
 
+                ImGui::Text("Texture: %s", spriteRenderer.texture ? spriteRenderer.texture->getData().filepath.c_str() : "None");
+
+                ImGui::SameLine();
+                if (ImGui::Button("...")) {
+                    std::string filepath = platform::fileDialogs::openFile("Image (*.png) (*.jpg)\0*.png\0");
+                    if (!filepath.empty()) {
+                        std::shared_ptr<texture2d> texture = resourceHandler::createTexture(filepath);
+                        spriteRenderer.texture = texture;
+                    }
+                }
+                if (spriteRenderer.texture) {
+                    ImGui::Image((void*)(uintptr_t)spriteRenderer.texture->getId(), ImVec2{100.0f, 100.0f},
+                                 ImVec2{0, 1}, ImVec2{1, 0});
+                } else {
+                    ImGui::Image((void*)(uintptr_t)mDefaultTexture->getId(), ImVec2{110.0f, 110.0f}, ImVec2{0, 1}, ImVec2{1, 0});
+                }
+                if (spriteRenderer.texture) {
+                    if (ImGui::Button("Reset Texture")) {
+                        resourceHandler::deleteTexture(spriteRenderer.texture);
+                        spriteRenderer.texture = nullptr;
+                    }
+                }
                 ImGui::TreePop();
             }
             ImGui::PopStyleVar();
