@@ -3,6 +3,8 @@
 #include "calmar/core/defines.hpp"
 #include "calmar/core/application_attachment.hpp"
 
+#include <imgui.h>
+
 namespace calmar {
     class imGuiHandler : public applicationAttachment {
        public:
@@ -21,5 +23,6 @@ namespace calmar {
         void endImGui();
 
        private:
+        void styleEditorTheme(ImGuiStyle* style);
     };
 }  // namespace calmar
