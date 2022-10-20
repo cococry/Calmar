@@ -5,6 +5,7 @@
 #include "calmar/renderer/orbit_camera.hpp"
 #include "calmar/renderer/vertex_array.hpp"
 #include "calmar/renderer/shader.hpp"
+#include "calmar/renderer/entity_camera.hpp"
 
 #include <glm/glm.hpp>
 #include <memory>
@@ -24,6 +25,8 @@ namespace calmar {
         static void shutdown();
 
         static void beginRender(const orbitCamera& camera);
+
+        static void beginRender(const entityCamera& camera, const glm::mat4& transform);
 
         static void endRender();
 

@@ -5,6 +5,8 @@
 #include <calmar/renderer/texture.hpp>
 #include <calmar/ecs/scene.hpp>
 
+#include "../scene_manager.hpp"
+
 #include <memory>
 #include <string>
 #include <glm/glm.hpp>
@@ -20,8 +22,15 @@ namespace calmarEd {
 
         void renderImGui();
 
+        inline entity getSelectedEntity() const {
+            return mSelectedEntity;
+        }
+
+        sceneManager sceneManaging;
+
        private:
-        void renderImGuiEntityNode(entity entty);
+        void
+        renderImGuiEntityNode(entity entty);
 
         void renderImGuiEntityComponents(entity entty);
 

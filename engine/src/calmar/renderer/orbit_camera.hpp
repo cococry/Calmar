@@ -7,6 +7,11 @@
 #include <glm/glm.hpp>
 
 namespace calmar {
+    enum class cameraType {
+        Orthograpic = 0,
+        Perspective
+    };
+
     struct cameraProperties {
         cameraProperties(float fov = 45.0f, float nearClip = 0.1f, float farClip = 1000.0f, float aspectRatio = 1.779f)
             : fov(fov), nearClip(nearClip), farClip(farClip), aspectRatio(aspectRatio) {}
@@ -71,6 +76,8 @@ namespace calmar {
         void mousePan(const glm::vec2& mouseDelta);
 
         void mouseZoom(float delta);
+
+        void mouseRotate(const glm::vec2& mouseDelta);
 
         glm::vec3 calculatePosition() const;
 

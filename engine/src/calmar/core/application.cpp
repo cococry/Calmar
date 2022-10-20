@@ -16,7 +16,6 @@
 
 #include "calmar/platform/opengl/gl_rendering.hpp"
 
-
 #include <sstream>
 
 calmar::application* calmar::application::mInstance = nullptr;
@@ -76,6 +75,7 @@ namespace calmar {
         entityComponentSystem.registerComponent<transformComponent>();
         entityComponentSystem.registerComponent<spriteRendererComponent>();
         entityComponentSystem.registerComponent<tagComponent>();
+        entityComponentSystem.registerComponent<cameraComponent>();
 
         mImGuiHandler = new imGuiHandler();
         addAttachment(mImGuiHandler);
@@ -112,9 +112,8 @@ namespace calmar {
             display->stopTiming();
             mFps = display->getFps();
             mDeltaTime = display->getDeltaTime();
-            
-            display->update();
 
+            display->update();
         }
     }
 

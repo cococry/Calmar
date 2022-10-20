@@ -6,6 +6,7 @@
 #include "calmar/core/application.hpp"
 
 #include "calmar/renderer/batch_renderer_2d.hpp"
+#include "calmar/renderer/entity_camera.hpp"
 
 namespace calmar {
     scene::scene() {
@@ -29,9 +30,75 @@ namespace calmar {
                     batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.texture, spriteRenderer.tint, transform.rotation.z);
                 else {
                     batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.tint, transform.rotation.z);
-                 }
+                }
             }
         }
         batchRenderer2d::endRender();
+    }
+
+    void scene::updateRuntime() {
+        entityCamera* renderCamera = nullptr;
+        glm::mat4 cameraTransform;
+
+        for (auto const& entty : mEntities) {
+            if (ECS.hasComponent<cameraComponent>(entty)) {
+                auto& cameraComp = ECS.getComponent<cameraComponent>(entty);
+                auto& transformComp = ECS.getComponent<transformComponent>(entty);
+                if (cameraComp.selectedForRendering) {
+                    renderCamera = &cameraComp.camera;
+                    cameraTransform = transformComp.getTransform();
+                }
+            }
+        }
+
+        if (renderCamera) {
+            batchRenderer2d::beginRender(*renderCamera, cameraTransform);
+            for (auto const& entty : mEntities) {
+                if (ECS.hasComponent<transformComponent>(entty)) {
+                    auto const& transformComp = ECS.getComponent<transformComponent>(entty);
+
+                    if (ECS.hasComponent<spriteRendererComponent>(entty)) {
+                        auto const& spriteRendererComp = ECS.getComponent<spriteRendererComponent>(entty);
+
+                        if (spriteRendererComp.texture) {
+                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.texture, spriteRendererComp.tint, transformComp.rotation.z);
+                        } else {
+                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.tint, transformComp.rotation.z);
+                        }
+                    }
+                }
+            }
+            batchRenderer2d::endRender();
+        }
+    }
+
+    entity scene::getRenderCameraEntity() const {
+        for (auto const& entty : mEntities) {
+            if (ECS.hasComponent<cameraComponent>(entty)) {
+                auto const& cameraComp = ECS.getComponent<cameraComponent>(entty);
+                if (cameraComp.selectedForRendering) {
+                    return entty;
+                }
+            }
+        }
+        return -1;
+    }
+
+    std::shared_ptr<scene> scene::copy(std::shared_ptr<scene> sceneToCopy) {
+        std::shared_ptr<scene> newScene = std::make_shared<scene>();
+
+        newScene->mEntities = sceneToCopy->mEntities;
+
+        return newScene;
+    }
+
+    void scene::handleResize(u32 width, u32 height) {
+        for (auto const& entty : mEntities) {
+            if (ECS.hasComponent<cameraComponent>(entty)) {
+                auto& cameraComp = ECS.getComponent<cameraComponent>(entty);
+
+                cameraComp.camera.setViewportSize(width, height);
+            }
+        }
     }
 }  // namespace calmar

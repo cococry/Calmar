@@ -1,10 +1,17 @@
 #include "editor.hpp"
 
-#include "calmar/core/application.hpp"
-
-#include "calmar/renderer/render_command.hpp"
-
+#include <calmar/core/application.hpp>
+#include <calmar/renderer/render_command.hpp>
+#include <calmar/renderer/resource_handler.hpp>
+#include <calmar/input/input.hpp>
+#include <calmar/input/key_codes.hpp>
+#include <calmar/core/util.hpp>
 #include <imgui.h>
+#include <glm/gtc/type_ptr.hpp>
+
+#include <calmar/event_system/window_events.hpp>
+
+#include <ImGuizmo.h>
 
 namespace calmarEd {
     void editorAttachment::init() {
@@ -19,6 +26,11 @@ namespace calmarEd {
         framebufferProps.width = 1920;
         framebufferProps.height = 1080;
         mFramebuffer = framebuffer::createRef(framebufferProps);
+
+        mStopIcon = resourceHandler::createTexture("../editor/assets/icons/stop-icon.png");
+        mStartIcon = resourceHandler::createTexture("../editor/assets/icons/play-icon.png");
+
+        mSceneState = sceneState::EditorMode;
     }
 
     void editorAttachment::update() {
@@ -32,10 +44,16 @@ namespace calmarEd {
         // for imgui
         renderCommand::clearBuffers(clearBuffers::colorBuffer | clearBuffers::depthBuffer);
         renderCommand::clearColor({0.1f, 0.1f, 0.1f, 1.0f});
+
+        handleInput();
     }
 
     void editorAttachment::handleEvents(const event& ev) {
         camera.handleEvents(ev);
+
+        if (COMPARE_EVENTS(ev, windowResizeEvent)) {
+            sceneHirarchy.sceneManaging.getActiveScene()->handleResize(application::getInstance()->display->getProperties().width, application::getInstance()->display->getProperties().height);
+        }
     }
 
     void editorAttachment::shutdown() {
@@ -44,6 +62,8 @@ namespace calmarEd {
     void editorAttachment::renderImGui() {
         handleImGuiDockspace();
         renderImGuiSceneViewport();
+        renderGizmos();
+        renderPlayButton();
         sceneHirarchy.renderImGui();
         imguiStatsPanel.renderImGui();
     }
@@ -53,15 +73,50 @@ namespace calmarEd {
         ImGui::Begin("Viewport");
         ImVec2 panelSize = ImGui::GetContentRegionAvail();
 
+        if (mFirstRun) {
+            sceneHirarchy.sceneManaging.getActiveScene()->handleResize(panelSize.x, panelSize.y);
+            mFirstRun = false;
+        }
+        sceneHirarchy.sceneManaging.getActiveScene()->handleResize(panelSize.x, panelSize.y);
         if (mViewportSize != *((glm::vec2*)&panelSize)) {
             mFramebuffer->resize((u32)panelSize.x, (u32)panelSize.y);
             mViewportSize = {panelSize.x, panelSize.y};
             camera.resize(panelSize.x, panelSize.y);
+            sceneHirarchy.sceneManaging.getActiveScene()->handleResize(panelSize.x, panelSize.y);
         }
         render_id texId = mFramebuffer->getColorAttachmentId();
         ImGui::Image((void*)(uintptr_t)texId, ImVec2{mViewportSize.x, mViewportSize.y}, ImVec2{0, 1}, ImVec2{1, 0});
+    }
+
+    void editorAttachment::renderPlayButton() {
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 2));
+        ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(0, 0));
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+        auto& colors = ImGui::GetStyle().Colors;
+        const auto& buttonHovered = colors[ImGuiCol_ButtonHovered];
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(buttonHovered.x, buttonHovered.y, buttonHovered.z, 0.5f));
+        const auto& buttonActive = colors[ImGuiCol_ButtonActive];
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(buttonActive.x, buttonActive.y, buttonActive.z, 0.5f));
+
+        ImGui::Begin("##toolbar", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+        float size = 32.0f;
+        std::shared_ptr<texture2d> icon = mSceneState == sceneState::EditorMode ? mStartIcon : mStopIcon;
+        ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
+        ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
+        if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(icon->getId()), ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), 0)) {
+            if (mSceneState == sceneState::EditorMode) {
+                mGizmoType = -1;
+                mSceneState = sceneState::PlayMode;
+                sceneHirarchy.sceneManaging.startRuntimeScene();
+            } else if (mSceneState == sceneState::PlayMode) {
+                mSceneState = sceneState::EditorMode;
+                sceneHirarchy.sceneManaging.stopRuntimeScene();
+            }
+        }
+        ImGui::PopStyleVar(2);
+        ImGui::PopStyleColor(3);
         ImGui::End();
-        ImGui::PopStyleVar();
     }
 
     void editorAttachment::handleImGuiDockspace() {
@@ -112,7 +167,65 @@ namespace calmarEd {
 
             ImGui::EndMenuBar();
         }
+    }
+
+    void editorAttachment::renderGizmos() {
+        entity selectedEntity = sceneHirarchy.getSelectedEntity();
+        if (selectedEntity != -1 && mGizmoType != -1) {
+            ImGuizmo::SetOrthographic(false);
+            ImGuizmo::SetDrawlist();
+            float windowWidth = (float)ImGui::GetWindowWidth();
+            float windowHeight = (float)ImGui::GetWindowHeight();
+            ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+            const glm::mat4& cameraProjection = camera.getData().projMatrix;
+            glm::mat4 cameraView = camera.getData().viewMatrix;
+
+            auto& transformComp = ECS.getComponent<transformComponent>(selectedEntity);
+            glm::mat4 transform = transformComp.getTransform();
+
+            bool snapped = input::isKeyDown(key::LeftControl);
+            float snapValue = .5f;
+            if (mGizmoType == ImGuizmo::OPERATION::ROTATE)
+                snapValue = 45.0f;
+
+            float snapValues[3] = {snapValue, snapValue, snapValue};
+
+            ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection), (ImGuizmo::OPERATION)mGizmoType,
+                                 ImGuizmo::LOCAL, glm::value_ptr(transform), nullptr, snapped ? snapValues : nullptr);
+
+            if (ImGuizmo::IsUsing()) {
+                glm::vec3 translation, rotation, scale;
+                math::linalg::decomposeTransform(transform, translation, rotation, scale);
+
+                glm::vec3 deltaRotation = rotation - transformComp.rotation;
+                transformComp.position = translation;
+                transformComp.rotation += deltaRotation;
+                transformComp.scale = scale;
+            }
+        }
 
         ImGui::End();
+        ImGui::PopStyleVar();
+
+        ImGui::End();
+    }
+
+    void editorAttachment::handleInput() {
+        if (input::isKeyDown(key::Q)) {
+            mGizmoType = -1;
+        } else if (input::isKeyDown(key::W)) {
+            if (mSceneState != sceneState::PlayMode) {
+                mGizmoType = ImGuizmo::OPERATION::TRANSLATE;
+            }
+        } else if (input::isKeyDown(key::R)) {
+            if (mSceneState != sceneState::PlayMode) {
+                mGizmoType = ImGuizmo::OPERATION::ROTATE;
+            }
+        } else if (input::isKeyDown(key::S)) {
+            if (mSceneState != sceneState::PlayMode) {
+                mGizmoType = ImGuizmo::OPERATION::SCALE;
+            }
+        }
     }
 }  // namespace calmarEd

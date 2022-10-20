@@ -5,6 +5,8 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 
+#include <ImGuizmo.h>
+
 #include <GLFW/glfw3.h>
 
 namespace calmar {
@@ -40,9 +42,9 @@ namespace calmar {
         style.Colors[ImGuiCol_HeaderActive] = ImColor(19, 25, 28);
 
         // Buttons
-        style.Colors[ImGuiCol_Button] = ImColor(55, 52, 60);
-        style.Colors[ImGuiCol_ButtonHovered] = ImColor(62, 58, 68);
-        style.Colors[ImGuiCol_ButtonActive] = ImColor(45, 49, 56);
+        style.Colors[ImGuiCol_Button] = ImColor(58, 59, 69);
+        style.Colors[ImGuiCol_ButtonHovered] = ImColor(68, 69, 79);
+        style.Colors[ImGuiCol_ButtonActive] = ImColor(48, 49, 59);
 
         // Frame BG
         style.Colors[ImGuiCol_FrameBg] = ImColor(39, 47, 51);
@@ -80,6 +82,7 @@ namespace calmar {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        ImGuizmo::BeginFrame();
     }
     void imGuiHandler::endImGui() {
         ImGuiIO& io = ImGui::GetIO();

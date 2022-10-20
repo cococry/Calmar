@@ -18,9 +18,11 @@ namespace calmarEd {
         mScene->init();
 
         mDefaultTexture = resourceHandler::createTexture("../engine/assets/textures/checkerboardicon.png");
+
+        sceneManaging = sceneManager(mScene);
     }
     void sceneHirarchyPanel::update() {
-        mScene->update();
+        sceneManaging.updateActiveScene();
     }
     void sceneHirarchyPanel::renderImGui() {
         ImGui::Begin("Scene Hirarchy");
@@ -97,6 +99,12 @@ namespace calmarEd {
                 }
             }
 
+            if (!ECS.hasComponent<cameraComponent>(mSelectedEntity)) {
+                if (ImGui::MenuItem("Camera")) {
+                    ECS.addComponent(entty, cameraComponent());
+                    ImGui::CloseCurrentPopup();
+                }
+            }
             ImGui::EndPopup();
         }
 
@@ -169,6 +177,68 @@ namespace calmarEd {
                 }
                 ImGui::TreePop();
             }
+            ImGui::PopStyleVar();
+        }
+        if (ECS.hasComponent<cameraComponent>(entty)) {
+            ImGuiIO io = ImGui::GetIO();
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+            ImGui::Separator();
+
+            bool open = ImGui::TreeNodeEx((void*)typeid(cameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Sprite Renderer");
+            ImGui::SameLine();
+            if (ImGui::Button("-")) {
+                ECS.removeComponent<cameraComponent>(entty);
+            }
+
+            if (open) {
+                auto& cameraComp = ECS.getComponent<cameraComponent>(entty);
+                auto& camera = cameraComp.camera;
+                ImGui::Checkbox("Select for Rendering", &cameraComp.selectedForRendering);
+
+                const char* projectionTypeStrings[] = {"Perspective", "Orthographic"};
+                const char* currentProjectionTypeString = projectionTypeStrings[(int)camera.getProjectionType()];
+
+                if (ImGui::BeginCombo("Projection", currentProjectionTypeString)) {
+                    for (int32_t i = 0; i < 2; ++i) {
+                        bool isSelected = currentProjectionTypeString == projectionTypeStrings[i];
+                        if (ImGui::Selectable(projectionTypeStrings[i], isSelected)) {
+                            currentProjectionTypeString = projectionTypeStrings[i];
+                            camera.setProjectionType((entityCamera::projectionType)i);
+                        }
+                        if (isSelected)
+                            ImGui::SetItemDefaultFocus();
+                    }
+                    ImGui::EndCombo();
+                }
+                if (camera.getProjectionType() == entityCamera::projectionType::Perspective) {
+                    float verticalFov = glm::degrees(camera.getPerspectiveVerticalFOV());
+                    if (ImGui::DragFloat("Vertical FOV", &verticalFov))
+                        camera.setPerspectiveVerticalFOV(glm::radians(verticalFov));
+
+                    float perspectiveNear = camera.getPerspectiveNearClip();
+                    if (ImGui::DragFloat("Near", &perspectiveNear))
+                        camera.setPerspectiveNearClip(perspectiveNear);
+
+                    float perspectiveFar = camera.getPerspectiveFarClip();
+                    if (ImGui::DragFloat("Far", &perspectiveFar))
+                        camera.setPerspectiveFarClip(perspectiveFar);
+                }
+                if (camera.getProjectionType() == entityCamera::projectionType::Orthographic) {
+                    float orthoSize = camera.getOrthographicSize();
+                    if (ImGui::DragFloat("Size", &orthoSize))
+                        camera.setOrthographicSize(orthoSize);
+
+                    float orthoNear = camera.getOrthographicNearClip();
+                    if (ImGui::DragFloat("Near", &orthoNear))
+                        camera.setOrthographicNearClip(orthoNear);
+
+                    float orthoFar = camera.getOrthographicFarClip();
+                    if (ImGui::DragFloat("Far", &orthoFar))
+                        camera.setOrthographicFarClip(orthoFar);
+                }
+                ImGui::TreePop();
+            }
+
             ImGui::PopStyleVar();
         }
     }

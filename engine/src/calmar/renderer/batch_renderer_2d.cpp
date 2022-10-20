@@ -76,6 +76,19 @@ namespace calmar {
             resetStats();
         }
     }
+
+    void batchRenderer2d::beginRender(const entityCamera& camera, const glm::mat4& transform) {
+        glm::mat4 viewProj = camera.getProjection() * glm::inverse(transform);
+
+        mData.quadShader->bind();
+        mData.quadShader->setMatrix4f("uViewProj", viewProj);
+
+        mData.quadIndexCount = 0;
+        mData.quadVertexBufferPointer = mData.quadVertexBufferBase;
+
+        mData.textureSlotIndex = 1;
+        resetStats();
+    }
     void batchRenderer2d::endRender() {
         if (USING_COMPATABLE_RENDERING_API) {
             drawData();
@@ -133,7 +146,7 @@ namespace calmar {
                 mData.textureSlotIndex++;
             }
 
-            glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
+            glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f}) * glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
 
             for (u32 i = 0; i < quadVertexCount; i++) {
                 mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];

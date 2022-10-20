@@ -4,6 +4,7 @@
 
 #include "calmar/renderer/orbit_camera.hpp"
 #include "calmar/renderer/framebuffer.hpp"
+#include "calmar/renderer/texture.hpp"
 
 #include "panels/scene_hirarchy.hpp"
 #include "panels/stats_panel.hpp"
@@ -14,6 +15,10 @@
 using namespace calmar;
 
 namespace calmarEd {
+    enum class sceneState {
+        PlayMode = 0,
+        EditorMode
+    };
     class editorAttachment : public applicationAttachment {
        public:
         virtual void init() override;
@@ -34,10 +39,24 @@ namespace calmarEd {
        private:
         std::shared_ptr<framebuffer> mFramebuffer;
 
+        std::shared_ptr<texture2d> mStopIcon, mStartIcon;
+
         glm::vec2 mViewportSize = glm::vec2(1.0f);
+
+        i32 mGizmoType = -1;
+
+        sceneState mSceneState;
+
+        bool mFirstRun = true;
 
         void renderImGuiSceneViewport();
 
+        void renderPlayButton();
+
         void handleImGuiDockspace();
+
+        void renderGizmos();
+
+        void handleInput();
     };
 }  // namespace calmarEd

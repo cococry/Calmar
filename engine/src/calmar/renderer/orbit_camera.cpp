@@ -34,10 +34,13 @@ namespace calmar {
 
             if (input::isMouseButtonDown(button::Middle)) {
                 mousePan(mouseDelta);
-            } else if (input::isMouseButtonDown(button::Right)) {
+            }
+
+            if (input::isMouseButtonDown(button::Right)) {
                 mouseZoom(mouseDelta.y);
             }
         }
+
         updateView();
     }
 
@@ -95,8 +98,15 @@ namespace calmar {
         mData.oribtDistance -= delta * getZoomSpeed();
 
         if (mData.oribtDistance < 0.5f) {
+            mData.focalPoint += getForwardDir();
             mData.oribtDistance = 0.5f;
         }
+    }
+
+    void orbitCamera::mouseRotate(const glm::vec2& mouseDelta) {
+        float yawSign = getUpDir().y < 0 ? -1.0f : 1.0f;
+        mData.yaw += yawSign * mouseDelta.x * 1.36f;
+        mData.pitch += mouseDelta.y * 1.36f;
     }
 
     glm::vec3 orbitCamera::calculatePosition() const {
