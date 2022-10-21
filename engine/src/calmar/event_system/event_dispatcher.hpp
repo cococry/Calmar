@@ -9,8 +9,8 @@
 #include "calmar/core/defines.hpp"
 
 namespace calmar {
-    // A simple alias for an std::function<void(const event& ev)>
-    using eventCallback = std::function<void(const event& ev)>;
+    // A simple alias for an std::function<void(const event ev)>
+    using eventCallback = std::function<void(event)>;
 
     /* This class is used to to listen given events and dispatch events
         This is done by storing a unordered map in the class which links a event type to a
@@ -29,7 +29,7 @@ namespace calmar {
         /// @brief Checks if the given event type is listend and if it is, it calls the call back that is linked
         /// to its time.
         /// @param ev The event which is being dispatched
-        void dispatch(const event& ev);
+        void dispatch(event ev);
 
        private:
         std::unordered_map<eventType, std::vector<eventCallback>> mEvents;

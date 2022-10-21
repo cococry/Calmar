@@ -25,7 +25,7 @@ namespace calmarEd {
 
         virtual void update() override;
 
-        virtual void handleEvents(const event& ev) override;
+        virtual void handleEvents(event ev) override;
 
         virtual void shutdown() override;
 
@@ -42,12 +42,15 @@ namespace calmarEd {
         std::shared_ptr<texture2d> mStopIcon, mStartIcon;
 
         glm::vec2 mViewportSize = glm::vec2(1.0f);
+        glm::vec2 mViewportBounds[2];
 
         i32 mGizmoType = -1;
 
         sceneState mSceneState;
 
-        bool mFirstRun = true;
+        bool mFirstRun = true, mViewportFocused = false;
+
+        entity mHoveredEntity = -1;
 
         void renderImGuiSceneViewport();
 

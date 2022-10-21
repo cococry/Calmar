@@ -1,6 +1,8 @@
 #include "imgui_handler.hpp"
 
-#include "calmar/core/application.hpp"
+#include <calmar/core/application.hpp>
+#include <calmar/event_system/mouse_events.hpp>
+#include <calmar/event_system/key_events.hpp>
 
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
@@ -99,4 +101,5 @@ namespace calmar {
             glfwMakeContextCurrent(currentContext);
         }
     }
+
 }  // namespace calmar

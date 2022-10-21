@@ -7,7 +7,7 @@ namespace calmar {
         mEvents[type].push_back(callback);
     }
 
-    void eventDispatcher::dispatch(const event& ev) {
+    void eventDispatcher::dispatch(event ev) {
         // Getting the type of the event
         eventType type = ev.type();
 

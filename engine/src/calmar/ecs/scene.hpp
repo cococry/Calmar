@@ -3,6 +3,7 @@
 #include "system.hpp"
 
 #include <memory>
+#include "calmar/renderer/texture.hpp"
 
 namespace calmar {
     class scene : public systemEcs {
@@ -24,5 +25,6 @@ namespace calmar {
         static std::shared_ptr<scene> copy(std::shared_ptr<scene> sceneToCopy);
 
        private:
+        std::shared_ptr<texture2d> mCameraTexture;
     };
 }  // namespace calmar

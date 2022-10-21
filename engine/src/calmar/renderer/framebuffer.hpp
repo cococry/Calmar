@@ -58,6 +58,8 @@ namespace calmar {
 
         virtual void clearAttachment(u32 attachmentIndex, i32 data) {}
 
+        virtual i32 readPixel(u32 attachmentIndex, i32 x, i32 y) { return -1; }
+
         inline render_id getd() const {
             return mId;
         }

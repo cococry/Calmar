@@ -5,6 +5,8 @@
 #include <calmar/renderer/resource_handler.hpp>
 #include <calmar/input/input.hpp>
 #include <calmar/input/key_codes.hpp>
+#include <calmar/input/mouse_codes.hpp>
+#include <calmar/event_system/mouse_events.hpp>
 #include <calmar/core/util.hpp>
 #include <imgui.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -22,9 +24,9 @@ namespace calmarEd {
         imguiStatsPanel.init();
 
         framebufferProperties framebufferProps;
-        framebufferProps.attachments = {framebufferTextureFormat::RGBA8, framebufferTextureFormat::Depth};
-        framebufferProps.width = 1920;
-        framebufferProps.height = 1080;
+        framebufferProps.attachments = {framebufferTextureFormat::RGBA8, framebufferTextureFormat::SHADER_RED_INT, framebufferTextureFormat::Depth};
+        framebufferProps.width = 1280;
+        framebufferProps.height = 720;
         mFramebuffer = framebuffer::createRef(framebufferProps);
 
         mStopIcon = resourceHandler::createTexture("../editor/assets/icons/stop-icon.png");
@@ -35,20 +37,37 @@ namespace calmarEd {
 
     void editorAttachment::update() {
         mFramebuffer->bind();
-        camera.update();
-        renderCommand::clearBuffers(clearBuffers::colorBuffer | clearBuffers::depthBuffer);
         renderCommand::clearColor({0.1f, 0.1f, 0.1f, 1.0f});
+        renderCommand::clearBuffers(clearBuffers::colorBuffer | clearBuffers::depthBuffer);
+        mFramebuffer->clearAttachment(1, -1);
         sceneHirarchy.update();
-        mFramebuffer->unbind();
 
+        auto [imguiMouseX, imguiMouseY] = ImGui::GetMousePos();
+        imguiMouseX -= mViewportBounds[0].x;
+        imguiMouseY -= mViewportBounds[0].y;
+        glm::vec2 viewportSize = mViewportBounds[1] - mViewportBounds[0];
+        imguiMouseY = viewportSize.y - imguiMouseY;
+
+        i32 mouseX = (i32)imguiMouseX;
+        i32 mouseY = (i32)imguiMouseY - 20;
+
+        if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y) {
+            i32 pixelData = mFramebuffer->readPixel(1, mouseX, mouseY);
+            mHoveredEntity = pixelData;
+        }
+
+        mFramebuffer->unbind();
         // for imgui
         renderCommand::clearBuffers(clearBuffers::colorBuffer | clearBuffers::depthBuffer);
         renderCommand::clearColor({0.1f, 0.1f, 0.1f, 1.0f});
 
-        handleInput();
+        if (mViewportFocused) {
+            handleInput();
+            camera.update();
+        }
     }
 
-    void editorAttachment::handleEvents(const event& ev) {
+    void editorAttachment::handleEvents(event ev) {
         camera.handleEvents(ev);
 
         if (COMPARE_EVENTS(ev, windowResizeEvent)) {
@@ -71,6 +90,9 @@ namespace calmarEd {
     void editorAttachment::renderImGuiSceneViewport() {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
         ImGui::Begin("Viewport");
+        ImVec2 viewportOffset = ImGui::GetCursorPos();
+        mViewportFocused = ImGui::IsWindowFocused() && ImGui::IsWindowHovered();
+
         ImVec2 panelSize = ImGui::GetContentRegionAvail();
 
         if (mFirstRun) {
@@ -84,8 +106,14 @@ namespace calmarEd {
             camera.resize(panelSize.x, panelSize.y);
             sceneHirarchy.sceneManaging.getActiveScene()->handleResize(panelSize.x, panelSize.y);
         }
-        render_id texId = mFramebuffer->getColorAttachmentId();
+        render_id texId = mFramebuffer->getColorAttachmentId(0);
         ImGui::Image((void*)(uintptr_t)texId, ImVec2{mViewportSize.x, mViewportSize.y}, ImVec2{0, 1}, ImVec2{1, 0});
+
+        ImVec2 windowSize = ImGui::GetWindowSize();
+        ImVec2 minBound = {ImGui::GetWindowPos().x + viewportOffset.x, ImGui::GetWindowPos().y + viewportOffset.y};
+        ImVec2 maxBound = {minBound.x + windowSize.x, minBound.y + windowSize.y};
+        mViewportBounds[0] = {minBound.x, minBound.y};
+        mViewportBounds[1] = {maxBound.x, maxBound.y};
     }
 
     void editorAttachment::renderPlayButton() {
@@ -212,7 +240,7 @@ namespace calmarEd {
     }
 
     void editorAttachment::handleInput() {
-        if (input::isKeyDown(key::Q)) {
+        if (input::isKeyDown(key::Q) || input::isKeyDown(key::Escape)) {
             mGizmoType = -1;
         } else if (input::isKeyDown(key::W)) {
             if (mSceneState != sceneState::PlayMode) {
@@ -226,6 +254,9 @@ namespace calmarEd {
             if (mSceneState != sceneState::PlayMode) {
                 mGizmoType = ImGuizmo::OPERATION::SCALE;
             }
+        }
+        if (input::mouseButtonWentDown(button::Left) && mHoveredEntity != -1 && mViewportFocused) {
+            sceneHirarchy.setSelectedEntity(mHoveredEntity);
         }
     }
 }  // namespace calmarEd

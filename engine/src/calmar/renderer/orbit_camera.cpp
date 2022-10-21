@@ -39,6 +39,10 @@ namespace calmar {
             if (input::isMouseButtonDown(button::Right)) {
                 mouseZoom(mouseDelta.y);
             }
+
+            if (input::isMouseButtonDown(button::Left)) {
+                mouseRotate(mouseDelta);
+            }
         }
 
         updateView();
@@ -79,7 +83,7 @@ namespace calmar {
         mData.viewMatrix = glm::inverse(mData.viewMatrix);
     }
 
-    void orbitCamera::handleEvents(const event& ev) {
+    void orbitCamera::handleEvents(event ev) {
         if (ev.type() == mouseScrolledEvent::evType) {
             const mouseScrolledEvent& mouseEv = static_cast<const mouseScrolledEvent&>(ev);
             float delta = mouseEv.getYOffset() * 0.1f;

@@ -131,7 +131,7 @@ namespace calmar {
         }
     }
 
-    void application::handleEvents(const event& ev) {
+    void application::handleEvents(event ev) {
         // Checking the type of the event and handling it
         if (COMPARE_EVENTS(ev, windowCloseEvent)) {
             // Closing the window if a close event was recived

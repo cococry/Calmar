@@ -46,7 +46,7 @@ namespace calmar {
 
         void resize(float width, float height);
 
-        void handleEvents(const event& ev);
+        void handleEvents(event ev);
 
         glm::vec3 getUpDir() const;
 

@@ -13,7 +13,7 @@ namespace calmar {
 
         virtual void shutdown() {}
 
-        virtual void handleEvents(const event& ev) {}
+        virtual void handleEvents(event ev) {}
 
         virtual void renderImGui() {}
 

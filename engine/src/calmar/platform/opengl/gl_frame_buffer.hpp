@@ -23,6 +23,8 @@ namespace calmar {
             return mProps;
         }
 
+        virtual i32 readPixel(u32 attachmentIndex, i32 x, i32 y) override;
+
        private:
         framebufferProperties mProps;
     };

@@ -69,6 +69,9 @@ namespace calmar {
             // attachments at index 1 is reserved for the editor attachment
             return static_cast<calmarEd::editorAttachment*>(mAttachements[1]);
         }
+        inline imGuiHandler* getImGuiHandler() {
+            return mImGuiHandler;
+        }
         /// @brief The universal instance of the event dispatcher to dispatch evnts in the engine
         eventDispatcher evDispatcher;
 
@@ -89,7 +92,7 @@ namespace calmar {
         /// @brief This method handles general events which are specific to the application like window resizing
         /// and handeling closing the window
         /// @param ev The event which is internally recived.
-        void handleEvents(const event& ev);
+        void handleEvents(event ev);
 
        private:
         bool mRunning = false;

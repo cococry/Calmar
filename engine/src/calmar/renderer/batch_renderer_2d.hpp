@@ -17,6 +17,8 @@ namespace calmar {
         glm::vec4 tint;
         glm::vec2 texCoord;
         float texSlotIndex;
+
+        i32 entityId;
     };
     class batchRenderer2d {
        public:
@@ -32,17 +34,17 @@ namespace calmar {
 
         static void drawData();
 
-        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color, float rotation = 0.0f);
+        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color, float rotation = 0.0f, i32 entityId = -1);
 
-        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec4& color, float rotation = 0.0f);
+        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec4& color, float rotation = 0.0f, i32 entityId = -1);
 
-        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), float rotation = 0.0f);
+        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), float rotation = 0.0f, i32 entityId = -1);
 
-        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), float rotation = 0.0f);
+        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), float rotation = 0.0f, i32 entityId = -1);
 
-        static void renderQuad(const glm::mat4& transform, const glm::vec4& color);
+        static void renderQuad(const glm::mat4& transform, const glm::vec4& color, i32 entityId = -1);
 
-        static void renderQuad(const glm::mat4& transform, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f));
+        static void renderQuad(const glm::mat4& transform, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), i32 entityId = -1);
 
         struct renderStats {
             u32 drawCalls = 0;

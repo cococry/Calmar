@@ -8,8 +8,11 @@
 #include "calmar/renderer/batch_renderer_2d.hpp"
 #include "calmar/renderer/entity_camera.hpp"
 
+#include "calmar/renderer/resource_handler.hpp"
+
 namespace calmar {
     scene::scene() {
+        mCameraTexture = resourceHandler::createTexture("../editor/assets/icons/camera-icon.png");
     }
     scene::~scene() {
     }
@@ -27,10 +30,12 @@ namespace calmar {
                 auto const& spriteRenderer = ECS.getComponent<spriteRendererComponent>(entity);
 
                 if (spriteRenderer.texture != nullptr)
-                    batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.texture, spriteRenderer.tint, transform.rotation.z);
+                    batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.texture, spriteRenderer.tint, transform.rotation.z, entity);
                 else {
-                    batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.tint, transform.rotation.z);
+                    batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.tint, transform.rotation.z, entity);
                 }
+            } else if (ECS.hasComponent<cameraComponent>(entity) && !ECS.hasComponent<spriteRendererComponent>(entity)) {
+                batchRenderer2d::renderQuad(transform.position, glm::vec2(1.0f), mCameraTexture, glm::vec4(1.0f), 0.0f, entity);
             }
         }
         batchRenderer2d::endRender();
@@ -61,9 +66,9 @@ namespace calmar {
                         auto const& spriteRendererComp = ECS.getComponent<spriteRendererComponent>(entty);
 
                         if (spriteRendererComp.texture) {
-                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.texture, spriteRendererComp.tint, transformComp.rotation.z);
+                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.texture, spriteRendererComp.tint, transformComp.rotation.z, entty);
                         } else {
-                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.tint, transformComp.rotation.z);
+                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.tint, transformComp.rotation.z, entty);
                         }
                     }
                 }

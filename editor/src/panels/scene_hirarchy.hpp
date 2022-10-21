@@ -25,6 +25,9 @@ namespace calmarEd {
         inline entity getSelectedEntity() const {
             return mSelectedEntity;
         }
+        inline void setSelectedEntity(entity entty) {
+            mSelectedEntity = entty;
+        }
 
         sceneManager sceneManaging;
 

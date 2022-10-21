@@ -51,18 +51,7 @@ namespace calmar {
         static bool isDepthFormat(framebufferTextureFormat format) {
             return format == calmar::framebufferTextureFormat::DEPTH24STENCIL8;
         }
-        static bool calmarToGLTextureFormat(framebufferTextureFormat format) {
-            switch (static_cast<unsigned int>(format)) {
-                case static_cast<unsigned int>(framebufferTextureFormat::RGBA8):
-                    return GL_RGBA8;
-                case static_cast<unsigned int>(framebufferTextureFormat::SHADER_RED_INT):
-                    return GL_RED_INTEGER;
-                default:
-                    break;
-            }
-            CALMAR_ASSERT_MSG(false, "Using invalid texture format in framebuffer.");
-            return 0;
-        }
+
     }  // namespace util
     glFrameBuffer::glFrameBuffer(const framebufferProperties& props)
         : mProps(props) {
@@ -154,7 +143,15 @@ namespace calmar {
     void glFrameBuffer::clearAttachment(u32 attachmentIndex, i32 data) {
         CALMAR_ASSERT_MSG(attachmentIndex < mColorAttachmentProps.size(), "Attachment index out of bounds.");
 
-        auto& props = mColorAttachmentProps[attachmentIndex];
-        glClearTexImage(mColorAttachments[attachmentIndex], 0, util::calmarToGLTextureFormat(props.textureFormat), GL_INT, &data);
+        glClearTexImage(mColorAttachments[attachmentIndex], 0, GL_RED_INTEGER, GL_INT, &data);
+    }
+
+    i32 glFrameBuffer::readPixel(u32 attachmentIndex, i32 x, i32 y) {
+        CALMAR_ASSERT_MSG(attachmentIndex < mColorAttachmentProps.size(), "Attachment index out of bounds.");
+
+        glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
+        int pixelData;
+        glReadPixels(x, y, 1, 1, GL_RED_INTEGER, GL_INT, &pixelData);
+        return pixelData;
     }
 }  // namespace calmar
