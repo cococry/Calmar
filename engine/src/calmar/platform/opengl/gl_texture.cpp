@@ -9,7 +9,7 @@
 #include <glad/glad.h>
 
 namespace calmar {
-    glTexture2d::glTexture2d(const std::string& filepath) {
+    glTexture2d::glTexture2d(const std::string& filepath, textureFilterMode filterMode) {
         mTextureData.filepath = filepath;
         int width, height, channels;
         stbi_set_flip_vertically_on_load(true);
@@ -21,6 +21,7 @@ namespace calmar {
 
         mTextureData.width = width;
         mTextureData.height = height;
+        mTextureData.filterMode = filterMode;
 
         GLenum internalFormat = 0, dataFormat = 0;
         if (channels == 4) {
@@ -39,12 +40,17 @@ namespace calmar {
         glCreateTextures(GL_TEXTURE_2D, 1, &mId);
         glTextureStorage2D(mId, 1, internalFormat, mTextureData.width, mTextureData.height);
 
-        glTextureParameteri(mId, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTextureParameteri(mId, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+        if (filterMode == textureFilterMode::Linear) {
+            glTextureParameteri(mId, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTextureParameteri(mId, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        }
+        if (filterMode == textureFilterMode::Nearest) {
+            glTextureParameteri(mId, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTextureParameteri(mId, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        }
         glTextureParameteri(mId, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTextureParameteri(mId, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
+        glTextureParameteri(mId, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTextureSubImage2D(mId, 0, 0, 0, mTextureData.width, mTextureData.height, dataFormat, GL_UNSIGNED_BYTE, data);
 
         CALMAR_TRACE("Successsfully loaded texture at filepath'{0}' (channels: {1} size: {2}x{3}) with stb_image/OpenGL.", filepath, channels, mTextureData.width, mTextureData.height);

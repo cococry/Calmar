@@ -6,20 +6,25 @@
 #include <memory>
 
 namespace calmar {
+    enum class textureFilterMode {
+        Nearest = 0,
+        Linear
+    };
     struct texture2dObject {
         u32 width, height;
         u32 numberOfChannels;
         u32 dataFormat, internalFormat;
         std::string filepath;
+        textureFilterMode filterMode;
     };
 
     class texture2d {
        public:
-        static texture2d create(const std::string& filepath);
+        static texture2d create(const std::string& filepath, textureFilterMode filterMode = textureFilterMode::Linear);
 
-        static std::shared_ptr<texture2d> createRef(const std::string& filepath);
+        static std::shared_ptr<texture2d> createRef(const std::string& filepath, textureFilterMode filterMode = textureFilterMode::Linear);
 
-        static std::unique_ptr<texture2d> createScoped(const std::string& filepath);
+        static std::unique_ptr<texture2d> createScoped(const std::string& filepath, textureFilterMode filterMode = textureFilterMode::Linear);
 
         static texture2d create(u32 width, u32 height);
 

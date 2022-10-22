@@ -2,6 +2,7 @@
 
 #include "calmar/core/defines.hpp"
 #include "calmar/renderer/texture.hpp"
+#include "calmar/renderer/indexed_atlas_texture.hpp"
 #include "calmar/renderer/orbit_camera.hpp"
 #include "calmar/renderer/vertex_array.hpp"
 #include "calmar/renderer/shader.hpp"
@@ -34,17 +35,23 @@ namespace calmar {
 
         static void drawData();
 
-        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color, float rotation = 0.0f, i32 entityId = -1);
+        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color, glm::vec3 rotation = glm::vec3(0.0f), i32 entityId = -1);
 
-        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec4& color, float rotation = 0.0f, i32 entityId = -1);
+        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec4& color, glm::vec3 rotation = glm::vec3(0.0f), i32 entityId = -1);
 
-        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), float rotation = 0.0f, i32 entityId = -1);
+        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), glm::vec3 rotation = glm::vec3(0.0f), i32 entityId = -1);
 
-        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), float rotation = 0.0f, i32 entityId = -1);
+        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), glm::vec3 rotation = glm::vec3(0.0f), i32 entityId = -1);
+
+        static void renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<indexedAtlasTexture>& indexedTexture, const glm::vec4& tint = glm::vec4(1.0f), glm::vec3 rotation = glm::vec3(0.0f), i32 entityId = -1);
+
+        static void renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<indexedAtlasTexture>& indexedTexture, const glm::vec4& tint = glm::vec4(1.0f), glm::vec3 rotation = glm::vec3(0.0f), i32 entityId = -1);
 
         static void renderQuad(const glm::mat4& transform, const glm::vec4& color, i32 entityId = -1);
 
         static void renderQuad(const glm::mat4& transform, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint = glm::vec4(1.0f), i32 entityId = -1);
+
+        static void renderQuad(const glm::mat4& transform, const std::shared_ptr<indexedAtlasTexture>& indexedTexture, const glm::vec4& tint = glm::vec4(1.0f), i32 entityId = -1);
 
         struct renderStats {
             u32 drawCalls = 0;

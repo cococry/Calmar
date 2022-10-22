@@ -8,6 +8,8 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <iostream>
+
 namespace calmar {
     batchRenderer2d::renderData batchRenderer2d::mData;
 
@@ -109,21 +111,25 @@ namespace calmar {
 
         mData.stats.drawCalls++;
     }
-    void batchRenderer2d::renderQuad(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color, float rotation, i32 entityId) {
+    void batchRenderer2d::renderQuad(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color, glm::vec3 rotation, i32 entityId) {
         if (USING_COMPATABLE_RENDERING_API)
             renderQuad({position.x, position.y, 0.0f}, scale, color, rotation, entityId);
     }
-    void batchRenderer2d::renderQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec4& color, float rotation, i32 entityId) {
+    void batchRenderer2d::renderQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec4& color, glm::vec3 rotation, i32 entityId) {
         if (USING_COMPATABLE_RENDERING_API) {
-            glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f}) * glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
+            glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.x, glm::vec3(1, 0, 0)) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.y, glm::vec3(0, 1, 0)) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0, 0, 1)) *
+                                  glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
             renderQuad(transform, color, entityId);
         }
     }
-    void batchRenderer2d::renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint, float rotation, i32 entityId) {
+    void batchRenderer2d::renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint, glm::vec3 rotation, i32 entityId) {
         if (USING_COMPATABLE_RENDERING_API)
             renderQuad({position.x, position.y, 0.0f}, scale, texture, tint, rotation, entityId);
     }
-    void batchRenderer2d::renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint, float rotation, i32 entityId) {
+    void batchRenderer2d::renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<texture2d>& texture, const glm::vec4& tint, glm::vec3 rotation, i32 entityId) {
         if (USING_COMPATABLE_RENDERING_API) {
             constexpr u32 quadVertexCount = 4;
             constexpr glm::vec2 textureCoords[] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
@@ -147,8 +153,11 @@ namespace calmar {
                 mData.textureSlotIndex++;
             }
 
-            glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f}) * glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
-
+            glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.x, glm::vec3(1, 0, 0)) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.y, glm::vec3(0, 1, 0)) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0, 0, 1)) *
+                                  glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
             for (u32 i = 0; i < quadVertexCount; i++) {
                 mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
                 mData.quadVertexBufferPointer->tint = tint;
@@ -192,7 +201,6 @@ namespace calmar {
             if (mData.quadIndexCount >= mData.maxIndicesBatch)
                 drawReset();
 
-            constexpr glm::vec4 color = {1.0f, 1.0f, 1.0f, 1.0f};
             constexpr uint32_t quadVertexCount = 4;
             constexpr glm::vec2 textureCoords[] = {{
                                                        0.0f,
@@ -219,7 +227,45 @@ namespace calmar {
 
             for (uint32_t i = 0; i < quadVertexCount; i++) {
                 mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
-                mData.quadVertexBufferPointer->tint = color;
+                mData.quadVertexBufferPointer->tint = tint;
+                mData.quadVertexBufferPointer->texCoord = textureCoords[i];
+                mData.quadVertexBufferPointer->texSlotIndex = textureIndex;
+                mData.quadVertexBufferPointer->entityId = entityId;
+                mData.quadVertexBufferPointer++;
+            }
+            mData.quadIndexCount += 6;
+
+            mData.stats.numberOfQuads++;
+        }
+    }
+
+    void batchRenderer2d::renderQuad(const glm::mat4& transform, const std::shared_ptr<indexedAtlasTexture>& indexedTexture, const glm::vec4& tint, i32 entityId) {
+        if (USING_COMPATABLE_RENDERING_API) {
+            if (mData.quadIndexCount >= mData.maxIndicesBatch)
+                drawReset();
+
+            constexpr uint32_t quadVertexCount = 4;
+            const glm::vec2* textureCoords = indexedTexture->getTextureCoords();
+
+            const std::shared_ptr<texture2d> texture = indexedTexture->atlasTexture;
+            float textureIndex = 0.0f;
+
+            for (uint32_t i = 1; i < mData.textureSlotIndex; i++) {
+                if (*mData.textures[i].get() == *texture.get()) {
+                    textureIndex = (float)i;
+                    break;
+                }
+            }
+
+            if (textureIndex == 0.0f) {
+                textureIndex = (float)mData.textureSlotIndex;
+                mData.textures[mData.textureSlotIndex] = texture;
+                mData.textureSlotIndex++;
+            }
+
+            for (uint32_t i = 0; i < quadVertexCount; i++) {
+                mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
+                mData.quadVertexBufferPointer->tint = tint;
                 mData.quadVertexBufferPointer->texCoord = textureCoords[i];
                 mData.quadVertexBufferPointer->texSlotIndex = textureIndex;
                 mData.quadVertexBufferPointer->entityId = entityId;
@@ -248,5 +294,93 @@ namespace calmar {
         mData.quadVertexBufferPointer = mData.quadVertexBufferBase;
 
         mData.textureSlotIndex = 1;
+    }
+
+    void batchRenderer2d::renderQuad(const glm::vec2& position, const glm::vec2& scale, const std::shared_ptr<indexedAtlasTexture>& indexedTexture, const glm::vec4& tint, glm::vec3 rotation, i32 entityId) {
+        if (USING_COMPATABLE_RENDERING_API) {
+            constexpr u32 quadVertexCount = 4;
+            const glm::vec2* textureCoords = indexedTexture->getTextureCoords();
+
+            const std::shared_ptr<texture2d> texture = indexedTexture->atlasTexture;
+
+            if (mData.quadIndexCount >= renderData::maxIndicesBatch) {
+                drawReset();
+            }
+
+            float textureIndex = 0.0f;
+
+            for (u32 i = 1; i < mData.textureSlotIndex; i++) {
+                if (*mData.textures[i].get() == *texture.get()) {
+                    textureIndex = (float)i;
+                    break;
+                }
+            }
+
+            if (textureIndex == 0.0f) {
+                textureIndex = (float)mData.textureSlotIndex;
+                mData.textures[mData.textureSlotIndex] = texture;
+                mData.textureSlotIndex++;
+            }
+
+            glm::mat4 transform = glm::translate(glm::mat4(1.0f), {position.x, position.y, 0.0f}) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.x, glm::vec3(1, 0, 0)) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.y, glm::vec3(0, 1, 0)) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0, 0, 1)) *
+                                  glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
+            for (u32 i = 0; i < quadVertexCount; i++) {
+                mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
+                mData.quadVertexBufferPointer->tint = tint;
+                mData.quadVertexBufferPointer->texCoord = textureCoords[i];
+                mData.quadVertexBufferPointer->texSlotIndex = textureIndex;
+                mData.quadVertexBufferPointer->entityId = entityId;
+                mData.quadVertexBufferPointer++;
+            }
+            mData.quadIndexCount += 6;
+
+            mData.stats.numberOfQuads++;
+        }
+    }
+    void batchRenderer2d::renderQuad(const glm::vec3& position, const glm::vec2& scale, const std::shared_ptr<indexedAtlasTexture>& indexedTexture, const glm::vec4& tint, glm::vec3 rotation, i32 entityId) {
+        if (USING_COMPATABLE_RENDERING_API) {
+            constexpr u32 quadVertexCount = 4;
+            const glm::vec2* textureCoords = indexedTexture->getTextureCoords();
+            const std::shared_ptr<texture2d> texture = indexedTexture->atlasTexture;
+
+            if (mData.quadIndexCount >= renderData::maxIndicesBatch) {
+                drawReset();
+            }
+
+            float textureIndex = 0.0f;
+
+            for (u32 i = 1; i < mData.textureSlotIndex; i++) {
+                if (*mData.textures[i].get() == *texture.get()) {
+                    textureIndex = (float)i;
+                    break;
+                }
+            }
+
+            if (textureIndex == 0.0f) {
+                textureIndex = (float)mData.textureSlotIndex;
+                mData.textures[mData.textureSlotIndex] = texture;
+                mData.textureSlotIndex++;
+            }
+
+            glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.x, glm::vec3(1, 0, 0)) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.y, glm::vec3(0, 1, 0)) *
+                                  glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0, 0, 1)) *
+                                  glm::scale(glm::mat4(1.0f), {scale.x, scale.y, 1.0f});
+            for (u32 i = 0; i < quadVertexCount; i++) {
+                mData.quadVertexBufferPointer->position = transform * mData.quadVertexPositions[i];
+                mData.quadVertexBufferPointer->tint = tint;
+                mData.quadVertexBufferPointer->texCoord = textureCoords[i];
+                mData.quadVertexBufferPointer->texSlotIndex = textureIndex;
+                mData.quadVertexBufferPointer->entityId = entityId;
+                mData.quadVertexBufferPointer++;
+            }
+            mData.quadIndexCount += 6;
+
+            mData.stats.numberOfQuads++;
+        }
     }
 }  // namespace calmar

@@ -4,6 +4,7 @@
 #include <calmar/core/application_attachment.hpp>
 #include <calmar/renderer/texture.hpp>
 #include <calmar/ecs/scene.hpp>
+#include <calmar/ecs/ecs.hpp>
 
 #include "../scene_manager.hpp"
 
@@ -29,16 +30,22 @@ namespace calmarEd {
             mSelectedEntity = entty;
         }
 
+        entity duplicateEntity(entity entty);
+
         sceneManager sceneManaging;
 
        private:
-        void
-        renderImGuiEntityNode(entity entty);
+        void renderImGuiEntityNode(entity entty);
 
         void renderImGuiEntityComponents(entity entty);
 
         void renderImGuiVec3Slider(const std::string& label, glm::vec3& vec, entity entty, float resetValue = 0.0f);
 
+        void handleInput();
+
+        template <typename T>
+        void duplicateComponentIfHas(entity source, entity dest);
+        
         std::shared_ptr<scene> mScene;
         std::shared_ptr<texture2d> mDefaultTexture;
 

@@ -76,6 +76,7 @@ namespace calmar {
         entityComponentSystem.registerComponent<spriteRendererComponent>();
         entityComponentSystem.registerComponent<tagComponent>();
         entityComponentSystem.registerComponent<cameraComponent>();
+        entityComponentSystem.registerComponent<indexedTextureComponent>();
 
         mImGuiHandler = new imGuiHandler();
         addAttachment(mImGuiHandler);

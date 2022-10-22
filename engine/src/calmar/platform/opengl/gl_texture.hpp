@@ -5,7 +5,7 @@
 namespace calmar {
     class glTexture2d : public texture2d {
        public:
-        glTexture2d(const std::string& filepath);
+        glTexture2d(const std::string& filepath, textureFilterMode filterMode);
         glTexture2d(u32 width, u32 height);
         ~glTexture2d();
 

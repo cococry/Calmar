@@ -4,6 +4,7 @@
 #include <calmar/core/util.hpp>
 #include <calmar/input/input.hpp>
 #include <calmar/input/mouse_codes.hpp>
+#include <calmar/input/key_codes.hpp>
 #include <calmar/renderer/resource_handler.hpp>
 #include <calmar/core/asset_pool.hpp>
 #include <imgui.h>
@@ -23,6 +24,7 @@ namespace calmarEd {
     }
     void sceneHirarchyPanel::update() {
         sceneManaging.updateActiveScene();
+        handleInput();
     }
     void sceneHirarchyPanel::renderImGui() {
         ImGui::Begin("Scene Hirarchy");
@@ -69,7 +71,11 @@ namespace calmarEd {
         }
 
         if (ImGui::BeginPopupContextItem()) {
-            if (ImGui::MenuItem("Delete Entity")) {
+            if (ImGui::MenuItem("Duplicate")) {
+                entity duplicatedEntity = duplicateEntity(entty);
+                mSelectedEntity = duplicatedEntity;
+            }
+            if (ImGui::MenuItem("Delete")) {
                 mDeletedEntity = entty;
                 if (mSelectedEntity == entty) {
                     mSelectedEntity = -1;
@@ -102,6 +108,12 @@ namespace calmarEd {
             if (!ECS.hasComponent<cameraComponent>(mSelectedEntity)) {
                 if (ImGui::MenuItem("Camera")) {
                     ECS.addComponent(entty, cameraComponent());
+                    ImGui::CloseCurrentPopup();
+                }
+            }
+            if (!ECS.hasComponent<indexedTextureComponent>(mSelectedEntity)) {
+                if (ImGui::MenuItem("Sprite Atlas Texture")) {
+                    ECS.addComponent(entty, indexedTextureComponent());
                     ImGui::CloseCurrentPopup();
                 }
             }
@@ -157,14 +169,14 @@ namespace calmarEd {
 
                 ImGui::SameLine();
                 if (ImGui::Button("...")) {
-                    std::string filepath = platform::fileDialogs::openFile("Image (*.png) (*.jpg)\0*.png\0");
+                    std::string filepath = platform::fileDialogs::openFile("Image (*.png) (*.jpg)\0*.png;*.jpg\0");
                     if (!filepath.empty()) {
                         std::shared_ptr<texture2d> texture = resourceHandler::createTexture(filepath);
                         spriteRenderer.texture = texture;
                     }
                 }
                 if (spriteRenderer.texture) {
-                    ImGui::Image((void*)(uintptr_t)spriteRenderer.texture->getId(), ImVec2{100.0f, 100.0f},
+                    ImGui::Image((void*)(uintptr_t)spriteRenderer.texture->getId(), ImVec2{110.0f, 110.0f},
                                  ImVec2{0, 1}, ImVec2{1, 0});
                 } else {
                     ImGui::Image((void*)(uintptr_t)mDefaultTexture->getId(), ImVec2{110.0f, 110.0f}, ImVec2{0, 1}, ImVec2{1, 0});
@@ -184,61 +196,155 @@ namespace calmarEd {
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
             ImGui::Separator();
 
-            bool open = ImGui::TreeNodeEx((void*)typeid(cameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Sprite Renderer");
+            bool open = ImGui::TreeNodeEx((void*)typeid(cameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Sprite Atlas Texture");
             ImGui::SameLine();
             if (ImGui::Button("-")) {
                 ECS.removeComponent<cameraComponent>(entty);
             }
 
             if (open) {
-                auto& cameraComp = ECS.getComponent<cameraComponent>(entty);
-                auto& camera = cameraComp.camera;
-                ImGui::Checkbox("Select for Rendering", &cameraComp.selectedForRendering);
+                if (ECS.hasComponent<cameraComponent>(entty)) {
+                    auto& cameraComp = ECS.getComponent<cameraComponent>(entty);
+                    auto& camera = cameraComp.camera;
+                    ImGui::Checkbox("Select for Rendering", &cameraComp.selectedForRendering);
 
-                const char* projectionTypeStrings[] = {"Perspective", "Orthographic"};
-                const char* currentProjectionTypeString = projectionTypeStrings[(int)camera.getProjectionType()];
+                    const char* projectionTypeStrings[] = {"Perspective", "Orthographic"};
+                    const char* currentProjectionTypeString = projectionTypeStrings[(int)camera.getProjectionType()];
 
-                if (ImGui::BeginCombo("Projection", currentProjectionTypeString)) {
-                    for (int32_t i = 0; i < 2; ++i) {
-                        bool isSelected = currentProjectionTypeString == projectionTypeStrings[i];
-                        if (ImGui::Selectable(projectionTypeStrings[i], isSelected)) {
-                            currentProjectionTypeString = projectionTypeStrings[i];
-                            camera.setProjectionType((entityCamera::projectionType)i);
+                    if (ImGui::BeginCombo("Projection", currentProjectionTypeString)) {
+                        for (int32_t i = 0; i < 2; ++i) {
+                            bool isSelected = currentProjectionTypeString == projectionTypeStrings[i];
+                            if (ImGui::Selectable(projectionTypeStrings[i], isSelected)) {
+                                currentProjectionTypeString = projectionTypeStrings[i];
+                                camera.setProjectionType((entityCamera::projectionType)i);
+                            }
+                            if (isSelected)
+                                ImGui::SetItemDefaultFocus();
                         }
-                        if (isSelected)
-                            ImGui::SetItemDefaultFocus();
+                        ImGui::EndCombo();
                     }
-                    ImGui::EndCombo();
-                }
-                if (camera.getProjectionType() == entityCamera::projectionType::Perspective) {
-                    float verticalFov = glm::degrees(camera.getPerspectiveVerticalFOV());
-                    if (ImGui::DragFloat("Vertical FOV", &verticalFov))
-                        camera.setPerspectiveVerticalFOV(glm::radians(verticalFov));
+                    if (camera.getProjectionType() == entityCamera::projectionType::Perspective) {
+                        float verticalFov = glm::degrees(camera.getPerspectiveVerticalFOV());
+                        if (ImGui::DragFloat("Vertical FOV", &verticalFov))
+                            camera.setPerspectiveVerticalFOV(glm::radians(verticalFov));
 
-                    float perspectiveNear = camera.getPerspectiveNearClip();
-                    if (ImGui::DragFloat("Near", &perspectiveNear))
-                        camera.setPerspectiveNearClip(perspectiveNear);
+                        float perspectiveNear = camera.getPerspectiveNearClip();
+                        if (ImGui::DragFloat("Near", &perspectiveNear))
+                            camera.setPerspectiveNearClip(perspectiveNear);
 
-                    float perspectiveFar = camera.getPerspectiveFarClip();
-                    if (ImGui::DragFloat("Far", &perspectiveFar))
-                        camera.setPerspectiveFarClip(perspectiveFar);
-                }
-                if (camera.getProjectionType() == entityCamera::projectionType::Orthographic) {
-                    float orthoSize = camera.getOrthographicSize();
-                    if (ImGui::DragFloat("Size", &orthoSize))
-                        camera.setOrthographicSize(orthoSize);
+                        float perspectiveFar = camera.getPerspectiveFarClip();
+                        if (ImGui::DragFloat("Far", &perspectiveFar))
+                            camera.setPerspectiveFarClip(perspectiveFar);
+                    }
+                    if (camera.getProjectionType() == entityCamera::projectionType::Orthographic) {
+                        float orthoSize = camera.getOrthographicSize();
+                        if (ImGui::DragFloat("Size", &orthoSize))
+                            camera.setOrthographicSize(orthoSize);
 
-                    float orthoNear = camera.getOrthographicNearClip();
-                    if (ImGui::DragFloat("Near", &orthoNear))
-                        camera.setOrthographicNearClip(orthoNear);
+                        float orthoNear = camera.getOrthographicNearClip();
+                        if (ImGui::DragFloat("Near", &orthoNear))
+                            camera.setOrthographicNearClip(orthoNear);
 
-                    float orthoFar = camera.getOrthographicFarClip();
-                    if (ImGui::DragFloat("Far", &orthoFar))
-                        camera.setOrthographicFarClip(orthoFar);
+                        float orthoFar = camera.getOrthographicFarClip();
+                        if (ImGui::DragFloat("Far", &orthoFar))
+                            camera.setOrthographicFarClip(orthoFar);
+                    }
                 }
                 ImGui::TreePop();
             }
 
+            ImGui::PopStyleVar();
+        }
+        if (ECS.hasComponent<indexedTextureComponent>(mSelectedEntity)) {
+            ImGuiIO io = ImGui::GetIO();
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+            ImGui::Separator();
+
+            bool open = ImGui::TreeNodeEx((void*)typeid(indexedTextureComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Sprite Atlas Sub-Texture");
+            ImGui::SameLine();
+            if (ImGui::Button("-")) {
+                ECS.removeComponent<indexedTextureComponent>(entty);
+            }
+
+            if (open) {
+                if (ECS.hasComponent<indexedTextureComponent>(entty)) {
+                    auto& indexedTextureComp = ECS.getComponent<indexedTextureComponent>(entty);
+
+                    ImGui::Text("Position on Sheet");
+                    ImGui::Separator();
+                    ImGui::PushItemWidth(100);
+                    ImGui::PushID(0);
+                    ImGui::DragFloat("X", &indexedTextureComp.coordsOnSheet.x);
+                    ImGui::PopID();
+                    ImGui::SameLine();
+                    ImGui::PushID(1);
+                    ImGui::DragFloat("Y", &indexedTextureComp.coordsOnSheet.y);
+                    ImGui::PopID();
+
+                    ImGui::Text("Individual Cell Size");
+                    ImGui::Separator();
+                    ImGui::PushID(2);
+                    ImGui::DragFloat("X", &indexedTextureComp.cellSize.x);
+                    ImGui::PopID();
+                    ImGui::SameLine();
+                    ImGui::PushID(3);
+                    ImGui::DragFloat("Y", &indexedTextureComp.cellSize.y);
+                    ImGui::PopID();
+                    ImGui::PopItemWidth();
+
+                    ImGui::PushItemWidth(300.0f);
+                    ImGui::ColorEdit4("Color", glm::value_ptr(indexedTextureComp.tint));
+                    ImGui::PopItemWidth();
+
+                    ImGui::Text("Atlas Texture");
+                    ImGui::SameLine();
+                    if (ImGui::Button("...")) {
+                        std::string filepath = platform::fileDialogs::openFile("Image (*.png) (*.jpg)\0*.png;*.jpg\0");
+                        if (!filepath.empty()) {
+                            std::shared_ptr<texture2d> texture = resourceHandler::createTexture(filepath, indexedTextureComp.atlasTextureFilterMode);
+                            indexedTextureComp.atlasTexture = texture;
+                        }
+                    }
+                    if (!indexedTextureComp.atlasTexture) {
+                        ImGui::Image((void*)(uintptr_t)mDefaultTexture->getId(), ImVec2{110.0f, 110.0f}, ImVec2{0, 1}, ImVec2{1, 0});
+                    } else {
+                        ImGui::Image((void*)(uintptr_t)indexedTextureComp.atlasTexture->getId(), ImVec2{110.0f, 110.0f},
+                                     ImVec2{0, 1}, ImVec2{1, 0});
+                    }
+
+                    const char* filterTypeStrings[] = {"Nearest", "Linear"};
+                    const char* currentFilterTypeString = filterTypeStrings[(int)indexedTextureComp.atlasTextureFilterMode];
+
+                    if (ImGui::BeginCombo("Filter Mode", currentFilterTypeString)) {
+                        for (int32_t i = 0; i < 2; ++i) {
+                            bool isSelected = currentFilterTypeString == filterTypeStrings[i];
+                            if (ImGui::Selectable(filterTypeStrings[i], isSelected)) {
+                                currentFilterTypeString = filterTypeStrings[i];
+                                indexedTextureComp.atlasTextureFilterMode = (textureFilterMode)i;
+                            }
+                            if (isSelected)
+                                ImGui::SetItemDefaultFocus();
+                        }
+                        ImGui::EndCombo();
+                    }
+
+                    if (indexedTextureComp.atlasTexture) {
+                        if (ImGui::Button("Reset Texture")) {
+                            resourceHandler::deleteTexture(indexedTextureComp.atlasTexture);
+                            indexedTextureComp.atlasTexture = nullptr;
+                            indexedTextureComp.indexedTexture->atlasTexture = nullptr;
+                            indexedTextureComp.indexedTexture = nullptr;
+                        }
+                    }
+                    ImGui::Separator();
+
+                    if (ImGui::Button("Create Sub Texture") && indexedTextureComp.atlasTexture) {
+                        indexedTextureComp.indexedTexture = indexedAtlasTexture::createWithCoords(indexedTextureComp.atlasTexture, indexedTextureComp.coordsOnSheet, indexedTextureComp.cellSize);
+                        indexedTextureComp.indexedTexture->atlasTexture = indexedTextureComp.atlasTexture;
+                    }
+                }
+                ImGui::TreePop();
+            }
             ImGui::PopStyleVar();
         }
     }
@@ -302,6 +408,36 @@ namespace calmarEd {
         ImGui::PopStyleColor(3);
         ImGui::Columns(1);
         ImGui::PopID();
+    }
+
+    void sceneHirarchyPanel::handleInput() {
+        if (input::isKeyDown(key::LeftControl) && input::keyWentDown(key::D)) {
+            duplicateEntity(mSelectedEntity);
+        }
+    }
+
+    entity sceneHirarchyPanel::duplicateEntity(entity entty) {
+        entity newEntity = ECS.createEntity();
+
+        duplicateComponentIfHas<tagComponent>(entty, newEntity);
+
+        auto& tagComp = ECS.getComponent<tagComponent>(newEntity);
+        if (tagComp.tag.find(" (Copy)") == std::string::npos) {
+            tagComp.tag += std::string(" (Copy)");
+        }
+
+        duplicateComponentIfHas<transformComponent>(entty, newEntity);
+        duplicateComponentIfHas<spriteRendererComponent>(entty, newEntity);
+        duplicateComponentIfHas<cameraComponent>(entty, newEntity);
+
+        return newEntity;
+    }
+
+    template <typename T>
+    void sceneHirarchyPanel::duplicateComponentIfHas(entity source, entity dest) {
+        if (ECS.hasComponent<T>(source)) {
+            ECS.addComponent(dest, ECS.getComponent<T>(source));
+        }
     }
 
 }  // namespace calmarEd

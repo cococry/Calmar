@@ -6,10 +6,10 @@
 
 namespace calmar {
 
-    texture2d texture2d::create(const std::string& filepath) {
+    texture2d texture2d::create(const std::string& filepath, textureFilterMode filterMode) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
-                return glTexture2d(filepath);
+                return glTexture2d(filepath, filterMode);
                 break;
             default:
                 return texture2d();
@@ -17,10 +17,10 @@ namespace calmar {
         }
         return texture2d();
     }
-    std::shared_ptr<texture2d> texture2d::createRef(const std::string& filepath) {
+    std::shared_ptr<texture2d> texture2d::createRef(const std::string& filepath, textureFilterMode filterMode) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
-                return std::make_shared<glTexture2d>(filepath);
+                return std::make_shared<glTexture2d>(filepath, filterMode);
                 break;
             default:
                 return std::make_shared<texture2d>();
@@ -28,10 +28,10 @@ namespace calmar {
         }
         return std::make_shared<texture2d>();
     }
-    std::unique_ptr<texture2d> texture2d::createScoped(const std::string& filepath) {
+    std::unique_ptr<texture2d> texture2d::createScoped(const std::string& filepath, textureFilterMode filterMode) {
         switch (application::getInstance()->renderBackend) {
             case renderingBackend::OPENGL:
-                return std::make_unique<glTexture2d>(filepath);
+                return std::make_unique<glTexture2d>(filepath, filterMode);
                 break;
             default:
                 return std::make_unique<texture2d>();

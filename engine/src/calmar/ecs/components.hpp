@@ -2,6 +2,7 @@
 
 #include "calmar/core/defines.hpp"
 #include "calmar/renderer/texture.hpp"
+#include "calmar/renderer/indexed_atlas_texture.hpp"
 #include "calmar/renderer/entity_camera.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
@@ -35,7 +36,7 @@ namespace calmar {
         }
 
         glm::mat4 getTransform() const {
-            glm::mat4 rot = glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0, 0, 1));
+            glm::mat4 rot = glm::toMat4(glm::quat(rotation));
 
             return glm::translate(glm::mat4(1.0f), position) * rot * glm::scale(glm::mat4(1.0f), scale);
         };
@@ -63,5 +64,23 @@ namespace calmar {
 
         cameraComponent() = default;
         cameraComponent(const cameraComponent&) = default;
+    };
+
+    struct indexedTextureComponent {
+       public:
+        std::shared_ptr<indexedAtlasTexture> indexedTexture = nullptr;
+        glm::vec4 tint = glm::vec4(1.0f);
+        glm::vec2 coordsOnSheet = glm::vec2(0);
+        glm::vec2 cellSize = glm::vec2(0);
+        std::shared_ptr<texture2d> atlasTexture = nullptr;
+        textureFilterMode atlasTextureFilterMode = textureFilterMode::Linear;
+
+        indexedTextureComponent(const std::shared_ptr<indexedAtlasTexture>& texture, const glm::vec4& tint)
+            : indexedTexture(texture), tint(tint) {
+        }
+        indexedTextureComponent() {
+        }
+
+       private:
     };
 }  // namespace calmar

@@ -30,12 +30,17 @@ namespace calmar {
                 auto const& spriteRenderer = ECS.getComponent<spriteRendererComponent>(entity);
 
                 if (spriteRenderer.texture != nullptr)
-                    batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.texture, spriteRenderer.tint, transform.rotation.z, entity);
+                    batchRenderer2d::renderQuad(transform.getTransform(), spriteRenderer.texture, spriteRenderer.tint, entity);
                 else {
-                    batchRenderer2d::renderQuad(transform.position, glm::vec2(transform.scale.x, transform.scale.y), spriteRenderer.tint, transform.rotation.z, entity);
+                    batchRenderer2d::renderQuad(transform.getTransform(), spriteRenderer.tint, entity);
                 }
             } else if (ECS.hasComponent<cameraComponent>(entity) && !ECS.hasComponent<spriteRendererComponent>(entity)) {
-                batchRenderer2d::renderQuad(transform.position, glm::vec2(1.0f), mCameraTexture, glm::vec4(1.0f), 0.0f, entity);
+                batchRenderer2d::renderQuad(transform.position, glm::vec2(1.0f), mCameraTexture, glm::vec4(1.0f), glm::vec3(0.0f), entity);
+            } else if (ECS.hasComponent<indexedTextureComponent>(entity) && !ECS.hasComponent<spriteRendererComponent>(entity)) {
+                auto& indexedTextureComp = ECS.getComponent<indexedTextureComponent>(entity);
+                if (indexedTextureComp.indexedTexture) {
+                    batchRenderer2d::renderQuad(transform.getTransform(), indexedTextureComp.indexedTexture, indexedTextureComp.tint, entity);
+                }
             }
         }
         batchRenderer2d::endRender();
@@ -66,9 +71,15 @@ namespace calmar {
                         auto const& spriteRendererComp = ECS.getComponent<spriteRendererComponent>(entty);
 
                         if (spriteRendererComp.texture) {
-                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.texture, spriteRendererComp.tint, transformComp.rotation.z, entty);
+                            batchRenderer2d::renderQuad(transformComp.getTransform(), spriteRendererComp.texture, spriteRendererComp.tint, entty);
                         } else {
-                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.tint, transformComp.rotation.z, entty);
+                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.tint, transformComp.rotation, entty);
+                        }
+                    }
+                    if (ECS.hasComponent<indexedTextureComponent>(entty) && !ECS.hasComponent<spriteRendererComponent>(entty)) {
+                        auto& indexedTextureComp = ECS.getComponent<indexedTextureComponent>(entty);
+                        if (indexedTextureComp.indexedTexture) {
+                            batchRenderer2d::renderQuad(transformComp.getTransform(), indexedTextureComp.indexedTexture, indexedTextureComp.tint, entty);
                         }
                     }
                 }

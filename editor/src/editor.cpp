@@ -55,6 +55,9 @@ namespace calmarEd {
             i32 pixelData = mFramebuffer->readPixel(1, mouseX, mouseY);
             mHoveredEntity = pixelData;
         }
+        if (mHoveredEntity == -1 && mViewportFocused && input::mouseButtonWentDown(button::Left) && !ImGuizmo::IsOver()) {
+            sceneHirarchy.setSelectedEntity(-1);
+        }
 
         mFramebuffer->unbind();
         // for imgui
@@ -255,7 +258,7 @@ namespace calmarEd {
                 mGizmoType = ImGuizmo::OPERATION::SCALE;
             }
         }
-        if (input::mouseButtonWentDown(button::Left) && mHoveredEntity != -1 && mViewportFocused) {
+        if (input::mouseButtonWentDown(button::Left) && mHoveredEntity != -1 && mViewportFocused && !ImGuizmo::IsOver()) {
             sceneHirarchy.setSelectedEntity(mHoveredEntity);
         }
     }
