@@ -18,6 +18,8 @@ namespace calmar {
 
         static std::shared_ptr<texture2d> getTextureWithFilepath(const std::string& filepath);
 
+        static std::shared_ptr<texture2d> getTextureWithFilepathAndFilterMode(const std::string& filepath, textureFilterMode filterMode);
+
         static std::shared_ptr<texture2d> getTexture(u32 index);
 
         static std::vector<std::shared_ptr<texture2d>> textures;

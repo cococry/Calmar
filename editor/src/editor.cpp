@@ -202,7 +202,17 @@ namespace calmarEd {
 
     void editorAttachment::renderGizmos() {
         entity selectedEntity = sceneHirarchy.getSelectedEntity();
-        if (selectedEntity != -1 && mGizmoType != -1) {
+        if (selectedEntity != -1 && mGizmoType != -1 && !input::isKeyDown(key::LeftAlt)) {
+            if (ECS.hasComponent<cameraComponent>(selectedEntity)) {
+                if (mGizmoType == ImGuizmo::OPERATION::SCALE) {
+                    ImGui::End();
+                    ImGui::PopStyleVar();
+
+                    ImGui::End();
+                    return;
+                }
+            }
+
             ImGuizmo::SetOrthographic(false);
             ImGuizmo::SetDrawlist();
             float windowWidth = (float)ImGui::GetWindowWidth();
@@ -216,7 +226,7 @@ namespace calmarEd {
             glm::mat4 transform = transformComp.getTransform();
 
             bool snapped = input::isKeyDown(key::LeftControl);
-            float snapValue = .5f;
+            float snapValue = 1.0f;
             if (mGizmoType == ImGuizmo::OPERATION::ROTATE)
                 snapValue = 45.0f;
 
@@ -235,7 +245,6 @@ namespace calmarEd {
                 transformComp.scale = scale;
             }
         }
-
         ImGui::End();
         ImGui::PopStyleVar();
 

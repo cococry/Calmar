@@ -6,6 +6,7 @@
 #include <calmar/ecs/scene.hpp>
 #include <calmar/ecs/ecs.hpp>
 
+#include <calmar/renderer/indexed_atlas_texture.hpp>
 #include "../scene_manager.hpp"
 
 #include <memory>
@@ -45,9 +46,11 @@ namespace calmarEd {
 
         template <typename T>
         void duplicateComponentIfHas(entity source, entity dest);
-        
+
         std::shared_ptr<scene> mScene;
         std::shared_ptr<texture2d> mDefaultTexture;
+        std::shared_ptr<indexedAtlasTexture> mPreviewSubtexture;
+        bool mChangedSubtexture = false;
 
         entity mSelectedEntity = -1;
         entity mDeletedEntity = 1;

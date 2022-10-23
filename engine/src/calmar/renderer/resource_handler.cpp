@@ -4,12 +4,12 @@
 
 namespace calmar {
     std::shared_ptr<texture2d> resourceHandler::createTexture(const std::string& filepath, textureFilterMode filterMode) {
-        if (assetPool::getTextureWithFilepath(filepath) == nullptr || assetPool::getTextureWithFilepath(filepath)->getData().filterMode != filterMode) {
+        if (assetPool::getTextureWithFilepathAndFilterMode(filepath, filterMode) == nullptr) {
             std::shared_ptr<texture2d> ret = texture2d::createRef(filepath, filterMode);
             assetPool::addTexture(ret);
             return ret;
         } else {
-            return assetPool::getTextureWithFilepath(filepath);
+            return assetPool::getTextureWithFilepathAndFilterMode(filepath, filterMode);
         }
     }
     void resourceHandler::deleteTexture(const std::shared_ptr<texture2d>& texture) {

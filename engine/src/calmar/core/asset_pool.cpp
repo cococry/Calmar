@@ -25,6 +25,15 @@ namespace calmar {
         }
         return nullptr;
     }
+
+    std::shared_ptr<texture2d> assetPool::getTextureWithFilepathAndFilterMode(const std::string& filepath, textureFilterMode filterMode) {
+        for (const auto& texture : textures) {
+            if (texture->getData().filepath == filepath && texture->getData().filterMode == filterMode) {
+                return texture;
+            }
+        }
+        return nullptr;
+    }
     std::shared_ptr<texture2d> assetPool::getTexture(u32 index) {
         return textures[index];
     }

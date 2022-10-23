@@ -57,6 +57,9 @@ namespace calmar {
         inline const texture2dObject& getData() const {
             return mTextureData;
         }
+        inline void setFilterMode(textureFilterMode filterMode) {
+            mTextureData.filterMode = filterMode;
+        }
 
        protected:
         render_id mId;

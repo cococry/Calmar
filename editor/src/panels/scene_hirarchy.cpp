@@ -10,6 +10,9 @@
 #include <imgui.h>
 #include <imgui_internal.h>
 
+#include <calmar/renderer/batch_renderer_2d.hpp>
+#include <calmar/renderer/render_command.hpp>
+
 #include <glm/gtc/type_ptr.hpp>
 
 namespace calmarEd {
@@ -21,6 +24,8 @@ namespace calmarEd {
         mDefaultTexture = resourceHandler::createTexture("../engine/assets/textures/checkerboardicon.png");
 
         sceneManaging = sceneManager(mScene);
+
+        mPreviewSubtexture = std::make_shared<indexedAtlasTexture>();
     }
     void sceneHirarchyPanel::update() {
         sceneManaging.updateActiveScene();
@@ -140,8 +145,10 @@ namespace calmarEd {
 
             if (open) {
                 renderImGuiVec3Slider("Position", transform.position, entty);
-                renderImGuiVec3Slider("Rotation", transform.rotation, entty);
-                renderImGuiVec3Slider("Scale", transform.scale, entty, 1.0f);
+                renderImGuiVec3Slider("Rotation", transform.rotation, entty, 0.0f);
+
+                if (!ECS.hasComponent<cameraComponent>(entty))
+                    renderImGuiVec3Slider("Scale", transform.scale, entty, 1.0f);
 
                 ImGui::TreePop();
             }
@@ -165,7 +172,13 @@ namespace calmarEd {
                 ImGui::ColorEdit4("Color", glm::value_ptr(spriteRenderer.tint));
                 ImGui::PopItemWidth();
 
-                ImGui::Text("Texture: %s", spriteRenderer.texture ? spriteRenderer.texture->getData().filepath.c_str() : "None");
+                ImGui::Text("Texture:");
+                if (spriteRenderer.texture) {
+                    ImGui::Image((void*)(uintptr_t)spriteRenderer.texture->getId(), ImVec2{110.0f, 110.0f},
+                                 ImVec2{0, 1}, ImVec2{1, 0});
+                } else {
+                    ImGui::Image((void*)(uintptr_t)mDefaultTexture->getId(), ImVec2{110.0f, 110.0f}, ImVec2{0, 1}, ImVec2{1, 0});
+                }
 
                 ImGui::SameLine();
                 if (ImGui::Button("...")) {
@@ -175,12 +188,28 @@ namespace calmarEd {
                         spriteRenderer.texture = texture;
                     }
                 }
+
                 if (spriteRenderer.texture) {
-                    ImGui::Image((void*)(uintptr_t)spriteRenderer.texture->getId(), ImVec2{110.0f, 110.0f},
-                                 ImVec2{0, 1}, ImVec2{1, 0});
-                } else {
-                    ImGui::Image((void*)(uintptr_t)mDefaultTexture->getId(), ImVec2{110.0f, 110.0f}, ImVec2{0, 1}, ImVec2{1, 0});
+                    const char* filterTypeStrings[] = {"Nearest", "Linear"};
+                    const char* currentFilterTypeString = filterTypeStrings[(int)spriteRenderer.texture->getData().filterMode];
+
+                    if (ImGui::BeginCombo("Filter Mode", currentFilterTypeString)) {
+                        for (int32_t i = 0; i < 2; ++i) {
+                            bool isSelected = currentFilterTypeString == filterTypeStrings[i];
+                            if (ImGui::Selectable(filterTypeStrings[i], isSelected)) {
+                                if (spriteRenderer.texture->getData().filterMode != (textureFilterMode)i) {
+                                    std::string filepath = spriteRenderer.texture->getData().filepath;
+                                    spriteRenderer.texture = resourceHandler::createTexture(filepath, (textureFilterMode)i);
+                                    spriteRenderer.texture->setFilterMode((textureFilterMode)i);
+                                }
+                            }
+                            if (isSelected)
+                                ImGui::SetItemDefaultFocus();
+                        }
+                        ImGui::EndCombo();
+                    }
                 }
+
                 if (spriteRenderer.texture) {
                     if (ImGui::Button("Reset Texture")) {
                         resourceHandler::deleteTexture(spriteRenderer.texture);
@@ -196,7 +225,7 @@ namespace calmarEd {
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
             ImGui::Separator();
 
-            bool open = ImGui::TreeNodeEx((void*)typeid(cameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Sprite Atlas Texture");
+            bool open = ImGui::TreeNodeEx((void*)typeid(cameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Camera");
             ImGui::SameLine();
             if (ImGui::Button("-")) {
                 ECS.removeComponent<cameraComponent>(entty);
@@ -274,37 +303,36 @@ namespace calmarEd {
                     ImGui::Separator();
                     ImGui::PushItemWidth(100);
                     ImGui::PushID(0);
-                    ImGui::DragFloat("X", &indexedTextureComp.coordsOnSheet.x);
+                    if (ImGui::DragFloat("X", &indexedTextureComp.coordsOnSheet.x))
+                        mChangedSubtexture = true;
                     ImGui::PopID();
                     ImGui::SameLine();
                     ImGui::PushID(1);
-                    ImGui::DragFloat("Y", &indexedTextureComp.coordsOnSheet.y);
+                    if (ImGui::DragFloat("Y", &indexedTextureComp.coordsOnSheet.y))
+                        mChangedSubtexture = true;
                     ImGui::PopID();
 
                     ImGui::Text("Individual Cell Size");
                     ImGui::Separator();
                     ImGui::PushID(2);
-                    ImGui::DragFloat("X", &indexedTextureComp.cellSize.x);
+                    if (ImGui::DragFloat("X", &indexedTextureComp.cellSize.x))
+                        mChangedSubtexture = true;
                     ImGui::PopID();
                     ImGui::SameLine();
                     ImGui::PushID(3);
-                    ImGui::DragFloat("Y", &indexedTextureComp.cellSize.y);
+                    if (ImGui::DragFloat("Y", &indexedTextureComp.cellSize.y))
+                        mChangedSubtexture = true;
                     ImGui::PopID();
                     ImGui::PopItemWidth();
 
                     ImGui::PushItemWidth(300.0f);
-                    ImGui::ColorEdit4("Color", glm::value_ptr(indexedTextureComp.tint));
+                    if (ImGui::ColorEdit4("Color", glm::value_ptr(indexedTextureComp.tint)))
+                        mChangedSubtexture = true;
                     ImGui::PopItemWidth();
 
                     ImGui::Text("Atlas Texture");
                     ImGui::SameLine();
-                    if (ImGui::Button("...")) {
-                        std::string filepath = platform::fileDialogs::openFile("Image (*.png) (*.jpg)\0*.png;*.jpg\0");
-                        if (!filepath.empty()) {
-                            std::shared_ptr<texture2d> texture = resourceHandler::createTexture(filepath, indexedTextureComp.atlasTextureFilterMode);
-                            indexedTextureComp.atlasTexture = texture;
-                        }
-                    }
+
                     if (!indexedTextureComp.atlasTexture) {
                         ImGui::Image((void*)(uintptr_t)mDefaultTexture->getId(), ImVec2{110.0f, 110.0f}, ImVec2{0, 1}, ImVec2{1, 0});
                     } else {
@@ -312,6 +340,22 @@ namespace calmarEd {
                                      ImVec2{0, 1}, ImVec2{1, 0});
                     }
 
+                    if (indexedTextureComp.atlasTexture && mChangedSubtexture) {
+                        ImGui::SameLine();
+                        ImGui::Text("Preview");
+                        ImGui::SameLine();
+                        mPreviewSubtexture = indexedAtlasTexture::createWithCoords(indexedTextureComp.atlasTexture, indexedTextureComp.coordsOnSheet, indexedTextureComp.cellSize);
+                        ImGui::Image((void*)(intptr_t)indexedTextureComp.atlasTexture->getId(),
+                                     ImVec2{110.0f, 110.0f}, ImVec2{mPreviewSubtexture->getTextureCoords()[0].x, mPreviewSubtexture->getTextureCoords()[2].y},
+                                     ImVec2{mPreviewSubtexture->getTextureCoords()[2].x, mPreviewSubtexture->getTextureCoords()[0].y});
+                    }
+                    if (ImGui::Button("...")) {
+                        std::string filepath = platform::fileDialogs::openFile("Image (*.png) (*.jpg)\0*.png;*.jpg\0");
+                        if (!filepath.empty()) {
+                            std::shared_ptr<texture2d> texture = resourceHandler::createTexture(filepath, indexedTextureComp.atlasTextureFilterMode);
+                            indexedTextureComp.atlasTexture = texture;
+                        }
+                    }
                     const char* filterTypeStrings[] = {"Nearest", "Linear"};
                     const char* currentFilterTypeString = filterTypeStrings[(int)indexedTextureComp.atlasTextureFilterMode];
 
@@ -319,8 +363,13 @@ namespace calmarEd {
                         for (int32_t i = 0; i < 2; ++i) {
                             bool isSelected = currentFilterTypeString == filterTypeStrings[i];
                             if (ImGui::Selectable(filterTypeStrings[i], isSelected)) {
-                                currentFilterTypeString = filterTypeStrings[i];
-                                indexedTextureComp.atlasTextureFilterMode = (textureFilterMode)i;
+                                if (indexedTextureComp.atlasTextureFilterMode != (textureFilterMode)i) {
+                                    indexedTextureComp.atlasTextureFilterMode = (textureFilterMode)i;
+                                    if (indexedTextureComp.atlasTexture) {
+                                        std::string filepath = indexedTextureComp.atlasTexture->getData().filepath;
+                                        indexedTextureComp.atlasTexture = resourceHandler::createTexture(filepath, indexedTextureComp.atlasTextureFilterMode);
+                                    }
+                                }
                             }
                             if (isSelected)
                                 ImGui::SetItemDefaultFocus();
@@ -340,7 +389,6 @@ namespace calmarEd {
 
                     if (ImGui::Button("Create Sub Texture") && indexedTextureComp.atlasTexture) {
                         indexedTextureComp.indexedTexture = indexedAtlasTexture::createWithCoords(indexedTextureComp.atlasTexture, indexedTextureComp.coordsOnSheet, indexedTextureComp.cellSize);
-                        indexedTextureComp.indexedTexture->atlasTexture = indexedTextureComp.atlasTexture;
                     }
                 }
                 ImGui::TreePop();
@@ -384,7 +432,7 @@ namespace calmarEd {
 
         ImGui::PushFont(font);
         if (ImGui::Button("Y", buttonSize))
-            vec.x = resetValue;
+            vec.y = resetValue;
         ImGui::PopFont();
 
         ImGui::SameLine();
@@ -429,6 +477,7 @@ namespace calmarEd {
         duplicateComponentIfHas<transformComponent>(entty, newEntity);
         duplicateComponentIfHas<spriteRendererComponent>(entty, newEntity);
         duplicateComponentIfHas<cameraComponent>(entty, newEntity);
+        duplicateComponentIfHas<indexedTextureComponent>(entty, newEntity);
 
         return newEntity;
     }

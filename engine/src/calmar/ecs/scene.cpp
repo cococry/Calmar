@@ -35,7 +35,7 @@ namespace calmar {
                     batchRenderer2d::renderQuad(transform.getTransform(), spriteRenderer.tint, entity);
                 }
             } else if (ECS.hasComponent<cameraComponent>(entity) && !ECS.hasComponent<spriteRendererComponent>(entity)) {
-                batchRenderer2d::renderQuad(transform.position, glm::vec2(1.0f), mCameraTexture, glm::vec4(1.0f), glm::vec3(0.0f), entity);
+                batchRenderer2d::renderQuad(transform.getTransform(), mCameraTexture, glm::vec4(1.0f), entity);
             } else if (ECS.hasComponent<indexedTextureComponent>(entity) && !ECS.hasComponent<spriteRendererComponent>(entity)) {
                 auto& indexedTextureComp = ECS.getComponent<indexedTextureComponent>(entity);
                 if (indexedTextureComp.indexedTexture) {
