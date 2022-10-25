@@ -1,4 +1,4 @@
-*.lib
-*.idb
-*.pbd
-*.exe
+bin/*.lib
+bin/*.idb
+bin/*.pbd
+bin/*.exe
