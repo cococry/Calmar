@@ -1,4 +1,6 @@
 bin/*.lib
 bin/*.idb
 bin/*.pbd
+bin/*.ilk
+bin/*.pdb
 bin/*.exe
