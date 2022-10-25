@@ -44,6 +44,7 @@ namespace calmar {
             default:
                 break;
         };
+
         if (display->getProperties().renderBackend == renderingBackend::NONE) {
             windowTitle += " No Rendering Backend, ";
         } else if (display->getProperties().renderBackend == renderingBackend::OPENGL) {

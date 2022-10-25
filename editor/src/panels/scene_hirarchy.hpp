@@ -7,7 +7,6 @@
 #include <calmar/ecs/ecs.hpp>
 
 #include <calmar/renderer/indexed_atlas_texture.hpp>
-#include "../scene_manager.hpp"
 
 #include <memory>
 #include <string>
@@ -18,7 +17,7 @@ using namespace calmar;
 namespace calmarEd {
     class sceneHirarchyPanel {
        public:
-        void init();
+        void init(const std::shared_ptr<scene>& scene);
 
         void update();
 
@@ -31,9 +30,12 @@ namespace calmarEd {
             mSelectedEntity = entty;
         }
 
-        entity duplicateEntity(entity entty);
+        entity duplicateEntity(entity& entty);
 
-        sceneManager sceneManaging;
+        inline void setScene(const std::shared_ptr<scene>& scene) {
+            mScene = scene;
+            mSelectedEntity = -1;
+        }
 
        private:
         void renderImGuiEntityNode(entity entty);

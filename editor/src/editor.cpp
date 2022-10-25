@@ -13,14 +13,14 @@
 
 #include <calmar/event_system/window_events.hpp>
 
+#include <calmar/ecs/scene_serializer.hpp>
+
 #include <ImGuizmo.h>
 
 namespace calmarEd {
     void editorAttachment::init() {
         camera = orbitCamera(cameraProperties());
 
-        sceneHirarchy = sceneHirarchyPanel();
-        sceneHirarchy.init();
         imguiStatsPanel.init();
 
         framebufferProperties framebufferProps;
@@ -32,7 +32,14 @@ namespace calmarEd {
         mStopIcon = resourceHandler::createTexture("../editor/assets/icons/stop-icon.png");
         mStartIcon = resourceHandler::createTexture("../editor/assets/icons/play-icon.png");
 
+        mActiveScene = ECS.registerSystem<scene>();
+        mActiveScene->init();
+        mEditorScene = mActiveScene;
+        mEditorScene->init();
         mSceneState = sceneState::EditorMode;
+
+        sceneHirarchy = sceneHirarchyPanel();
+        sceneHirarchy.init(mEditorScene);
     }
 
     void editorAttachment::update() {
@@ -40,7 +47,12 @@ namespace calmarEd {
         renderCommand::clearColor({0.1f, 0.1f, 0.1f, 1.0f});
         renderCommand::clearBuffers(clearBuffers::colorBuffer | clearBuffers::depthBuffer);
         mFramebuffer->clearAttachment(1, -1);
-        sceneHirarchy.update();
+
+        if (mSceneState == sceneState::EditorMode) {
+            mActiveScene->update();
+        } else {
+            mActiveScene->updateRuntime();
+        }
 
         auto [imguiMouseX, imguiMouseY] = ImGui::GetMousePos();
         imguiMouseX -= mViewportBounds[0].x;
@@ -67,6 +79,7 @@ namespace calmarEd {
         if (mViewportFocused) {
             handleInput();
             camera.update();
+            sceneHirarchy.update();
         }
     }
 
@@ -74,7 +87,7 @@ namespace calmarEd {
         camera.handleEvents(ev);
 
         if (COMPARE_EVENTS(ev, windowResizeEvent)) {
-            sceneHirarchy.sceneManaging.getActiveScene()->handleResize(application::getInstance()->display->getProperties().width, application::getInstance()->display->getProperties().height);
+            mActiveScene->handleResize(application::getInstance()->display->getProperties().width, application::getInstance()->display->getProperties().height);
         }
     }
 
@@ -99,15 +112,15 @@ namespace calmarEd {
         ImVec2 panelSize = ImGui::GetContentRegionAvail();
 
         if (mFirstRun) {
-            sceneHirarchy.sceneManaging.getActiveScene()->handleResize(panelSize.x, panelSize.y);
+            mActiveScene->handleResize(panelSize.x, panelSize.y);
             mFirstRun = false;
         }
-        sceneHirarchy.sceneManaging.getActiveScene()->handleResize(panelSize.x, panelSize.y);
+        mActiveScene->handleResize(panelSize.x, panelSize.y);
         if (mViewportSize != *((glm::vec2*)&panelSize)) {
             mFramebuffer->resize((u32)panelSize.x, (u32)panelSize.y);
             mViewportSize = {panelSize.x, panelSize.y};
             camera.resize(panelSize.x, panelSize.y);
-            sceneHirarchy.sceneManaging.getActiveScene()->handleResize(panelSize.x, panelSize.y);
+            mActiveScene->handleResize(panelSize.x, panelSize.y);
         }
         render_id texId = mFramebuffer->getColorAttachmentId(0);
         ImGui::Image((void*)(uintptr_t)texId, ImVec2{mViewportSize.x, mViewportSize.y}, ImVec2{0, 1}, ImVec2{1, 0});
@@ -139,10 +152,10 @@ namespace calmarEd {
             if (mSceneState == sceneState::EditorMode) {
                 mGizmoType = -1;
                 mSceneState = sceneState::PlayMode;
-                sceneHirarchy.sceneManaging.startRuntimeScene();
+                startRuntimeScene();
             } else if (mSceneState == sceneState::PlayMode) {
                 mSceneState = sceneState::EditorMode;
-                sceneHirarchy.sceneManaging.stopRuntimeScene();
+                stopRuntimeScene();
             }
         }
         ImGui::PopStyleVar(2);
@@ -192,6 +205,18 @@ namespace calmarEd {
             if (ImGui::BeginMenu("File")) {
                 if (ImGui::MenuItem("Exit")) {
                     application::getInstance()->close();
+                }
+                if (ImGui::MenuItem("New Scene")) {
+                    newScene();
+                }
+                if (ImGui::MenuItem("Save Scene")) {
+                    saveScene();
+                }
+                if (ImGui::MenuItem("Save Scene As")) {
+                    saveSceneAs();
+                }
+                if (ImGui::MenuItem("Open Scene")) {
+                    openScene();
                 }
                 ImGui::EndMenu();
             }
@@ -270,5 +295,66 @@ namespace calmarEd {
         if (input::mouseButtonWentDown(button::Left) && mHoveredEntity != -1 && mViewportFocused && !ImGuizmo::IsOver()) {
             sceneHirarchy.setSelectedEntity(mHoveredEntity);
         }
+    }
+
+    void editorAttachment::newScene() {
+        mGizmoType = -1;
+        mActiveScene = ECS.registerSystem<scene>();
+        mActiveScene->handleResize(mViewportSize.x, mViewportSize.y);
+        sceneHirarchy.setScene(mActiveScene);
+
+        mScenePath = std::filesystem::path();
+    }
+
+    void editorAttachment::openScene() {
+        std::string filepath = platform::fileDialogs::openFile("Calmar Scene (*.clmscene)\0*.clmscene\0");
+
+        if (!filepath.empty()) {
+            openScene(filepath);
+        }
+    }
+
+    void editorAttachment::openScene(const std::filesystem::path& path) {
+        if (path.extension().string() != ".clmscene") {
+            CALMAR_ERROR("Failed to scene file '{0}' - not a .clmscene file", path.filename().string());
+            return;
+        }
+        std::shared_ptr<scene> newScene = ECS.registerSystem<scene>();
+        newScene->init();
+        mEditorScene = newScene;
+        mEditorScene->handleResize(mViewportSize.x, mViewportSize.y);
+        sceneSerialzer serialzer(newScene);
+        if (serialzer.deserialize(path.string())) {
+            mActiveScene = mEditorScene;
+            sceneHirarchy.setScene(mActiveScene);
+            mScenePath = path;
+        }
+    }
+
+    void editorAttachment::saveSceneAs() {
+        std::string filepath = platform::fileDialogs::saveFile("Calmar Scene (*.clmscene)\0*.clmscene\0");
+        if (!filepath.empty()) {
+            sceneSerialzer serializer(mActiveScene);
+            serializer.serialize(filepath);
+
+            mScenePath = filepath;
+        }
+    }
+
+    void editorAttachment::saveScene() {
+        if (!mScenePath.empty()) {
+            sceneSerialzer serializer(mActiveScene);
+            serializer.serialize(mScenePath.string());
+        } else {
+            saveSceneAs();
+        }
+    }
+
+    void editorAttachment::startRuntimeScene() {
+        mActiveScene = scene::copy(mEditorScene);
+    }
+
+    void editorAttachment::stopRuntimeScene() {
+        mActiveScene = mEditorScene;
     }
 }  // namespace calmarEd

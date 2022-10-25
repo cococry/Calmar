@@ -9,6 +9,8 @@ namespace calmar {
         class windowsFileDialogs {
            public:
             static std::string openFile(const char* filter, const char* dir);
+            
+            static std::string saveFile(const char* filter);
 
            private:
         };

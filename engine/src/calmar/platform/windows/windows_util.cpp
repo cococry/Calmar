@@ -26,5 +26,22 @@ namespace calmar {
             }
             return std::string();
         }
+        std::string windowsFileDialogs::saveFile(const char* filter) {
+            OPENFILENAMEA ofn;
+            CHAR szFile[260] = {0};
+            ZeroMemory(&ofn, sizeof(OPENFILENAMEA));
+            ofn.lStructSize = sizeof(OPENFILENAMEA);
+            ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)application::getInstance()->display->getBackendHandle());
+            ofn.lpstrFile = szFile;
+            ofn.nMaxFile = sizeof(szFile);
+            ofn.lpstrFilter = filter;
+            ofn.nFilterIndex = 1;
+            ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+            if (GetSaveFileNameA(&ofn) == TRUE) {
+                return ofn.lpstrFile;
+            }
+            return std::string();
+        }
     }  // namespace platform
+
 }  // namespace calmar

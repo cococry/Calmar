@@ -128,6 +128,9 @@
         "span": "cpp",
         "unordered_set": "cpp",
         "bitset": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "any": "cpp",
+        "filesystem": "cpp",
+        "valarray": "cpp"
     },
 }

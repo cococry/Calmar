@@ -11,16 +11,24 @@
 #include "calmar/renderer/resource_handler.hpp"
 
 namespace calmar {
-    scene::scene() {
+    scene::scene(bool setComponentSet) {
         mCameraTexture = resourceHandler::createTexture("../editor/assets/icons/camera-icon.png");
-    }
-    scene::~scene() {
+        if (setComponentSet) {
+            componentSet listenedComponents;
+            listenedComponents.set(ECS.getComponentType<transformComponent>());
+
+            ECS.setSystemComponentSet<scene>(listenedComponents);
+        }
     }
     void scene::init() {
+        mCameraTexture = resourceHandler::createTexture("../editor/assets/icons/camera-icon.png");
+
         componentSet listenedComponents;
         listenedComponents.set(ECS.getComponentType<transformComponent>());
 
         ECS.setSystemComponentSet<scene>(listenedComponents);
+    }
+    scene::~scene() {
     }
     void scene::update() {
         batchRenderer2d::beginRender(application::getInstance()->getEditorAttachment()->camera);

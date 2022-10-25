@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${VULKAN_SDK}/Include/**"
+                "${VULKAN_SDK}/Include/**",
+                "${workspaceFolder}/engine/vendor/glad/include"
             ],
             "defines": [
                 "_DEBUG",

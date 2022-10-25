@@ -1,0 +1,222 @@
+scene: untitled
+entities:
+  - entity: 45
+    tagComponent:
+      tag: Entity
+    transformComponent:
+      position: [0, 3.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 46
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, 1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 47
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, 1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 48
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, 1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 49
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3, 1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 50
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3, 2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 51
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, 2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 52
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, 2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 53
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, 2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 54
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, 1.99248326, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 55
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, 2.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 56
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, 2.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 57
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, 2.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 58
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3, 2.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 59
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [4.5634737, 0.472645283, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/playertexture.png
+  - entity: 60
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, 3.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 61
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, 3.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 62
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, 3.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 63
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3, 3.99248314, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+  - entity: 64
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.4365263, 0.472645283, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/playertexture.png
+  - entity: 65
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.4365263, 4.47264528, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/playertexture.png
+  - entity: 66
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [4.5634737, 4.47264528, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/playertexture.png

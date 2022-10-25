@@ -16,19 +16,14 @@
 #include <glm/gtc/type_ptr.hpp>
 
 namespace calmarEd {
-    void sceneHirarchyPanel::init() {
-        mScene = ECS.registerSystem<scene>();
-
-        mScene->init();
+    void sceneHirarchyPanel::init(const std::shared_ptr<scene>& scene) {
+        setScene(scene);
 
         mDefaultTexture = resourceHandler::createTexture("../engine/assets/textures/checkerboardicon.png");
-
-        sceneManaging = sceneManager(mScene);
 
         mPreviewSubtexture = std::make_shared<indexedAtlasTexture>();
     }
     void sceneHirarchyPanel::update() {
-        sceneManaging.updateActiveScene();
         handleInput();
     }
     void sceneHirarchyPanel::renderImGui() {
@@ -39,8 +34,10 @@ namespace calmarEd {
         if (ImGui::BeginPopupContextWindow(0, 1, false)) {
             if (ImGui::MenuItem("Create Entity")) {
                 entity entty = ECS.createEntity();
-                ECS.addComponent(entty, transformComponent());
-                ECS.addComponent(entty, tagComponent());
+                if (!ECS.hasComponent<transformComponent>(entty))
+                    ECS.addComponent(entty, transformComponent());
+                if (!ECS.hasComponent<tagComponent>(entty))
+                    ECS.addComponent(entty, tagComponent());
                 mSelectedEntity = entty;
             }
             ImGui::EndPopup();
@@ -340,7 +337,7 @@ namespace calmarEd {
                                      ImVec2{0, 1}, ImVec2{1, 0});
                     }
 
-                    if (indexedTextureComp.atlasTexture && mChangedSubtexture) {
+                    if (indexedTextureComp.atlasTexture) {
                         ImGui::SameLine();
                         ImGui::Text("Preview");
                         ImGui::SameLine();
@@ -459,12 +456,12 @@ namespace calmarEd {
     }
 
     void sceneHirarchyPanel::handleInput() {
-        if (input::isKeyDown(key::LeftControl) && input::keyWentDown(key::D)) {
+        if (input::isKeyDown(key::LeftControl) && input::keyWentDown(key::D) && mSelectedEntity != -1) {
             duplicateEntity(mSelectedEntity);
         }
     }
 
-    entity sceneHirarchyPanel::duplicateEntity(entity entty) {
+    entity sceneHirarchyPanel::duplicateEntity(entity& entty) {
         entity newEntity = ECS.createEntity();
 
         duplicateComponentIfHas<tagComponent>(entty, newEntity);
@@ -475,6 +472,13 @@ namespace calmarEd {
         }
 
         duplicateComponentIfHas<transformComponent>(entty, newEntity);
+
+        auto& transformComp = ECS.getComponent<transformComponent>(newEntity);
+        auto& transformCompSrc = ECS.getComponent<transformComponent>(entty);
+        transformComp.position = transformCompSrc.position;
+        transformComp.rotation = transformCompSrc.rotation;
+        transformComp.scale = transformCompSrc.scale;
+
         duplicateComponentIfHas<spriteRendererComponent>(entty, newEntity);
         duplicateComponentIfHas<cameraComponent>(entty, newEntity);
         duplicateComponentIfHas<indexedTextureComponent>(entty, newEntity);
@@ -484,8 +488,10 @@ namespace calmarEd {
 
     template <typename T>
     void sceneHirarchyPanel::duplicateComponentIfHas(entity source, entity dest) {
-        if (ECS.hasComponent<T>(source)) {
-            ECS.addComponent(dest, ECS.getComponent<T>(source));
+        if (!ECS.hasComponent<T>(dest)) {
+            if (ECS.hasComponent<T>(source)) {
+                ECS.addComponent(dest, ECS.getComponent<T>(source));
+            }
         }
     }
 

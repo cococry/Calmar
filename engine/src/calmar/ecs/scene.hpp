@@ -8,11 +8,13 @@
 namespace calmar {
     class scene : public systemEcs {
        public:
-        scene();
-
-        ~scene();
+        scene() = default;
+        
+        scene(bool setComponentSet);
 
         void init();
+
+        ~scene();
 
         void update();
 

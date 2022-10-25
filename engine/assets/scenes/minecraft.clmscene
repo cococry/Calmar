@@ -1,0 +1,565 @@
+scene: untitled
+entities:
+  - entity: 2
+    tagComponent:
+      tag: Stone
+    transformComponent:
+      position: [-2, -3, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 3
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, 0, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [0, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 4
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1, 0, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [0, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 5
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2, 0, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [0, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 6
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, 0, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [0, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 7
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, 0, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [0, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 8
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, -1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 9
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, -1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 10
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, -1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 11
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1, -1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 12
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2, -1, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 13
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2, -2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 14
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1, -2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 15
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, -2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 16
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, -2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 17
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, -2, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 18
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, -7, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 19
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, -3, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 20
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, -3, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 21
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1, -3, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 22
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2, -3, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 23
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, -3, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 24
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, -4, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 25
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, -4, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 26
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, -4, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [4, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 27
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1, -4, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 28
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2, -4, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 29
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2, -5, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 30
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1, -5, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 31
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, -5, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [4, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 32
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, -5, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [4, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 33
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, -5, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 34
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, -5, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 35
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2, -6, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 36
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, -6, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 37
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, -6, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 38
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1, -6, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 39
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2, -6, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 40
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2, -7, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 41
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1, -7, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 42
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, -7, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 43
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1, -7, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+  - entity: 44
+    tagComponent:
+      tag: Camera
+    transformComponent:
+      position: [0, 9.81743431, 11.7038822]
+      rotation: [-0.856930315, 0, 0]
+      scale: [1, 0.999999881, 0.999999881]
+    cameraComponent:
+      camera:
+        projectionType: 0
+        perspectiveVerticalFOV: 0.785398185
+        perspectiveNearClip: 0.00999999978
+        perspectiveFarClip: 1000
+        orthographicSize: 10
+        orthographicNearClip: -1
+        orthographicFarClip: 1
+      selectedForRendering: true

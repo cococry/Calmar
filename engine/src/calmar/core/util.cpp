@@ -19,6 +19,13 @@ namespace calmar {
             return std::string("");
 #endif
         }
+        std::string fileDialogs::saveFile(const char* filter) {
+#ifdef CALMAR_PLATFORM_WINDOWS
+            return platform::windowsFileDialogs::saveFile(filter);
+#else
+            return std::string("");
+#endif
+        }
     }  // namespace platform
     std::string util::getFileContents(const std::string& filepath) {
         std::string source = "";

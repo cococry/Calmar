@@ -1,5 +1,7 @@
 #include "ecs.hpp"
 
+#include "components.hpp"
+
 namespace calmar {
     void ecs::init() {
         mComponentManager = std::make_unique<componentManager>();
@@ -7,7 +9,10 @@ namespace calmar {
         mSystemManager = std::make_unique<systemManager>();
     }
     entity ecs::createEntity() {
-        return mEntityManager->createEntity();
+        entity ret = mEntityManager->createEntity();
+        addComponent(ret, transformComponent());
+        addComponent(ret, tagComponent("Entity"));
+        return ret;
     }
     void ecs::destroyEntity(entity entty) {
         mEntityManager->destroyEntity(entty);

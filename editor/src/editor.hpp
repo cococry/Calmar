@@ -12,6 +12,8 @@
 #include <memory>
 #include <glm/glm.hpp>
 
+#include <filesystem>
+
 using namespace calmar;
 
 namespace calmarEd {
@@ -41,6 +43,8 @@ namespace calmarEd {
 
         std::shared_ptr<texture2d> mStopIcon, mStartIcon;
 
+        std::shared_ptr<scene> mActiveScene, mEditorScene;
+
         glm::vec2 mViewportSize = glm::vec2(1.0f);
         glm::vec2 mViewportBounds[2];
 
@@ -61,5 +65,21 @@ namespace calmarEd {
         void renderGizmos();
 
         void handleInput();
+
+        void newScene();
+
+        void openScene();
+
+        void openScene(const std::filesystem::path& path);
+
+        void saveSceneAs();
+
+        void saveScene();
+
+        void startRuntimeScene();
+
+        void stopRuntimeScene();
+
+        std::filesystem::path mScenePath;
     };
 }  // namespace calmarEd

@@ -12,6 +12,8 @@ namespace calmar {
            public:
             static std::string openFile(const char* filter, const char* dir = "../engine/assets");
 
+            static std::string saveFile(const char* filter);
+            
            private:
         };
     }  // namespace platform
