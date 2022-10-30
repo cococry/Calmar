@@ -300,6 +300,7 @@ namespace calmarEd {
     void editorAttachment::newScene() {
         mGizmoType = -1;
         mActiveScene = ECS.registerSystem<scene>();
+        mEditorScene = ECS.registerSystem<scene>();
         mActiveScene->handleResize(mViewportSize.x, mViewportSize.y);
         sceneHirarchy.setScene(mActiveScene);
 
@@ -352,9 +353,11 @@ namespace calmarEd {
 
     void editorAttachment::startRuntimeScene() {
         mActiveScene = scene::copy(mEditorScene);
+        mActiveScene->onRuntimeStart();
     }
 
     void editorAttachment::stopRuntimeScene() {
+        mActiveScene->onRuntimeStop();
         mActiveScene = mEditorScene;
     }
 }  // namespace calmarEd

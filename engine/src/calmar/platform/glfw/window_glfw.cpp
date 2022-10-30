@@ -28,10 +28,6 @@ namespace calmar {
     void glfwWindow::update() {
         glfwPollEvents();
         glfwSwapBuffers(mBackendHandle);
-
-        mCurrentFrameTime = glfwGetTime();
-        mDeltaTime = (mCurrentFrameTime - mLastFrameTime);
-        mFrameCounter++;
     }
 
     void glfwWindow::initBackend() {
@@ -134,6 +130,11 @@ namespace calmar {
         return glfwWindowShouldClose(mBackendHandle);
     }
 
+    void glfwWindow::startTiming() {
+        mCurrentFrameTime = glfwGetTime();
+        mFrameCounter++;
+        mDeltaTime = (mCurrentFrameTime - mLastFrameTime);
+    }
     void glfwWindow::stopTiming() {
         if (mDeltaTime >= 1.0f / 30.0f) {
             mFps = (1.0f / mDeltaTime) * mFrameCounter;

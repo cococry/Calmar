@@ -78,7 +78,8 @@ namespace calmar {
         entityComponentSystem.registerComponent<tagComponent>();
         entityComponentSystem.registerComponent<cameraComponent>();
         entityComponentSystem.registerComponent<indexedTextureComponent>();
-
+        entityComponentSystem.registerComponent<rigidBody2dComponent>();
+        entityComponentSystem.registerComponent<boxCollider2dComponent>();
         mImGuiHandler = new imGuiHandler();
         addAttachment(mImGuiHandler);
     }
@@ -100,6 +101,8 @@ namespace calmar {
             if (display->closeRequested()) {
                 close();
             }
+            display->startTiming();
+
             for (applicationAttachment* attachment : mAttachements) {
                 attachment->update();
             }
@@ -111,11 +114,11 @@ namespace calmar {
             mImGuiHandler->endImGui();
 
             input::update();
+            display->update();
+
             display->stopTiming();
             mFps = display->getFps();
             mDeltaTime = display->getDeltaTime();
-
-            display->update();
         }
     }
 

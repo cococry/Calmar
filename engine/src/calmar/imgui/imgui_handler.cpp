@@ -27,6 +27,9 @@ namespace calmar {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
+        io.Fonts->AddFontFromFileTTF("../editor/assets/fonts/roboto/Roboto-Bold.ttf", 16.0f);
+        io.FontDefault = io.Fonts->AddFontFromFileTTF("../editor/assets/fonts/roboto/Roboto-Bold.ttf", 16.0f);
+
         ImGui::StyleColorsDark();
 
         ImGuiStyle& style = ImGui::GetStyle();

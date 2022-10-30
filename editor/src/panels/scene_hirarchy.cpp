@@ -119,6 +119,19 @@ namespace calmarEd {
                     ImGui::CloseCurrentPopup();
                 }
             }
+            if (!ECS.hasComponent<rigidBody2dComponent>(mSelectedEntity)) {
+                if (ImGui::MenuItem("Rigidbody 2D")) {
+                    ECS.addComponent(entty, rigidBody2dComponent());
+                    ImGui::CloseCurrentPopup();
+                }
+            }
+            if (!ECS.hasComponent<boxCollider2dComponent>(mSelectedEntity)) {
+                if (ImGui::MenuItem("Box Collider 2D")) {
+                    ECS.addComponent(entty, boxCollider2dComponent());
+                    ImGui::CloseCurrentPopup();
+                }
+            }
+
             ImGui::EndPopup();
         }
 
@@ -209,7 +222,6 @@ namespace calmarEd {
 
                 if (spriteRenderer.texture) {
                     if (ImGui::Button("Reset Texture")) {
-                        resourceHandler::deleteTexture(spriteRenderer.texture);
                         spriteRenderer.texture = nullptr;
                     }
                 }
@@ -282,7 +294,6 @@ namespace calmarEd {
             ImGui::PopStyleVar();
         }
         if (ECS.hasComponent<indexedTextureComponent>(mSelectedEntity)) {
-            ImGuiIO io = ImGui::GetIO();
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
             ImGui::Separator();
 
@@ -374,22 +385,83 @@ namespace calmarEd {
                         ImGui::EndCombo();
                     }
 
-                    if (indexedTextureComp.atlasTexture) {
-                        if (ImGui::Button("Reset Texture")) {
-                            resourceHandler::deleteTexture(indexedTextureComp.atlasTexture);
-                            indexedTextureComp.atlasTexture = nullptr;
-                            indexedTextureComp.indexedTexture->atlasTexture = nullptr;
-                            indexedTextureComp.indexedTexture = nullptr;
-                        }
-                    }
                     ImGui::Separator();
 
                     if (ImGui::Button("Create Sub Texture") && indexedTextureComp.atlasTexture) {
                         indexedTextureComp.indexedTexture = indexedAtlasTexture::createWithCoords(indexedTextureComp.atlasTexture, indexedTextureComp.coordsOnSheet, indexedTextureComp.cellSize);
                     }
+
+                    if (indexedTextureComp.indexedTexture) {
+                        if (ImGui::Button("Reset Texture")) {
+                            indexedTextureComp.atlasTexture = nullptr;
+                            indexedTextureComp.indexedTexture = nullptr;
+                        }
+                    }
                 }
                 ImGui::TreePop();
             }
+            ImGui::PopStyleVar();
+        }
+        if (ECS.hasComponent<rigidBody2dComponent>(entty)) {
+            auto& rigidBody2dComp = ECS.getComponent<rigidBody2dComponent>(entty);
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+            ImGui::Separator();
+            bool open = ImGui::TreeNodeEx((void*)typeid(rigidBody2dComponent).hash_code(),
+                                          ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed |
+                                              ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap,
+                                          "Rigidbody 2D");
+
+            ImGui::SameLine();
+            if (ImGui::Button("-")) {
+                ECS.removeComponent<rigidBody2dComponent>(entty);
+            }
+            if (open) {
+                const char* bodyTypeStrings[] = {"Static", "Dynamic"};
+                const char* currentBodyTypeString = bodyTypeStrings[(int)rigidBody2dComp.type];
+
+                if (ImGui::BeginCombo("Filter Mode", currentBodyTypeString)) {
+                    for (int32_t i = 0; i < 2; ++i) {
+                        bool isSelected = currentBodyTypeString == bodyTypeStrings[i];
+                        if (ImGui::Selectable(bodyTypeStrings[i], isSelected)) {
+                            rigidBody2dComp.type = (rigidBody2dComponent::bodyType)i;
+                        }
+                        if (isSelected)
+                            ImGui::SetItemDefaultFocus();
+                    }
+
+                    ImGui::EndCombo();
+                }
+
+                ImGui::Checkbox("Fixed Rotation", &rigidBody2dComp.fixedRotation);
+
+                ImGui::TreePop();
+            }
+            ImGui::PopStyleVar();
+        }
+        if (ECS.hasComponent<boxCollider2dComponent>(entty)) {
+            auto& boxCollider2dComp = ECS.getComponent<boxCollider2dComponent>(entty);
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+            ImGui::Separator();
+            bool open = ImGui::TreeNodeEx((void*)typeid(boxCollider2dComponent).hash_code(),
+                                          ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed |
+                                              ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap,
+                                          "Box Collider 2D");
+
+            ImGui::SameLine();
+            if (ImGui::Button("-")) {
+                ECS.removeComponent<boxCollider2dComponent>(entty);
+            }
+            if (open) {
+                ImGui::DragFloat2("Offset", glm::value_ptr(boxCollider2dComp.offset));
+                ImGui::DragFloat2("Size", glm::value_ptr(boxCollider2dComp.size));
+                ImGui::DragFloat("Density", &boxCollider2dComp.density, 0.01f, 0.0f, 1.0f);
+                ImGui::DragFloat("Friction", &boxCollider2dComp.friction, 0.01f, 0.0f, 1.0f);
+                ImGui::DragFloat("Restitution", &boxCollider2dComp.restitution, 0.01f, 0.0f, 1.0f);
+                ImGui::DragFloat("Restitution Threshold", &boxCollider2dComp.restitutionThreshold, 0.01f, 0.0f, 1.0f);
+
+                ImGui::TreePop();
+            }
+
             ImGui::PopStyleVar();
         }
     }
@@ -467,6 +539,8 @@ namespace calmarEd {
         duplicateComponentIfHas<tagComponent>(entty, newEntity);
 
         auto& tagComp = ECS.getComponent<tagComponent>(newEntity);
+        auto& tagCompSrc = ECS.getComponent<tagComponent>(entty);
+        tagComp.tag = tagCompSrc.tag;
         if (tagComp.tag.find(" (Copy)") == std::string::npos) {
             tagComp.tag += std::string(" (Copy)");
         }
@@ -482,6 +556,8 @@ namespace calmarEd {
         duplicateComponentIfHas<spriteRendererComponent>(entty, newEntity);
         duplicateComponentIfHas<cameraComponent>(entty, newEntity);
         duplicateComponentIfHas<indexedTextureComponent>(entty, newEntity);
+        duplicateComponentIfHas<rigidBody2dComponent>(entty, newEntity);
+        duplicateComponentIfHas<boxCollider2dComponent>(entty, newEntity);
 
         return newEntity;
     }

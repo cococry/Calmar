@@ -184,6 +184,32 @@ namespace calmar {
 
             out << YAML::EndMap;  // map for indexedTextureComponent
         }
+        if (ECS.hasComponent<rigidBody2dComponent>(entity)) {
+            out << YAML::Key << "rigidBody2dComponent";
+            out << YAML::BeginMap;
+
+            auto& rigidBody2dComp = ECS.getComponent<rigidBody2dComponent>(entity);
+
+            out << YAML::Key << "bodyType" << (int)rigidBody2dComp.type;
+            out << YAML::Key << "fixedRotation" << rigidBody2dComp.fixedRotation;
+
+            out << YAML::EndMap;  // map for rigidBody2dComponent
+        }
+        if (ECS.hasComponent<boxCollider2dComponent>(entity)) {
+            out << YAML::Key << "boxCollider2dComponent";
+            out << YAML::BeginMap;
+
+            auto& boxCollider2dComp = ECS.getComponent<boxCollider2dComponent>(entity);
+
+            out << YAML::Key << "density" << boxCollider2dComp.density;
+            out << YAML::Key << "friction" << boxCollider2dComp.friction;
+            out << YAML::Key << "offset" << boxCollider2dComp.offset;
+            out << YAML::Key << "restitution" << boxCollider2dComp.restitution;
+            out << YAML::Key << "restitutionThreshold" << boxCollider2dComp.restitutionThreshold;
+            out << YAML::Key << "size" << boxCollider2dComp.size;
+
+            out << YAML::EndMap;  // map for rigidBody2dComponent
+        }
         out << YAML::EndMap;  // map for the entity
     }
     void sceneSerialzer::serialize(const std::string& filepath) {
@@ -277,6 +303,30 @@ namespace calmar {
                         indexedTextureComp.atlasTexture = resourceHandler::createTexture(indexedTextureComponentNode["texture"].as<std::string>(), indexedTextureComp.atlasTextureFilterMode);
 
                     indexedTextureComp.indexedTexture = indexedAtlasTexture::createWithCoords(indexedTextureComp.atlasTexture, indexedTextureComp.coordsOnSheet, indexedTextureComp.cellSize);
+                }
+
+                auto rigidBody2dComponentNode = entty["rigidBody2dComponent"];
+                if (rigidBody2dComponentNode) {
+                    ECS.addComponent(newEntity, rigidBody2dComponent());
+
+                    auto& rigidBody2dComp = ECS.getComponent<rigidBody2dComponent>(newEntity);
+
+                    rigidBody2dComp.fixedRotation = rigidBody2dComponentNode["fixedRotation"].as<bool>();
+                    rigidBody2dComp.type = (rigidBody2dComponent::bodyType)rigidBody2dComponentNode["bodyType"].as<int>();
+                }
+
+                auto boxCollider2dComponentNode = entty["boxCollider2dComponent"];
+                if (boxCollider2dComponentNode) {
+                    ECS.addComponent(newEntity, boxCollider2dComponent());
+
+                    auto& boxCollider2dComp = ECS.getComponent<boxCollider2dComponent>(newEntity);
+
+                    boxCollider2dComp.density = boxCollider2dComponentNode["density"].as<float>();
+                    boxCollider2dComp.friction = boxCollider2dComponentNode["friction"].as<float>();
+                    boxCollider2dComp.offset = boxCollider2dComponentNode["offset"].as<glm::vec2>();
+                    boxCollider2dComp.restitution = boxCollider2dComponentNode["restitution"].as<float>();
+                    boxCollider2dComp.restitutionThreshold = boxCollider2dComponentNode["restitutionThreshold"].as<float>();
+                    boxCollider2dComp.size = boxCollider2dComponentNode["size"].as<glm::vec2>();
                 }
             }
         }

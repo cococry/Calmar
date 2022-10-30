@@ -4,3 +4,4 @@ bin/*.pbd
 bin/*.ilk
 bin/*.pdb
 bin/*.exe
+.vscode/

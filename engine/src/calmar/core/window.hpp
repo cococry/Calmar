@@ -125,6 +125,8 @@ namespace calmar {
         /// @return
         virtual double getDeltaTime() const { return 0.0; };
 
+        virtual void startTiming() {}
+        
         virtual void stopTiming() {}
 
         virtual float getFps() const { return 0.0f; }

@@ -35,6 +35,8 @@ namespace calmar {
 
         virtual double getDeltaTime() const override;
 
+        virtual void startTiming() override;
+        
         virtual void stopTiming() override;
 
         virtual float getFps() const override;

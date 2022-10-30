@@ -43,6 +43,8 @@ namespace calmar {
         glm::vec3 position;
         glm::vec3 rotation;
         glm::vec3 scale;
+
+        transformComponent(const transformComponent&) = default;
     };
     struct spriteRendererComponent {
         spriteRendererComponent() {
@@ -56,6 +58,8 @@ namespace calmar {
 
         std::shared_ptr<texture2d> texture;
         glm::vec4 tint;
+
+        spriteRendererComponent(const spriteRendererComponent&) = default;
     };
 
     struct cameraComponent {
@@ -78,9 +82,37 @@ namespace calmar {
         indexedTextureComponent(const std::shared_ptr<indexedAtlasTexture>& texture, const glm::vec4& tint)
             : indexedTexture(texture), tint(tint) {
         }
-        indexedTextureComponent() {
-        }
+
+        indexedTextureComponent() = default;
+        indexedTextureComponent(const indexedTextureComponent&) = default;
 
        private:
+    };
+
+    struct rigidBody2dComponent {
+        enum class bodyType { Static = 0,
+                              Dynamic };
+
+        bodyType type = bodyType::Static;
+        bool fixedRotation = false;
+
+        void* runtimeBody = nullptr;
+
+        rigidBody2dComponent() = default;
+        rigidBody2dComponent(const rigidBody2dComponent&) = default;
+    };
+    struct boxCollider2dComponent {
+        glm::vec2 offset = {0.0f, 0.0f};
+        glm::vec2 size = {0.5f, 0.5f};
+
+        float density = 1.0f;
+        float friction = 0.5f;
+        float restitution = 0.0f;
+        float restitutionThreshold = 0.5f;
+
+        void* runtimeFixture = nullptr;
+
+        boxCollider2dComponent() = default;
+        boxCollider2dComponent(const boxCollider2dComponent&) = default;
     };
 }  // namespace calmar
