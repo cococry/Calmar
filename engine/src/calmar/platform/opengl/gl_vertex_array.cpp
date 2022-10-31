@@ -29,7 +29,9 @@ namespace calmar {
         glDeleteVertexArrays(1, &mId);
     }
 
-    void glVertexArray::setVertexLayoutAttribute(layoutAttributeType dataTypeCount, u32 stride, u32 type, bool normalized) {
+    void glVertexArray::setVertexLayoutAttribute(layoutAttributeType dataTypeCount, const std::shared_ptr<vertexBuffer>& layoutBuffer, u32 stride, u32 type, bool normalized) {
+        this->bind();
+        layoutBuffer->bind();
         u32 _stride = (stride != 0) ? stride : mVertexStride;
         u32 finalStride = 0;
         u32 finalOffset = 0;

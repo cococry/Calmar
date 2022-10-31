@@ -18,7 +18,7 @@ namespace calmar {
 
         virtual void deleteId() override;
 
-        virtual void setVertexLayoutAttribute(layoutAttributeType dataTypeCount, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) override;
+        virtual void setVertexLayoutAttribute(layoutAttributeType dataTypeCount, const std::shared_ptr<vertexBuffer>& layoutBuffer, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) override;
 
         inline u32 getAttribOffset() const {
             return mAttribOffset;

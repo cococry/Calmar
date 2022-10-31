@@ -44,7 +44,7 @@ namespace calmarEd {
 
     void editorAttachment::update() {
         mFramebuffer->bind();
-        renderCommand::clearColor({0.1f, 0.1f, 0.1f, 1.0f});
+        renderCommand::clearColor({0.35f, 0.35f, 0.35f, 1.0f});
         renderCommand::clearBuffers(clearBuffers::colorBuffer | clearBuffers::depthBuffer);
         mFramebuffer->clearAttachment(1, -1);
 
@@ -74,7 +74,7 @@ namespace calmarEd {
         mFramebuffer->unbind();
         // for imgui
         renderCommand::clearBuffers(clearBuffers::colorBuffer | clearBuffers::depthBuffer);
-        renderCommand::clearColor({0.1f, 0.1f, 0.1f, 1.0f});
+        renderCommand::clearColor({0.35f, 0.35f, 0.35f, 1.0f});
 
         if (mViewportFocused) {
             handleInput();
@@ -99,6 +99,7 @@ namespace calmarEd {
         renderImGuiSceneViewport();
         renderGizmos();
         renderPlayButton();
+        renderSettingsPanel();
         sceneHirarchy.renderImGui();
         imguiStatsPanel.renderImGui();
     }
@@ -206,16 +207,16 @@ namespace calmarEd {
                 if (ImGui::MenuItem("Exit")) {
                     application::getInstance()->close();
                 }
-                if (ImGui::MenuItem("New Scene")) {
+                if (ImGui::MenuItem("New Scene", "LCTRL + LSHIFT + N")) {
                     newScene();
                 }
-                if (ImGui::MenuItem("Save Scene")) {
+                if (ImGui::MenuItem("Save Scene", "LCTRL + S")) {
                     saveScene();
                 }
-                if (ImGui::MenuItem("Save Scene As")) {
+                if (ImGui::MenuItem("Save Scene As", "LCTRL + LSHIFT + S")) {
                     saveSceneAs();
                 }
-                if (ImGui::MenuItem("Open Scene")) {
+                if (ImGui::MenuItem("Open Scene", "LCTRL + LSHIFT + O")) {
                     openScene();
                 }
                 ImGui::EndMenu();
@@ -295,6 +296,18 @@ namespace calmarEd {
         if (input::mouseButtonWentDown(button::Left) && mHoveredEntity != -1 && mViewportFocused && !ImGuizmo::IsOver()) {
             sceneHirarchy.setSelectedEntity(mHoveredEntity);
         }
+        if (input::isKeyDown(key::LeftControl) && input::isKeyDown(key::S)) {
+            saveScene();
+        }
+        if (input::isKeyDown(key::LeftControl) && input::isKeyDown(key::LeftShift) && input::isKeyDown(key::S)) {
+            saveSceneAs();
+        }
+        if (input::isKeyDown(key::LeftControl) && input::isKeyDown(key::LeftShift) && input::isKeyDown(key::O)) {
+            openScene();
+        }
+        if (input::isKeyDown(key::LeftControl) && input::isKeyDown(key::LeftShift) && input::isKeyDown(key::N)) {
+            newScene();
+        }
     }
 
     void editorAttachment::newScene() {
@@ -359,5 +372,26 @@ namespace calmarEd {
     void editorAttachment::stopRuntimeScene() {
         mActiveScene->onRuntimeStop();
         mActiveScene = mEditorScene;
+    }
+
+    void editorAttachment::renderSettingsPanel() {
+        ImGui::Begin("Settings");
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
+        ImGui::Separator();
+        bool open = ImGui::TreeNodeEx((void*)0,
+                                      ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed |
+                                          ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap,
+                                      "Physics");
+
+        if (open) {
+            ImGui::PushItemWidth(55.0f);
+            ImGui::DragInt("Velocity Iterations", &mActiveScene->velocityIterations);
+            ImGui::DragInt("Position Iterations", &mActiveScene->positionIterations);
+            ImGui::PopItemWidth();
+            ImGui::TreePop();
+        }
+
+        ImGui::PopStyleVar();
+        ImGui::End();
     }
 }  // namespace calmarEd

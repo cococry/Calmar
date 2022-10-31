@@ -62,6 +62,8 @@ namespace calmarEd {
 
         void handleImGuiDockspace();
 
+        void renderSettingsPanel();
+
         void renderGizmos();
 
         void handleInput();

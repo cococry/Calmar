@@ -56,9 +56,10 @@ namespace calmar {
         struct renderStats {
             u32 drawCalls = 0;
             u32 numberOfQuads = 0;
+            u32 numberOfCircles = 0;
 
-            u32 verticesCount = numberOfQuads * 6;
-            u32 indicesCount = numberOfQuads * 4;
+            u32 verticesCount = (numberOfQuads + numberOfCircles) * 6;
+            u32 indicesCount = (numberOfQuads + numberOfCircles) * 4;
         };
 
         struct renderData {
@@ -70,10 +71,10 @@ namespace calmar {
             std::shared_ptr<vertexArray> quadVertexArray;
             std::shared_ptr<vertexBuffer> quadVertexBuffer;
             std::shared_ptr<shader> quadShader;
+
             std::shared_ptr<texture2d> textureWhite;
 
             u32 quadIndexCount = 0;
-
             quadVertex* quadVertexBufferBase = nullptr;
             quadVertex* quadVertexBufferPointer = nullptr;
 

@@ -75,4 +75,10 @@ namespace calmar {
     void renderCommand::drawIndexed(const std::shared_ptr<vertexArray>& va) {
         glDrawElements(GL_TRIANGLES, va->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
     }
+
+    void renderCommand::drawIndexed(const std::shared_ptr<vertexArray>& va, u32 count) {
+        va->bind();
+        u32 indexCount = count ? count : va->getIndexBuffer()->getCount();
+        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
+    }
 }  // namespace calmar

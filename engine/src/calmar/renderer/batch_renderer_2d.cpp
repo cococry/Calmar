@@ -19,11 +19,11 @@ namespace calmar {
         mData.quadVertexBuffer = vertexBuffer::createRef(mData.maxVerticesBatch * sizeof(quadVertex));
         mData.quadVertexArray->addVertexBuffer(mData.quadVertexBuffer);
 
-        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::VEC3);
-        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::VEC4);
-        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::VEC2);
-        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::FLOAT);
-        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::INTEGER);
+        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::VEC3, mData.quadVertexBuffer);
+        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::VEC4, mData.quadVertexBuffer);
+        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::VEC2, mData.quadVertexBuffer);
+        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::FLOAT, mData.quadVertexBuffer);
+        mData.quadVertexArray->setVertexLayoutAttribute(layoutAttributeType::INTEGER, mData.quadVertexBuffer);
 
         mData.quadVertexBufferBase = new quadVertex[mData.maxVerticesBatch];
 
@@ -98,18 +98,17 @@ namespace calmar {
         }
     }
     void batchRenderer2d::drawData() {
-        if (mData.quadIndexCount == 0)
-            return;
+        if (mData.quadIndexCount) {
+            u32 dataSize = (u32)((u8*)mData.quadVertexBufferPointer - (u8*)mData.quadVertexBufferBase);
+            mData.quadVertexBuffer->setData(mData.quadVertexBufferBase, dataSize);
 
-        u32 dataSize = (u32)((u8*)mData.quadVertexBufferPointer - (u8*)mData.quadVertexBufferBase);
-        mData.quadVertexBuffer->setData(mData.quadVertexBufferBase, dataSize);
+            for (u32 i = 0; i < mData.textureSlotIndex; i++)
+                mData.textures[i]->bindUnit(i);
 
-        for (u32 i = 0; i < mData.textureSlotIndex; i++)
-            mData.textures[i]->bindUnit(i);
-
-        renderCommand::drawIndexed(mData.quadIndexCount);
-
-        mData.stats.drawCalls++;
+            mData.quadShader->bind();
+            renderCommand::drawIndexed(mData.quadVertexArray, mData.quadIndexCount);
+            mData.stats.drawCalls++;
+        }
     }
     void batchRenderer2d::renderQuad(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color, glm::vec3 rotation, i32 entityId) {
         if (USING_COMPATABLE_RENDERING_API)
@@ -178,7 +177,7 @@ namespace calmar {
                 drawReset();
 
             const float texIndex = 0.0f;
-            constexpr size_t quadVertexCount = 4;
+            constexpr u64 quadVertexCount = 4;
             constexpr glm::vec2 textureCoords[] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
 
             for (u32 i = 0; i < quadVertexCount; i++) {
@@ -383,4 +382,5 @@ namespace calmar {
             mData.stats.numberOfQuads++;
         }
     }
+
 }  // namespace calmar

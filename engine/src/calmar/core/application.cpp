@@ -80,6 +80,8 @@ namespace calmar {
         entityComponentSystem.registerComponent<indexedTextureComponent>();
         entityComponentSystem.registerComponent<rigidBody2dComponent>();
         entityComponentSystem.registerComponent<boxCollider2dComponent>();
+        entityComponentSystem.registerComponent<circleRendererComponent>();
+
         mImGuiHandler = new imGuiHandler();
         addAttachment(mImGuiHandler);
     }

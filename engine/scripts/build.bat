@@ -15,7 +15,7 @@ set thirdpartyFiles=vendor/glad/src/glad.cpp vendor/glad/src/glad_wgl.cpp vendor
 set includeDirs=-Isrc -Ivendor/glfw/include -Ivendor/glad/include -Ivendor/glm -Ivendor/stb_image -Ivendor/spdlog/include -I%VULKAN_SDK%/Include -Ivendor/imgui -Ivendor/imguizmo -Ivendor/yaml-cpp/include -Ivendor/box2d/include 
 set defaultLinkerFlags=-lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lopengl32
 set linkerFlags=%defaultLinkerFlags% -Lvendor/glfw/lib -Lvendor/imgui/lib -Lvendor/yaml-cpp/lib -L%VULKAN_SDK%/Lib -Lvendor/box2d/lib -lglfw3_mt -lvulkan-1  -lImGui -lyaml-cpp -lbox2d
-set compilerFlags=-fuse-ld=llvm-lib -g -Wno-pragma-pack -Wvarargs -Wall -std=c++17 -o ../bin/CalmarEngine.lib
+set compilerFlags=-fuse-ld=llvm-lib -O3 -g -Wno-pragma-pack -Wvarargs -Wall -std=c++17 -o ../bin/CalmarEngine.lib
 set preDefinedMacros=-DCALMAR_EXPORT -D_CRT_SECURE_NO_WARNINGS -DGLFW_INCLUDE_NONE -DCALMAR_PLATFORM_WINDOWS -DNOMINMAX  -DYAML_CPP_STATIC_DEFINE
 
 echo Starting Calmar Engine build process...

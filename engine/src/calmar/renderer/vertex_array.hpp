@@ -63,7 +63,7 @@ namespace calmar {
         /// @param stride The stride of a single vertex
         /// @param type The type of the data in the attribute
         /// @param normalized Defines if the data is normalized (lin alg. only)
-        virtual void setVertexLayoutAttribute(layoutAttributeType dataTypeCount, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) {}
+        virtual void setVertexLayoutAttribute(layoutAttributeType dataTypeCount, const std::shared_ptr<vertexBuffer>& layoutBuffer, u32 stride = 0, u32 type = renderDataTypes::float32, bool normalized = false) {}
 
         /// @brief This constant member function returns the list of vertex buffer assotiated with this vertex array
         /// @return Returns the private member variable "VertexBuffers"
@@ -89,6 +89,7 @@ namespace calmar {
         /// @param buffer The index buffer to set to the vertex array
         inline void setIndexBuffer(const std::shared_ptr<indexBuffer>& buffer) {
             mIndexBufer = buffer;
+            buffer->bind();
         }
 
         /// @brief This constant member function returns the renderer Id of this vertex array.

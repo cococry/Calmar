@@ -39,37 +39,37 @@ namespace calmar {
         }
 
         style.Colors[ImGuiCol_Text] = ImVec4(1.0f, 1.0f, 1.0f, 1.00f);
-        style.Colors[ImGuiCol_WindowBg] = ImColor(13, 18, 20);
+        style.Colors[ImGuiCol_WindowBg] = ImColor(41, 41, 41);
 
         // Headers
-        style.Colors[ImGuiCol_Header] = ImColor(23, 28, 31);
-        style.Colors[ImGuiCol_HeaderHovered] = ImColor(30, 35, 37);
-        style.Colors[ImGuiCol_HeaderActive] = ImColor(19, 25, 28);
+        style.Colors[ImGuiCol_Header] = ImColor(62, 62, 62);
+        style.Colors[ImGuiCol_HeaderHovered] = ImColor(67, 67, 67);
+        style.Colors[ImGuiCol_HeaderActive] = ImColor(59, 59, 59);
 
         // Buttons
-        style.Colors[ImGuiCol_Button] = ImColor(58, 59, 69);
-        style.Colors[ImGuiCol_ButtonHovered] = ImColor(68, 69, 79);
-        style.Colors[ImGuiCol_ButtonActive] = ImColor(48, 49, 59);
+        style.Colors[ImGuiCol_Button] = ImColor(55, 55, 55);
+        style.Colors[ImGuiCol_ButtonHovered] = ImColor(62, 62, 62);
+        style.Colors[ImGuiCol_ButtonActive] = ImColor(50, 50, 50);
 
         // Frame BG
-        style.Colors[ImGuiCol_FrameBg] = ImColor(39, 47, 51);
-        style.Colors[ImGuiCol_FrameBgHovered] = ImColor(47, 53, 59);
-        style.Colors[ImGuiCol_FrameBgActive] = ImColor(32, 42, 55);
+        style.Colors[ImGuiCol_FrameBg] = ImColor(67, 67, 67);
+        style.Colors[ImGuiCol_FrameBgHovered] = ImColor(72, 72, 72);
+        style.Colors[ImGuiCol_FrameBgActive] = ImColor(62, 62, 62);
 
-        style.Colors[ImGuiCol_MenuBarBg] = ImColor(34, 43, 47);
-        style.Colors[ImGuiCol_PopupBg] = ImColor(19, 24, 27);
+        style.Colors[ImGuiCol_MenuBarBg] = ImColor(55, 55, 55);
+        style.Colors[ImGuiCol_PopupBg] = ImColor(60, 60, 60);
 
         // Tabs
-        style.Colors[ImGuiCol_Tab] = ImColor(37, 47, 53);
-        style.Colors[ImGuiCol_TabHovered] = ImColor(45, 53, 58);
-        style.Colors[ImGuiCol_TabActive] = ImColor(30, 40, 45);
-        style.Colors[ImGuiCol_TabUnfocused] = ImColor(27, 38, 43);
-        style.Colors[ImGuiCol_TabUnfocusedActive] = ImColor(23, 34, 56);
+        style.Colors[ImGuiCol_Tab] = ImColor(55, 55, 55);
+        style.Colors[ImGuiCol_TabHovered] = ImColor(62, 62, 62);
+        style.Colors[ImGuiCol_TabActive] = ImColor(50, 50, 50);
+        style.Colors[ImGuiCol_TabUnfocused] = ImColor(52, 52, 52);
+        style.Colors[ImGuiCol_TabUnfocusedActive] = ImColor(50, 50, 50);
 
         // Title
-        style.Colors[ImGuiCol_TitleBg] = ImColor(16, 22, 26);
-        style.Colors[ImGuiCol_TitleBgActive] = ImColor(20, 26, 30);
-        style.Colors[ImGuiCol_TitleBgCollapsed] = ImColor(11, 16, 20);
+        style.Colors[ImGuiCol_TitleBg] = ImColor(52, 52, 52);
+        style.Colors[ImGuiCol_TitleBgActive] = ImColor(58, 58, 58);
+        style.Colors[ImGuiCol_TitleBgCollapsed] = ImColor(60, 60, 60);
 
         GLFWwindow* window = static_cast<GLFWwindow*>(application::getInstance()->display->getBackendHandle());
 

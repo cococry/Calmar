@@ -52,6 +52,8 @@ namespace calmar {
 
         static void drawIndexed(const std::shared_ptr<vertexArray>& va);
 
+        static void drawIndexed(const std::shared_ptr<vertexArray>& va, u32 count);
+
        private:
         static renderingBackend mBackend;
     };

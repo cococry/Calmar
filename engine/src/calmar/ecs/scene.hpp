@@ -36,6 +36,9 @@ namespace calmar {
 
         void onRuntimeStop();
 
+        i32 velocityIterations = 6;
+        i32 positionIterations = 2;
+
        private:
         std::vector<transformComponent> mEditorTransforms;
 

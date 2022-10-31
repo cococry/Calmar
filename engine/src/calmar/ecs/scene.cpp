@@ -69,6 +69,7 @@ namespace calmar {
                 }
             }
         }
+
         batchRenderer2d::endRender();
     }
 
@@ -88,8 +89,6 @@ namespace calmar {
         }
 
         {
-            const i32 velocityIterations = 6;
-            const i32 positionIterations = 2;
             mPhysicsWorld->Step(application::getInstance()->getDeltaTime(), velocityIterations, positionIterations);
 
             for (auto& entty : mEntities) {
@@ -117,21 +116,19 @@ namespace calmar {
                         if (spriteRendererComp.texture) {
                             batchRenderer2d::renderQuad(transformComp.getTransform(), spriteRendererComp.texture, spriteRendererComp.tint, entty);
                         } else {
-                            batchRenderer2d::renderQuad(transformComp.position, glm::vec2(transformComp.scale.x, transformComp.scale.y), spriteRendererComp.tint, transformComp.rotation, entty);
+                            batchRenderer2d::renderQuad(transformComp.getTransform(), spriteRendererComp.tint, entty);
                         }
-                    }
-                    if (ECS.hasComponent<indexedTextureComponent>(entty) && !ECS.hasComponent<spriteRendererComponent>(entty && !ECS.hasComponent<cameraComponent>(entty))) {
+                    } else if (ECS.hasComponent<indexedTextureComponent>(entty) && !ECS.hasComponent<spriteRendererComponent>(entty && !ECS.hasComponent<cameraComponent>(entty))) {
                         auto& indexedTextureComp = ECS.getComponent<indexedTextureComponent>(entty);
                         if (indexedTextureComp.indexedTexture) {
                             batchRenderer2d::renderQuad(transformComp.getTransform(), indexedTextureComp.indexedTexture, indexedTextureComp.tint, entty);
                         }
                     }
                 }
+                batchRenderer2d::endRender();
             }
-            batchRenderer2d::endRender();
         }
     }
-
     entity scene::getRenderCameraEntity() const {
         for (auto const& entty : mEntities) {
             if (ECS.hasComponent<cameraComponent>(entty)) {
@@ -148,6 +145,8 @@ namespace calmar {
         std::shared_ptr<scene> newScene = std::make_shared<scene>();
 
         newScene->mEntities = sceneToCopy->mEntities;
+        newScene->velocityIterations = sceneToCopy->velocityIterations;
+        newScene->positionIterations = sceneToCopy->positionIterations;
 
         return newScene;
     }

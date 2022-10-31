@@ -131,6 +131,7 @@
         "queue": "cpp",
         "any": "cpp",
         "filesystem": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "csignal": "cpp"
     },
 }

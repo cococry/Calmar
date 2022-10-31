@@ -1,10 +1,10 @@
 scene: untitled
 entities:
-  - entity: 18
+  - entity: 0
     tagComponent:
-      tag: Ground
+      tag: Entity
     transformComponent:
-      position: [2.91038305e-11, -20, 0]
+      position: [0, -20, 0]
       rotation: [0, 0, 0]
       scale: [20, 20, 1]
     indexedTextureComponent:
@@ -23,18 +23,18 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 19
+  - entity: 1
     tagComponent:
-      tag: Falling Block
+      tag: Entity
     transformComponent:
-      position: [-2.22174311, 3.10354519, 0]
-      rotation: [0.116782591, -0.0443142168, 0.572856367]
-      scale: [1, 0.999999881, 0.999996126]
+      position: [-5.38525486, 2.15362859, 0]
+      rotation: [0, 0, -0.300000131]
+      scale: [0.999999464, 0.999999464, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
       cellSize: [16, 16]
-      coordsOnSheet: [3, 0]
+      coordsOnSheet: [4, 0]
       tint: [1, 1, 1, 1]
     rigidBody2dComponent:
       bodyType: 1
@@ -46,11 +46,11 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 20
+  - entity: 2
     tagComponent:
       tag: Entity
     transformComponent:
-      position: [0, 0, 40.5]
+      position: [0, 0, 25.6243744]
       rotation: [0, 0, 0]
       scale: [1, 1, 1]
     cameraComponent:
@@ -59,17 +59,17 @@ entities:
         perspectiveVerticalFOV: 0.785398185
         perspectiveNearClip: 0.00999999978
         perspectiveFarClip: 1000
-        orthographicSize: 23
+        orthographicSize: 10
         orthographicNearClip: 1
         orthographicFarClip: 1
       selectedForRendering: true
-  - entity: 21
+  - entity: 3
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [8.07800102, 8.96756363, 0.0784716681]
-      rotation: [0.202877596, -0.188588351, 1.3455106]
-      scale: [1, 0.999999762, 0.999996305]
+      position: [3.50829411, 0.449282169, 0]
+      rotation: [0, 0, -0.300000012]
+      scale: [1, 1, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
@@ -86,18 +86,18 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 22
+  - entity: 4
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [2.51859355, 4.97922325, 0]
-      rotation: [0.0704884231, -0.0173450653, 0.330524385]
-      scale: [0.999999881, 1, 0.999996662]
+      position: [7.19208813, 5.59026051, 0]
+      rotation: [0, 0, -0.300000131]
+      scale: [0.999999464, 0.999999464, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
       cellSize: [16, 16]
-      coordsOnSheet: [3, 0]
+      coordsOnSheet: [5, 0]
       tint: [1, 1, 1, 1]
     rigidBody2dComponent:
       bodyType: 1
@@ -109,41 +109,452 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 23
+  - entity: 5
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [2.48358059, 6.36088896, 0]
-      rotation: [0.176318705, -0.112302721, 0.981019855]
-      scale: [1.00000012, 0.999999881, 0.999996543]
+      position: [7.4158926, 6.92798567, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
       cellSize: [16, 16]
-      coordsOnSheet: [0, 0]
+      coordsOnSheet: [5, 0]
       tint: [1, 1, 1, 1]
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
     boxCollider2dComponent:
       density: 1
-      friction: 0.230000004
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 6
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2.36244965, 7.4967742, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 7
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0.609059572, 8.57838058, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 8
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.33716393, 5.08841372, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 9
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1.77088594, 1.17177868, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 10
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [7.73932552, 9.73785973, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 11
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [6.7690239, 1.30823779, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 12
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [9.90233231, 3.79467773, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [5, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 13
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2.63568854, 7.63323355, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 14
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3.25729847, 6.84990644, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 15
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [4.82395267, 8.0931263, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 16
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1.09429264, 12.793088, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 17
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2.8223424, 9.68503761, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 18
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-5.95565033, 7.19859791, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 19
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-6.27908468, 4.38872433, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 20
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2.36244965, 7.4967742, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 21
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.92820466, 3.17774057, 0]
+      rotation: [0, 0, -0.300000131]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [4, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 22
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-3.31646585, -1.31012666, -5.58793545e-09]
+      rotation: [0, 0, -0.300000101]
+      scale: [5.55700016, 0.999999464, 4.95407343]
+    spriteRendererComponent:
+      tint: [0, 0.930501938, 0.208374947, 1]
+      texture: " "
+    rigidBody2dComponent:
+      bodyType: 0
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 23
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1.52884555, 4.2018528, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
+    indexedTextureComponent:
+      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
+      textureFilterMode: 0
+      cellSize: [16, 16]
+      coordsOnSheet: [2, 0]
+      tint: [1, 1, 1, 1]
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
       offset: [0, 0]
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
   - entity: 24
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [-1.73008442, -1.3067975, 0]
-      rotation: [0.116782591, -0.0443142168, 0.572856367]
-      scale: [1, 0.999999881, 0.999996126]
+      position: [4.90419388, 3.65821862, 0]
+      rotation: [0, 0, -0.899999976]
+      scale: [0.999999464, 0.999999464, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
       cellSize: [16, 16]
-      coordsOnSheet: [0, 0]
+      coordsOnSheet: [5, 0]
       tint: [1, 1, 1, 1]
     rigidBody2dComponent:
       bodyType: 1
@@ -157,11 +568,11 @@ entities:
       size: [0.5, 0.5]
   - entity: 25
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [-3.90080547, 2.02054024, 0]
-      rotation: [0.186531007, -0.132611185, -0.75]
-      scale: [0.999999762, 0.999999881, 0.999996543]
+      position: [0, 1.28107119, 0]
+      rotation: [0, 0, 0.75]
+      scale: [1, 1, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
@@ -180,11 +591,11 @@ entities:
       size: [0.5, 0.5]
   - entity: 26
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [0, 3.35471582, 0]
-      rotation: [0.116782583, -0.0443142205, 0.572856367]
-      scale: [1, 0.999999881, 0.999999404]
+      position: [2.04491639, -0.913995266, 0]
+      rotation: [0, 0, 0.75]
+      scale: [1, 1, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
@@ -203,11 +614,11 @@ entities:
       size: [0.5, 0.5]
   - entity: 27
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [-3.79876184, 9.17755699, 0]
-      rotation: [0.116782583, -0.0443142205, 0.572856367]
-      scale: [1, 0.999999881, 0.999996722]
+      position: [4.2399826, 1.13092113, 0]
+      rotation: [0, 0, 0.75]
+      scale: [1, 1, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
@@ -226,103 +637,11 @@ entities:
       size: [0.5, 0.5]
   - entity: 28
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [-2.11969948, 10.2605619, 0]
-      rotation: [0.187804759, -0.135556787, 0.600000024]
-      scale: [0.999999762, 0.999999642, 0.999996662]
-    indexedTextureComponent:
-      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
-      textureFilterMode: 0
-      cellSize: [16, 16]
-      coordsOnSheet: [3, 0]
-      tint: [1, 1, 1, 1]
-    rigidBody2dComponent:
-      bodyType: 1
-      fixedRotation: false
-    boxCollider2dComponent:
-      density: 1
-      friction: 0.5
-      offset: [0, 0]
-      restitution: 0
-      restitutionThreshold: 0.5
-      size: [0.5, 0.5]
-  - entity: 29
-    tagComponent:
-      tag: Falling Block (Copy)
-    transformComponent:
-      position: [-0.491658688, 7.76505852, 0]
-      rotation: [0.116782591, -0.0443142168, 0.572856367]
-      scale: [1, 0.999999881, 0.999996126]
-    indexedTextureComponent:
-      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
-      textureFilterMode: 0
-      cellSize: [16, 16]
-      coordsOnSheet: [5, 0]
-      tint: [1, 1, 1, 1]
-    rigidBody2dComponent:
-      bodyType: 1
-      fixedRotation: false
-    boxCollider2dComponent:
-      density: 1
-      friction: 0.5
-      offset: [0, 0]
-      restitution: 0
-      restitutionThreshold: 0.5
-      size: [0.5, 0.5]
-  - entity: 30
-    tagComponent:
-      tag: Falling Block (Copy)
-    transformComponent:
-      position: [1.18740368, 8.84806347, 0]
-      rotation: [0.116782591, -0.0443142168, 0.572856367]
-      scale: [1, 0.999999881, 0.999996126]
-    indexedTextureComponent:
-      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
-      textureFilterMode: 0
-      cellSize: [16, 16]
-      coordsOnSheet: [2, 0]
-      tint: [1, 1, 1, 1]
-    rigidBody2dComponent:
-      bodyType: 1
-      fixedRotation: false
-    boxCollider2dComponent:
-      density: 1
-      friction: 0.5
-      offset: [0, 0]
-      restitution: 0
-      restitutionThreshold: 0.5
-      size: [0.5, 0.5]
-  - entity: 31
-    tagComponent:
-      tag: Falling Block (Copy)
-    transformComponent:
-      position: [3.95182657, 8.26739979, 0]
-      rotation: [0.197164968, -0.162208885, 1.22399414]
-      scale: [1.00000036, 0.999999642, 0.99999702]
-    indexedTextureComponent:
-      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
-      textureFilterMode: 0
-      cellSize: [16, 16]
-      coordsOnSheet: [0, 0]
-      tint: [1, 1, 1, 1]
-    rigidBody2dComponent:
-      bodyType: 1
-      fixedRotation: false
-    boxCollider2dComponent:
-      density: 1
-      friction: 0.5
-      offset: [0, 0]
-      restitution: 0
-      restitutionThreshold: 0.5
-      size: [0.5, 0.5]
-  - entity: 32
-    tagComponent:
-      tag: Falling Block (Copy)
-    transformComponent:
-      position: [6.47041988, 9.89190674, 0]
-      rotation: [0.116782591, -0.0443142168, 0.572856367]
-      scale: [1, 0.999999881, 0.999996126]
+      position: [-2.51924539, 1.26706755, 0]
+      rotation: [0, 0, -0.300000131]
+      scale: [0.999999464, 0.999999464, 1]
     indexedTextureComponent:
       texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
       textureFilterMode: 0
@@ -339,21 +658,18 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 33
+  - entity: 29
     tagComponent:
-      tag: Falling Block (Copy)
+      tag: Entity (Copy)
     transformComponent:
-      position: [7.80160999, 6.023067, 0]
-      rotation: [0.116782591, -0.0443142168, 0.572856367]
-      scale: [1, 0.999999881, 0.999996126]
-    indexedTextureComponent:
-      texture: D:/Dev/calmar/engine/assets/textures/spriteatlas.png
-      textureFilterMode: 0
-      cellSize: [16, 16]
-      coordsOnSheet: [5, 0]
-      tint: [1, 1, 1, 1]
+      position: [7.00319862, -1.83518529, 0]
+      rotation: [0, 0, 0.600000024]
+      scale: [8.38207531, 1, 1]
+    spriteRendererComponent:
+      tint: [0.810810804, 0.394448459, 0, 1]
+      texture: " "
     rigidBody2dComponent:
-      bodyType: 1
+      bodyType: 0
       fixedRotation: false
     boxCollider2dComponent:
       density: 1
@@ -362,23 +678,13 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 34
+  - entity: 30
     tagComponent:
       tag: Entity
     transformComponent:
-      position: [-9.52737617, 0.455503762, 0]
+      position: [0, 3.67467833, -0.100000001]
       rotation: [0, 0, 0]
-      scale: [1, 20.975668, 1]
+      scale: [20, 27.3390942, 1]
     spriteRendererComponent:
-      tint: [0.486486495, 0.0356881991, 0.0356881991, 1]
-      texture: " "
-  - entity: 35
-    tagComponent:
-      tag: Entity (Copy)
-    transformComponent:
-      position: [9.47262383, 0.455503762, 0]
-      rotation: [0, 0, 0]
-      scale: [1, 20.975668, 1]
-    spriteRendererComponent:
-      tint: [0.486486495, 0.0356881991, 0.0356881991, 1]
-      texture: " "
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
