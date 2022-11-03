@@ -42,7 +42,7 @@ namespace calmar {
             }
             glFramebufferTexture2D(GL_FRAMEBUFFER, attachmentType, textureTarget(multisampled), id, 0);
         }
-        static void createTextures(bool multisampled, u32* oId, u64 count) {
+        static void createTextures(bool multisampled, u32* oId, u32 count) {
             glCreateTextures(textureTarget(multisampled), count, oId);
         }
         static void bindTexture(bool multisampled, u32 id) {
@@ -85,9 +85,9 @@ namespace calmar {
         bool multisampled = mProps.samples > 1;
         if (mColorAttachmentProps.size()) {
             mColorAttachments.resize(mColorAttachmentProps.size());
-            util::createTextures(multisampled, mColorAttachments.data(), mColorAttachments.size());
+            util::createTextures(multisampled, mColorAttachments.data(), (u32)mColorAttachments.size());
 
-            for (size_t i = 0; i < mColorAttachments.size(); i++) {
+            for (i32 i = 0; i < mColorAttachments.size(); i++) {
                 util::bindTexture(multisampled, mColorAttachments[i]);
                 switch (mColorAttachmentProps[i].textureFormat) {
                     case framebufferTextureFormat::RGBA8:
@@ -112,11 +112,10 @@ namespace calmar {
                     break;
             }
         }
-
         if (mColorAttachments.size() > 1) {
             CALMAR_ASSERT_MSG(mColorAttachments.size() <= 4, "Tried to use more than 4 color attachments in framebuffer");
             GLenum buffers[4] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3};
-            glDrawBuffers(mColorAttachments.size(), buffers);
+            glDrawBuffers((u32)mColorAttachments.size(), buffers);
         } else if (mColorAttachments.empty()) {
             glDrawBuffer(GL_NONE);
         }

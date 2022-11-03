@@ -14,10 +14,10 @@ namespace calmar {
         bool activeButtons[GLFW_KEY_LAST];
         bool changedButtons[GLFW_KEY_LAST];
 
-        i32 ypos = 0, xpos = 0;
-        i32 scrollDeltaX = 0, scrollDeltaY = 0;
-        i32 lastXpos = 0, lastYpos = 0;
-        i32 xposDelta = 0, yposDelta = 0;
+        double ypos = 0, xpos = 0;
+        double scrollDeltaX = 0, scrollDeltaY = 0;
+        double lastXpos = 0, lastYpos = 0;
+        double xposDelta = 0, yposDelta = 0;
 
         bool firstMouse = true;
     };
@@ -39,17 +39,17 @@ namespace calmar {
 
         static bool mouseButtonChanged(u32 buton);
 
-        static i32 getMouseX();
+        static double getMouseX();
 
-        static i32 getMouseY();
+        static double getMouseY();
 
-        static i32 getMouseScrollX();
+        static double getMouseScrollX();
 
-        static i32 getMouseScrollY();
+        static double getMouseScrollY();
 
-        static i32 getMouseXDelta();
+        static double getMouseXDelta();
 
-        static i32 getMouseYDelta();
+        static double getMouseYDelta();
 
         static void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 

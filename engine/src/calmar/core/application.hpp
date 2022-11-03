@@ -44,8 +44,14 @@ namespace calmar {
         /// runs when the engine is running.
         void run();
 
+        /// @brief This method adds an attachment to the application for the application to start using,
+        /// handling and updating it
+        /// @param attachment The attachment to push to the attachment stack
         void addAttachment(applicationAttachment* attachment);
 
+        /// @brief This method removes an attachments from the application and the application stops
+        /// using it in any way.
+        /// @param attachment The attachment to remove from the attachment stack
         void removeAttachment(applicationAttachment* attachment);
 
         /// @brief Closes the application by setting the "running" member variable to false and with that exits out
@@ -93,6 +99,13 @@ namespace calmar {
         /// and handeling closing the window
         /// @param ev The event which is internally recived.
         void handleEvents(event ev);
+
+        /// @brief This method sets up the display for the application
+        /// @param windowProps The properties of the display
+        void setupDisplay(const windowProperties& windowProps);
+
+        /// @brief This method initializes all of the subsystems of the engine
+        void initSubsystems(const windowProperties& windowProps);
 
        private:
         bool mRunning = false;

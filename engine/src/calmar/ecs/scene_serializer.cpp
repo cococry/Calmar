@@ -216,6 +216,8 @@ namespace calmar {
         YAML::Emitter out;
         out << YAML::BeginMap;  // scene
         out << YAML::Key << "scene" << YAML::Value << "untitled";
+        out << YAML::Key << "physicsVelocityIterations" << YAML::Value << mScene->velocityIterations;
+        out << YAML::Key << "physicsPositionIterations" << YAML::Value << mScene->positionIterations;
         out << YAML::Key << "entities" << YAML::Value << YAML::BeginSeq;
         for (entity entty : mScene->mEntities) {
             serializeEntity(out, entty);
@@ -237,8 +239,6 @@ namespace calmar {
 
         if (!data["scene"])
             return false;
-
-        std::string sceneName = data["scene"].as<std::string>();
 
         auto entities = data["entities"];
 
@@ -332,6 +332,27 @@ namespace calmar {
         }
 
         return true;
+    }
+
+    glm::vec2 sceneSerialzer::deserialzePhysicsSettings(const std::string& filepath) {
+        YAML::Node data;
+        try {
+            data = YAML::LoadFile(filepath);
+        } catch (YAML::ParserException e) {
+            CALMAR_ASSERT_MSG(false, "Failed to load scene data.");
+        }
+
+        if (!data["scene"])
+            CALMAR_ASSERT_MSG(false, "Failed to load scene data.");
+
+        if (data["physicsVelocityIterations"] && data["physicsPositionIterations"]) {
+            u32 velocityIterations = data["physicsVelocityIterations"].as<u32>();
+            u32 positionIterations = data["physicsPositionIterations"].as<u32>();
+
+            return {velocityIterations, positionIterations};
+        } else {
+            return glm::vec2(6, 2);
+        }
     }
 
 }  // namespace calmar

@@ -50,24 +50,24 @@ namespace calmar {
         static bool mouseButtonChanged(u32 button);
 
         /// @brief Returns the x position of the mouse in the current frame
-        static i32 getMouseX();
+        static double getMouseX();
 
         /// @brief Returns the y position of the mouse in the current frame
-        static i32 getMouseY();
+        static double getMouseY();
 
         /// @brief Returns the x scoll amout of the mouse in the current frame
-        static i32 getMouseScrollX();
+        static double getMouseScrollX();
 
         /// @brief Returns the y scoll amout of the mouse in the current frame
-        static i32 getMouseScrollY();
+        static double getMouseScrollY();
 
         /// @brief Returns the x scoll amout delta from the last frame to
         /// the current frame  of the mouse in the current frame
-        static i32 getMouseXDelta();
+        static double getMouseXDelta();
 
         /// @brief Returns the y scoll amout delta from the last frame to
         /// the current frame  of the mouse in the current frame
-        static i32 getMouseYDelta();
+        static double getMouseYDelta();
 
         /// @brief Updates the input system for the implmented windowing api if it is needed
         static void update();

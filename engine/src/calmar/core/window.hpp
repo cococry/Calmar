@@ -123,7 +123,7 @@ namespace calmar {
 
         /// @brief Returns the absolute time which has passed since the initialization of the window
         /// @return
-        virtual double getDeltaTime() const { return 0.0; };
+        virtual float getDeltaTime() const { return 0.0; };
 
         virtual void startTiming() {}
         

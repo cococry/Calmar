@@ -1,0 +1,899 @@
+scene: untitled
+entities:
+  - entity: 0
+    tagComponent:
+      tag: Entity
+    transformComponent:
+      position: [-1.59934449, 8.17199326, 0]
+      rotation: [0, 0, 0.652736843]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 1
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3.99396777, 6.19265747, 7.4505806e-09]
+      rotation: [0, 0, 0.581345379]
+      scale: [0.999999762, 0.999999762, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 2
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [4.10673809, 7.9019165, 0]
+      rotation: [0, 0, 0.504219949]
+      scale: [0.999999642, 0.999999642, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 3
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-3.71560526, 6.23065567, 0]
+      rotation: [0, 0, 1.09448171]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 4
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2.51443076, 10.7720881, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 5
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [5.21938324, 4.1104641, 0]
+      rotation: [0, 0, -0.427561015]
+      scale: [0.999999881, 0.999999881, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 6
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1.46880651, 6.44631958, 0]
+      rotation: [0, 0, 0.504219949]
+      scale: [0.999999642, 0.999999642, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 7
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-5.16336346, 3.30098367, 0]
+      rotation: [0, 0, 0.194530949]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 8
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1.75252247, 8.73356056, 0]
+      rotation: [0, 0, 0.652736843]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 9
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2.82696295, 6.49117088, 0]
+      rotation: [0, 0, 0.652736843]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 10
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2.53687191, 8.09667301, -1.1920929e-07]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 11
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.0982976, 5.74929714, 7.4505806e-09]
+      rotation: [0, 0, 0.581345379]
+      scale: [0.999999762, 0.999999762, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 12
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2.22059798, 4.34042072, 0]
+      rotation: [0, 0, -0.120756455]
+      scale: [0.999999881, 0.999999881, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 13
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [4.19743586, 5.66768837, 0]
+      rotation: [0, 0, 0.504219949]
+      scale: [0.999999642, 0.999999642, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 14
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2.9672482, 7.14471197, 0]
+      rotation: [0, 0, 0.652736843]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 15
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.96267021, 4.84804678, 0]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 16
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.42517567, 6.3041091, 0]
+      rotation: [0, 0, 0.652736843]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 17
+    tagComponent:
+      tag: Entity
+    transformComponent:
+      position: [-0.946425915, -7.98292017, 0]
+      rotation: [0, 0, -0.085018225]
+      scale: [21.3293953, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: " "
+    rigidBody2dComponent:
+      bodyType: 0
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 18
+    tagComponent:
+      tag: Entity
+    transformComponent:
+      position: [0, 0, 25.4478111]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    cameraComponent:
+      camera:
+        projectionType: 0
+        perspectiveVerticalFOV: 0.785398185
+        perspectiveNearClip: 0.00999999978
+        perspectiveFarClip: 1000
+        orthographicSize: 10
+        orthographicNearClip: -1
+        orthographicFarClip: 1
+      selectedForRendering: true
+  - entity: 19
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2.00989628, 3.02827334, 3.7252903e-09]
+      rotation: [0, 0, 0.581345439]
+      scale: [0.999999821, 0.999999821, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 20
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [1.48679399, 4.54521132, 7.4505806e-09]
+      rotation: [0, 0, 0.581345439]
+      scale: [0.999999821, 0.999999821, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 21
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.02037978, 2.89776468, 7.4505806e-09]
+      rotation: [0, 0, 0.581345379]
+      scale: [0.999999762, 0.999999762, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 22
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-0.18465519, 3.44691348, 7.4505806e-09]
+      rotation: [0, 0, 0.581345379]
+      scale: [0.999999762, 0.999999762, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 23
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3.15824342, 5.64350891, 7.4505806e-09]
+      rotation: [0, 0, 0.581345379]
+      scale: [0.999999762, 0.999999762, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 24
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0.193035573, 6.50055075, 0]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 25
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0.810573459, 9.43630409, -1.1920929e-07]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 26
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2.53687191, 8.09667301, -1.1920929e-07]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 27
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-6.1183672, 3.35510349, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 28
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [2.94538403, 7.57984304, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 29
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3.35707593, 9.5370121, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 30
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-2.51443076, 10.7720881, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 31
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0.00963059813, 8.19738102, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 32
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-0.763107896, 9.38181114, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 33
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.38064575, 6.4460578, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 34
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-5.29498339, 7.2694416, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 35
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-3.90470719, 9.02076435, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 36
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-3.90470719, 9.02076435, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 37
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-4.88329172, 9.22661018, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 38
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-6.1183672, 3.35510349, 5.96046448e-08]
+      rotation: [0, 0, 1.36346829]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 39
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-3.20108652, 3.68759632, 0]
+      rotation: [0, 0, 0.194530949]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 40
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-1.02037978, 2.89776468, 7.4505806e-09]
+      rotation: [0, 0, 0.581345379]
+      scale: [0.999999762, 0.999999762, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 41
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-7.4505806e-09, 4.07784796, 7.4505806e-09]
+      rotation: [0, 0, 0.581345439]
+      scale: [0.999999821, 0.999999821, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 42
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [3.89475083, 3.61513734, 0]
+      rotation: [0, 0, -0.427561015]
+      scale: [0.999999881, 0.999999881, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: D:/Dev/calmar/engine/assets/textures/box.png
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 43
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [-3.52947068, -1.26492238, 0]
+      rotation: [0, 0, -0.296161711]
+      scale: [5.88930273, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: " "
+    rigidBody2dComponent:
+      bodyType: 0
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 44
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [4.99773216, -1.22518492, 0]
+      rotation: [0, 0, 0.849362373]
+      scale: [5.8893013, 0.999999881, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: " "
+    rigidBody2dComponent:
+      bodyType: 0
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]

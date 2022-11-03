@@ -99,7 +99,7 @@ namespace calmar {
         }
 
        protected:
-        render_id mId;
+        render_id mId = 0;
 
         std::vector<std::shared_ptr<vertexBuffer>> mVertexBuffers;
         std::shared_ptr<indexBuffer> mIndexBufer;

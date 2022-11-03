@@ -44,27 +44,27 @@ namespace calmar {
         return ret;
     }
 
-    i32 glfwInput::getMouseX() {
+    double glfwInput::getMouseX() {
         return mMouse.xpos;
     }
 
-    i32 glfwInput::getMouseY() {
+    double glfwInput::getMouseY() {
         return mMouse.ypos;
     }
 
-    i32 glfwInput::getMouseScrollX() {
+    double glfwInput::getMouseScrollX() {
         return mMouse.scrollDeltaX;
     }
 
-    i32 glfwInput::getMouseScrollY() {
+    double glfwInput::getMouseScrollY() {
         return mMouse.scrollDeltaY;
     }
 
-    i32 glfwInput::getMouseXDelta() {
+    double glfwInput::getMouseXDelta() {
         return mMouse.xposDelta;
     }
 
-    i32 glfwInput::getMouseYDelta() {
+    double glfwInput::getMouseYDelta() {
         return mMouse.yposDelta;
     }
 
@@ -114,7 +114,7 @@ namespace calmar {
         mMouse.scrollDeltaX = xoffset;
         mMouse.scrollDeltaY = yoffset;
 
-        application::getInstance()->evDispatcher.dispatch(mouseScrolledEvent(xoffset, yoffset));
+        application::getInstance()->evDispatcher.dispatch(mouseScrolledEvent((u32)xoffset, (u32)yoffset));
     }
 
     void glfwInput::glfwCursorCallback(GLFWwindow* window, double xpos, double ypos) {
@@ -132,7 +132,7 @@ namespace calmar {
         mMouse.lastXpos = xpos;
         mMouse.lastYpos = ypos;
 
-        application::getInstance()->evDispatcher.dispatch(mouseMovedEvent(xpos, ypos));
+        application::getInstance()->evDispatcher.dispatch(mouseMovedEvent((u32)xpos, (u32)ypos));
     }
 
     void glfwInput::update() {

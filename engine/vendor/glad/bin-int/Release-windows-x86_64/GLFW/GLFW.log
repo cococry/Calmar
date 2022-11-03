@@ -1,0 +1,21 @@
+﻿  glad.c
+  context.c
+  egl_context.c
+  init.c
+  input.c
+  monitor.c
+  osmesa_context.c
+  vulkan.c
+  wgl_context.c
+  win32_init.c
+  win32_joystick.c
+  win32_monitor.c
+  win32_thread.c
+  win32_time.c
+  win32_window.c
+D:\Dev\Calmar\engine\vendor\glfw\src\win32_window.c(561,119): warning C4047: "Funktion": Anzahl der Dereferenzierungen bei "DWORD" und "void *" unterschiedlich
+D:\Dev\Calmar\engine\vendor\glfw\src\win32_window.c(561,115): warning C4024: "AdjustWindowRectEx": unterschiedliche Typen für formalen und übergebenen Parameter 4
+D:\Dev\Calmar\engine\vendor\glfw\src\win32_window.c(571,17): warning C4013: "DwmExtendFrameIntoClientArea" undefiniert; Annahme: extern mit Rückgabetyp int
+  window.c
+  Code wird generiert...
+  GLFW.vcxproj -> D:\Dev\Calmar\engine\vendor\glad\bin\Release-windows-x86_64\GLFW\GLFW.lib

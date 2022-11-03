@@ -113,15 +113,15 @@ namespace calmarEd {
         ImVec2 panelSize = ImGui::GetContentRegionAvail();
 
         if (mFirstRun) {
-            mActiveScene->handleResize(panelSize.x, panelSize.y);
+            mActiveScene->handleResize(static_cast<unsigned int>(panelSize.x), static_cast<unsigned int>(panelSize.y));
             mFirstRun = false;
         }
-        mActiveScene->handleResize(panelSize.x, panelSize.y);
+        mActiveScene->handleResize(static_cast<unsigned int>(panelSize.x), static_cast<unsigned int>(panelSize.y));
         if (mViewportSize != *((glm::vec2*)&panelSize)) {
             mFramebuffer->resize((u32)panelSize.x, (u32)panelSize.y);
             mViewportSize = {panelSize.x, panelSize.y};
             camera.resize(panelSize.x, panelSize.y);
-            mActiveScene->handleResize(panelSize.x, panelSize.y);
+            mActiveScene->handleResize(static_cast<unsigned int>(panelSize.x), static_cast<unsigned int>(panelSize.y));
         }
         render_id texId = mFramebuffer->getColorAttachmentId(0);
         ImGui::Image((void*)(uintptr_t)texId, ImVec2{mViewportSize.x, mViewportSize.y}, ImVec2{0, 1}, ImVec2{1, 0});
@@ -149,7 +149,7 @@ namespace calmarEd {
         std::shared_ptr<texture2d> icon = mSceneState == sceneState::EditorMode ? mStartIcon : mStopIcon;
         ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
         ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
-        if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(icon->getId()), ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), 0)) {
+        if (ImGui::ImageButton((ImTextureID)(intptr_t)(icon->getId()), ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), 0)) {
             if (mSceneState == sceneState::EditorMode) {
                 mGizmoType = -1;
                 mSceneState = sceneState::PlayMode;
@@ -314,7 +314,7 @@ namespace calmarEd {
         mGizmoType = -1;
         mActiveScene = ECS.registerSystem<scene>();
         mEditorScene = ECS.registerSystem<scene>();
-        mActiveScene->handleResize(mViewportSize.x, mViewportSize.y);
+        mActiveScene->handleResize(static_cast<unsigned int>(mViewportSize.x), static_cast<unsigned int>(mViewportSize.y));
         sceneHirarchy.setScene(mActiveScene);
 
         mScenePath = std::filesystem::path();
@@ -336,10 +336,12 @@ namespace calmarEd {
         std::shared_ptr<scene> newScene = ECS.registerSystem<scene>();
         newScene->init();
         mEditorScene = newScene;
-        mEditorScene->handleResize(mViewportSize.x, mViewportSize.y);
+        mEditorScene->handleResize(static_cast<unsigned int>(mViewportSize.x), static_cast<unsigned int>(mViewportSize.y));
         sceneSerialzer serialzer(newScene);
         if (serialzer.deserialize(path.string())) {
             mActiveScene = mEditorScene;
+            mActiveScene->velocityIterations = static_cast<i32>(serialzer.deserialzePhysicsSettings(path.string()).x);
+            mActiveScene->positionIterations = static_cast<i32>(serialzer.deserialzePhysicsSettings(path.string()).y);
             sceneHirarchy.setScene(mActiveScene);
             mScenePath = path;
         }

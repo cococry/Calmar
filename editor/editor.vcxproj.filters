@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="panels">
+      <UniqueIdentifier>{C8213A14-B4C3-64EA-9D7E-783E89BFEB3A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\editor.hpp" />
+    <ClInclude Include="src\panels\scene_hirarchy.hpp">
+      <Filter>panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\panels\stats_panel.hpp">
+      <Filter>panels</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\editor.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\panels\scene_hirarchy.cpp">
+      <Filter>panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\panels\stats_panel.cpp">
+      <Filter>panels</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

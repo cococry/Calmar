@@ -15,6 +15,7 @@
 #include "calmar/ecs/scene.hpp"
 
 #include "calmar/platform/opengl/gl_rendering.hpp"
+#include "calmar/scripting/scripting_system.hpp"
 
 #include <sstream>
 
@@ -26,40 +27,10 @@ namespace calmar {
 
         /* Singelton setup */
         CALMAR_ASSERT_MSG(mInstance == nullptr, "Tried to instantiate application more than once.");
-
         mInstance = this;
         mRunning = true;
 
-        renderBackend = windowProps.renderBackend;
-
-        // Creating the windowing context
-        display = window::createScoped(windowProps);
-        display->initRenderBackend();
-        std::string windowTitleStr = display->getProperties().title;
-        std::string windowTitle = windowTitleStr + " x64";
-        switch (display->getProperties().backened) {
-            case windowingBackend::GLFW:
-                windowTitle += " GLFW Windowing,";
-                break;
-            default:
-                break;
-        };
-
-        if (display->getProperties().renderBackend == renderingBackend::NONE) {
-            windowTitle += " No Rendering Backend, ";
-        } else if (display->getProperties().renderBackend == renderingBackend::OPENGL) {
-            const char* glVers = reinterpret_cast<const char*>(glRendering::getVersion());
-            std::string glVersStr = glVers;
-            windowTitle += " OpenGL " + glVersStr + " Rendering Backend, ";
-        } else if (display->getProperties().renderBackend == renderingBackend::VULKAN) {
-            windowTitle += " Vulkan Rendering Backend, ";
-        } else if (display->getProperties().renderBackend == renderingBackend::DIRECT3D) {
-            windowTitle += " Direct3D Rendering Backend, ";
-        }
-        std::string calmarVersionStr = engineVersion;
-        windowTitle += " Calmar Version " + calmarVersionStr;
-
-        display->setTitle(windowTitle.c_str());
+        setupDisplay(windowProps);
 
         /* Listening to events to be handled in the "handleEvents()" method. */
         evDispatcher.listen(windowCloseEvent::evType, EVENT_CALLBACK(application::handleEvents));
@@ -67,20 +38,7 @@ namespace calmar {
         evDispatcher.listen(windowResizeEvent::evType, EVENT_CALLBACK(application::handleEvents));
 
         /* Initializing backend specifc subsystems */
-        input::init(windowProps.backened);
-
-        appRenderer.initSubsystems(windowProps.renderBackend);
-
-        entityComponentSystem.init();
-
-        entityComponentSystem.registerComponent<transformComponent>();
-        entityComponentSystem.registerComponent<spriteRendererComponent>();
-        entityComponentSystem.registerComponent<tagComponent>();
-        entityComponentSystem.registerComponent<cameraComponent>();
-        entityComponentSystem.registerComponent<indexedTextureComponent>();
-        entityComponentSystem.registerComponent<rigidBody2dComponent>();
-        entityComponentSystem.registerComponent<boxCollider2dComponent>();
-        entityComponentSystem.registerComponent<circleRendererComponent>();
+        initSubsystems(windowProps);
 
         mImGuiHandler = new imGuiHandler();
         addAttachment(mImGuiHandler);
@@ -153,6 +111,62 @@ namespace calmar {
         for (applicationAttachment* attachemnt : mAttachements) {
             attachemnt->handleEvents(ev);
         }
+    }
+
+    void application::setupDisplay(const windowProperties& windowProps) {
+        renderBackend = windowProps.renderBackend;
+
+        // Creating the window
+        display = window::createScoped(windowProps);
+        display->initRenderBackend();
+
+        /* Setting the window title */
+        std::string windowTitleStr = display->getProperties().title;
+        std::string windowTitle = windowTitleStr + " x64";
+        switch (display->getProperties().backened) {
+            case windowingBackend::GLFW:
+                windowTitle += " GLFW Windowing,";
+                break;
+            default:
+                break;
+        };
+        if (display->getProperties().renderBackend == renderingBackend::NONE) {
+            windowTitle += " No Rendering Backend, ";
+        } else if (display->getProperties().renderBackend == renderingBackend::OPENGL) {
+            const char* glVers = reinterpret_cast<const char*>(glRendering::getVersion());
+            std::string glVersStr = glVers;
+            windowTitle += " OpenGL " + glVersStr + " Rendering Backend, ";
+        } else if (display->getProperties().renderBackend == renderingBackend::VULKAN) {
+            windowTitle += " Vulkan Rendering Backend, ";
+        } else if (display->getProperties().renderBackend == renderingBackend::DIRECT3D) {
+            windowTitle += " Direct3D Rendering Backend, ";
+        }
+        std::string calmarVersionStr = engineVersion;
+        windowTitle += " Calmar Version " + calmarVersionStr;
+
+        display->setTitle(windowTitle.c_str());
+    }
+
+    void application::initSubsystems(const windowProperties& windowProps) {
+        /* Initializing the input system */
+        input::init(windowProps.backened);
+
+        /* Initializes rendering subsystems */
+        appRenderer.initSubsystems(windowProps.renderBackend);
+
+        /* Initializing the ECS */
+        entityComponentSystem.init();
+        scriptingSystem::init();
+
+        /* Registering all of the components in the ECS */
+        entityComponentSystem.registerComponent<transformComponent>();
+        entityComponentSystem.registerComponent<spriteRendererComponent>();
+        entityComponentSystem.registerComponent<tagComponent>();
+        entityComponentSystem.registerComponent<cameraComponent>();
+        entityComponentSystem.registerComponent<indexedTextureComponent>();
+        entityComponentSystem.registerComponent<rigidBody2dComponent>();
+        entityComponentSystem.registerComponent<boxCollider2dComponent>();
+        entityComponentSystem.registerComponent<circleRendererComponent>();
     }
 
 }  // namespace calmar

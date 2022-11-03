@@ -131,7 +131,7 @@ namespace calmar {
     }
 
     void glfwWindow::startTiming() {
-        mCurrentFrameTime = glfwGetTime();
+        mCurrentFrameTime = (float)glfwGetTime();
         mFrameCounter++;
         mDeltaTime = (mCurrentFrameTime - mLastFrameTime);
     }
@@ -143,7 +143,7 @@ namespace calmar {
         }
     }
 
-    double glfwWindow::getDeltaTime() const {
+    float glfwWindow::getDeltaTime() const {
         return mDeltaTime;
     }
 

@@ -21,6 +21,7 @@ namespace calmar {
             default:
                 break;
         }
+        return false;
     }
 
     bool input::isKeyDown(u32 key) {
@@ -31,6 +32,7 @@ namespace calmar {
             default:
                 break;
         }
+        return false;
     }
 
     bool input::isKeyReleased(u32 key) {
@@ -41,6 +43,7 @@ namespace calmar {
             default:
                 break;
         }
+        return false;
     }
 
     bool input::keyChanged(u32 key) {
@@ -51,6 +54,7 @@ namespace calmar {
             default:
                 break;
         }
+        return false;
     }
 
     bool input::mouseButtonWentDown(u32 button) {
@@ -61,6 +65,7 @@ namespace calmar {
             default:
                 break;
         }
+        return false;
     }
 
     bool input::isMouseButtonDown(u32 button) {
@@ -71,6 +76,7 @@ namespace calmar {
             default:
                 break;
         }
+        return false;
     }
 
     bool input::isMouseButtonReleased(u32 button) {
@@ -81,6 +87,7 @@ namespace calmar {
             default:
                 break;
         }
+        return false;
     }
 
     bool input::mouseButtonChanged(u32 button) {
@@ -91,9 +98,10 @@ namespace calmar {
             default:
                 break;
         }
+        return false;
     }
 
-    i32 input::getMouseX() {
+    double input::getMouseX() {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseX();
@@ -101,9 +109,10 @@ namespace calmar {
             default:
                 break;
         }
+        return 0;
     }
 
-    i32 input::getMouseY() {
+    double input::getMouseY() {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseY();
@@ -111,9 +120,10 @@ namespace calmar {
             default:
                 break;
         }
+        return 0;
     }
 
-    i32 input::getMouseScrollX() {
+    double input::getMouseScrollX() {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseScrollX();
@@ -121,9 +131,10 @@ namespace calmar {
             default:
                 break;
         }
+        return 0;
     }
 
-    i32 input::getMouseScrollY() {
+    double input::getMouseScrollY() {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseScrollY();
@@ -131,9 +142,10 @@ namespace calmar {
             default:
                 break;
         }
+        return 0;
     }
 
-    i32 input::getMouseXDelta() {
+    double input::getMouseXDelta() {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseXDelta();
@@ -141,9 +153,10 @@ namespace calmar {
             default:
                 break;
         }
+        return 0;
     }
 
-    i32 input::getMouseYDelta() {
+    double input::getMouseYDelta() {
         switch (mBackend) {
             case windowingBackend::GLFW:
                 return glfwInput::getMouseYDelta();
@@ -151,6 +164,7 @@ namespace calmar {
             default:
                 break;
         }
+        return 0;
     }
 
     void input::update() {
