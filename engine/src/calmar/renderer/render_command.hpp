@@ -1,16 +1,10 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "rendering_backend.hpp"
-
 #include "vertex_array.hpp"
-
-#include <glm/glm.hpp>
 
 #include <glad/glad.h>
 
-#include <memory>
 
 namespace calmar {
     /*  This struct stores definitions of clear buffers. The purpose of it is

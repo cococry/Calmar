@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ecs.hpp"
 
 #include "components.hpp"

@@ -1,12 +1,6 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "texture.hpp"
-
-#include <memory>
-
-#include <glm/glm.hpp>
 
 namespace calmar {
     class indexedAtlasTexture {

@@ -1,7 +1,5 @@
-#ifndef CALMAR_GLFW_WINDOWING_INCLUDED
-#define CALMAR_GLFW_WINDOWING_INCLUDED
+#pragma once
 
-#include "calmar/core/defines.hpp"
 #include "calmar/core/window.hpp"
 
 struct GLFWwindow;
@@ -57,5 +55,3 @@ namespace calmar {
         virtual void shutdownBackend() override;
     };
 }  // namespace calmar
-
-#endif

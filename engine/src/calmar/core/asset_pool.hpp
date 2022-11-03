@@ -1,11 +1,6 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
 #include "calmar/renderer/texture.hpp"
-
-#include <memory>
-#include <vector>
-#include <string>
 
 namespace calmar {
     class assetPool {

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "indexed_atlas_texture.hpp"
 
 namespace calmar {

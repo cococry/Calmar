@@ -1,14 +1,7 @@
 #pragma once
-
-#include "calmar/core/defines.hpp"
-
 #include "render_buffers.hpp"
 
 #include "render_data_types.hpp"
-
-#include <memory>
-
-#include <vector>
 
 #include <glad/glad.h>
 

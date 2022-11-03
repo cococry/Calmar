@@ -1,9 +1,5 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
-#include <random>
-
 namespace calmar {
     class random {
        public:

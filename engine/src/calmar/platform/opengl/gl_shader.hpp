@@ -1,10 +1,6 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "calmar/renderer/shader.hpp"
-
-#include <vector>
 
 namespace calmar {
     class glShader : public shader {

@@ -2,9 +2,6 @@
 
 #include "ecs_defines.hpp"
 
-#include <queue>
-#include <array>
-
 namespace calmar {
     class entityManager {
        public:

@@ -1,6 +1,5 @@
+#include "pch.h"
 #include "component_manager.hpp"
-
-#include "calmar/core/asserting.hpp"
 
 namespace calmar {
     void componentManager::entityDestroyed(entity entty) {

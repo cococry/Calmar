@@ -1,12 +1,6 @@
 #pragma once
 
-#include <functional>
-#include <vector>
-#include <unordered_map>
-
 #include "event.hpp"
-
-#include "calmar/core/defines.hpp"
 
 namespace calmar {
     // A simple alias for an std::function<void(const event ev)>

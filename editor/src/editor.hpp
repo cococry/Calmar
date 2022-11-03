@@ -9,10 +9,6 @@
 #include "panels/scene_hirarchy.hpp"
 #include "panels/stats_panel.hpp"
 
-#include <memory>
-#include <glm/glm.hpp>
-
-#include <filesystem>
 
 using namespace calmar;
 

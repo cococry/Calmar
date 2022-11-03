@@ -1,11 +1,8 @@
 #ifndef CALMAR_LOGGING_INCLUDED
 #define CALMAR_LOGGING_INCLUDED
 
-#include "defines.hpp"
-
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
-#include <memory>
 
 namespace calmar {
     /*  This static class handles logging in the engine. The logging backend which is

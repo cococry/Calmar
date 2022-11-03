@@ -1,16 +1,12 @@
-#ifndef CALMAR_WINDOW_INCLUDED
-#define CALMAR_WINDOW_INCLUDED
-
-#include <memory>
-
-#include "defines.hpp"
+#pragma once
 
 #include "calmar/renderer/rendering_backend.hpp"
 
 namespace calmar {
     /* An enumaration to define different kinds of backends for windowing*/
     enum class windowingBackend {
-        GLFW = 0
+        NONE = 0,
+        GLFW
     };
 
     /*A structure which contains information about the application's window like
@@ -47,8 +43,8 @@ namespace calmar {
 
         u32 width = 0, height = 0;
         const char* title = "";
-        windowingBackend backened;
-        renderingBackend renderBackend;
+        windowingBackend backened = windowingBackend::NONE;
+        renderingBackend renderBackend = renderingBackend::NONE;
         u32 xpos = 0, ypos = 0;
         bool vsync = false;
         bool fullscreen = false;
@@ -162,5 +158,3 @@ namespace calmar {
        private:
     };
 }  // namespace calmar
-
-#endif  // CALMAR_WINDOW_INCLUDED

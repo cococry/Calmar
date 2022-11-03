@@ -46,12 +46,6 @@
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vendor\glad">
-      <UniqueIdentifier>{9A8E79C1-0644-F2B6-8F38-EC8DFBECE8BA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="vendor\glad\src">
-      <UniqueIdentifier>{B1098FEA-1D95-FCAE-26A6-7FA392B058AF}</UniqueIdentifier>
-    </Filter>
     <Filter Include="vendor\glm">
       <UniqueIdentifier>{829FC5A8-6E57-07F6-D75E-E051C335A2E6}</UniqueIdentifier>
     </Filter>
@@ -245,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="src\calmar\scripting\scripting_system.hpp">
       <Filter>src\calmar\scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\glm\common.hpp">
       <Filter>vendor\glm\glm</Filter>
@@ -1619,11 +1616,8 @@
     <ClCompile Include="src\calmar\scripting\scripting_system.cpp">
       <Filter>src\calmar\scripting</Filter>
     </ClCompile>
-    <ClCompile Include="vendor\glad\src\glad.cpp">
-      <Filter>vendor\glad\src</Filter>
-    </ClCompile>
-    <ClCompile Include="vendor\glad\src\glad_wgl.cpp">
-      <Filter>vendor\glad\src</Filter>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="vendor\imguizmo\ImGuizmo.cpp">
       <Filter>vendor\imguizmo</Filter>

@@ -1,10 +1,5 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
-#include <string>
-#include <memory>
-
 namespace calmar {
     enum class textureFilterMode {
         Nearest = 0,

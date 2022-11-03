@@ -1,13 +1,8 @@
-
+#include "pch.h"
 #include "scripting_system.hpp"
 
 #include <mono/metadata/assembly.h>
 #include <mono/jit/jit.h>
-
-#include "calmar/core/asserting.hpp"
-
-#include <fstream>
-#include <sstream>
 
 namespace calmar {
 
@@ -95,12 +90,12 @@ namespace calmar {
     void scriptingSystem::initMono() {
         mono_set_assemblies_path("mono/lib");
 
-        MonoDomain* monoRootDomain = mono_jit_init("CalamarJITRuntime");
+        MonoDomain* monoRootDomain = mono_jit_init("CalamarEngineMonoJITRuntime");
         CALMAR_ASSERT_MSG(monoRootDomain, "Failed to create mono root-domain.");
 
         scriptingData->monoRootDomain = monoRootDomain;
 
-        scriptingData->monoAppDomain = mono_domain_create_appdomain((char*)"CalmarScriptRuntime", nullptr);
+        scriptingData->monoAppDomain = mono_domain_create_appdomain((char*)"CalmarEngineMonoScriptingRuntime", nullptr);
         mono_domain_set(scriptingData->monoAppDomain, true);
 
         scriptingData->monoCoreAssmbly = loadCSharpAssembly("res/scripting/calmar_scripting.dll");

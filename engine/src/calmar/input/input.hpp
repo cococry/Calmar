@@ -1,9 +1,6 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "calmar/core/window.hpp"
-
 #include "calmar/core/application.hpp"
 
 namespace calmar {

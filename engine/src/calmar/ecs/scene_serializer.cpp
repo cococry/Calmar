@@ -1,18 +1,13 @@
+#include "pch.h"
 #include "scene_serializer.hpp"
 
 #include <yaml-cpp/yaml.h>
 #ifdef YAML_CPP_API
 #undef YAML_CPP_API
 #endif
-#include <glm/glm.hpp>
-
-#include <algorithm>
 
 #include "calmar/core/application.hpp"
-
 #include "calmar/renderer/resource_handler.hpp"
-
-#include <fstream>
 
 namespace YAML {
     template <>

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include <GLFW/glfw3.h>
 
 namespace calmar {

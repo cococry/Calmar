@@ -1,10 +1,7 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "rendering_backend.hpp"
 
-#include <memory>
 
 namespace calmar {
     /* This is struct is used to abstract render API specific buffer flags*/
@@ -93,7 +90,7 @@ namespace calmar {
         virtual void setData(const void* data, u32 size, u32 offset = 0) {}
 
        protected:
-        render_id mId;
+        render_id mId = 0;
     };
 
     class indexBuffer {
@@ -150,8 +147,8 @@ namespace calmar {
         }
 
        protected:
-        render_id mId;
-        u32 mCount;
+        render_id mId = 0;
+        u32 mCount = 0;
     };
 
 }  // namespace calmar

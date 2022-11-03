@@ -1,7 +1,5 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 namespace calmar {
     /* This struct is used to abstract data types from renderer APIs*/
     struct renderDataTypes {

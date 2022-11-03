@@ -1,9 +1,5 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
-#include <string>
-
 namespace calmar {
     namespace platform {
         class windowsFileDialogs {

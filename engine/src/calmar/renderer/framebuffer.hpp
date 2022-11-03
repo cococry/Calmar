@@ -1,10 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <initializer_list>
-#include <vector>
-#include "calmar/core/defines.hpp"
-
 namespace calmar {
     enum class framebufferTextureFormat {
         NONE = 0,

@@ -1,12 +1,6 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "calmar/renderer/vertex_array.hpp"
-
-#include <glm/glm.hpp>
-
-#include <memory>
 
 namespace calmar {
     class glRenderCommand {

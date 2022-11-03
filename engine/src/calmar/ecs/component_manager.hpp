@@ -3,11 +3,6 @@
 #include "ecs_defines.hpp"
 #include "component_list.hpp"
 
-#include "calmar/core/asserting.hpp"
-
-#include <unordered_map>
-#include <memory>
-
 namespace calmar {
     class componentManager {
        public:

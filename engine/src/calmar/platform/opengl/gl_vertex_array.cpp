@@ -1,6 +1,5 @@
+#include "pch.h"
 #include "gl_vertex_array.hpp"
-
-#include "calmar/core/asserting.hpp"
 
 namespace calmar {
     glVertexArray::glVertexArray(u32 vertexStride) {

@@ -1,9 +1,6 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
 #include "texture.hpp"
-
-#include <memory>
 
 namespace calmar {
     class resourceHandler {

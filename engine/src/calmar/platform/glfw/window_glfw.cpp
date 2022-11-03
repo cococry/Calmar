@@ -1,6 +1,5 @@
+#include "pch.h"
 #include "window_glfw.hpp"
-
-#include "calmar/core/asserting.hpp"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -15,6 +14,7 @@
 namespace calmar {
     glfwWindow::glfwWindow() {
         CALMAR_ASSERT_MSG(glfwInit(), "Failed to initialize GLFW.");
+        mBackendHandle = nullptr;
     }
     glfwWindow::glfwWindow(const windowProperties& props) {
         mProps = props;

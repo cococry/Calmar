@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "batch_renderer_2d.hpp"
 
 #include "render_command.hpp"
@@ -7,8 +8,6 @@
 #include "calmar/core/application.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
-
-#include <iostream>
 
 namespace calmar {
     batchRenderer2d::renderData batchRenderer2d::mData;

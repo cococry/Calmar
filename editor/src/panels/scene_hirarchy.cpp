@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "scene_hirarchy.hpp"
 
 #include <calmar/core/application.hpp>

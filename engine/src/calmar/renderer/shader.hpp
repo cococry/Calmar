@@ -1,12 +1,5 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
-#include <memory>
-#include <string>
-
-#include <glm/glm.hpp>
-
 namespace calmar {
     class shader {
        public:

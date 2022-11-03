@@ -1,9 +1,0 @@
-﻿  editor.cpp
-  main.cpp
-  scene_hirarchy.cpp
-  stats_panel.cpp
-  Code wird generiert...
-engine.lib(init.obj) : warning LNK4075: /EDITANDCONTINUE wird aufgrund der Angabe von /OPT:ICF ignoriert.
-     Bibliothek "..\bin\Release-windows-x86_64\editor\editor.lib" und Objekt "..\bin\Release-windows-x86_64\editor\editor.exp" werden erstellt.
-LINK : warning LNK4098: Standardbibliothek "LIBCMTD" steht in Konflikt mit anderen Bibliotheken; /NODEFAULTLIB:Bibliothek verwenden.
-  editor.vcxproj -> D:\Dev\Calmar\bin\Release-windows-x86_64\editor\editor.exe

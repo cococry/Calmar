@@ -1,8 +1,7 @@
+#include "pch.h"
 #include "input.hpp"
 
 #include "calmar/platform/glfw/glfw_input.hpp"
-
-#include "calmar/core/logging.hpp"
 
 #include "key_codes.hpp"
 

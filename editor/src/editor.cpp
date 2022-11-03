@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "editor.hpp"
 
 #include <calmar/core/application.hpp>

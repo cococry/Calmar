@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "scene.hpp"
 
 #include "ecs_defines.hpp"
@@ -118,7 +119,7 @@ namespace calmar {
                         } else {
                             batchRenderer2d::renderQuad(transformComp.getTransform(), spriteRendererComp.tint, entty);
                         }
-                    } else if (ECS.hasComponent<indexedTextureComponent>(entty) && !ECS.hasComponent<spriteRendererComponent>(entty && !ECS.hasComponent<cameraComponent>(entty))) {
+                    } else if (ECS.hasComponent<indexedTextureComponent>(entty) && !ECS.hasComponent<spriteRendererComponent>(entty) && !ECS.hasComponent<cameraComponent>(entty)) {
                         auto& indexedTextureComp = ECS.getComponent<indexedTextureComponent>(entty);
                         if (indexedTextureComp.indexedTexture) {
                             batchRenderer2d::renderQuad(transformComp.getTransform(), indexedTextureComp.indexedTexture, indexedTextureComp.tint, entty);

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "orbit_camera.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
@@ -12,11 +13,6 @@
 #include "calmar/core/application.hpp"
 
 #include "calmar/event_system/mouse_events.hpp"
-
-#include "calmar/core/logging.hpp"
-#include "calmar/core/application.hpp"
-
-#include <algorithm>
 
 namespace calmar {
     orbitCamera::orbitCamera(const cameraProperties& props) {

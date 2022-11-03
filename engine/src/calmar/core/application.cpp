@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "application.hpp"
 
 #include "logging.hpp"
@@ -17,7 +18,6 @@
 #include "calmar/platform/opengl/gl_rendering.hpp"
 #include "calmar/scripting/scripting_system.hpp"
 
-#include <sstream>
 
 calmar::application* calmar::application::mInstance = nullptr;
 

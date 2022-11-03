@@ -1,6 +1,5 @@
+#include "pch.h"
 #include "entity_manager.hpp"
-
-#include "calmar/core/asserting.hpp"
 
 namespace calmar {
     entityManager::entityManager() {

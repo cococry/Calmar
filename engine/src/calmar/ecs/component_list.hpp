@@ -1,11 +1,8 @@
 #pragma once
 
+#include "pch.h"
 #include "ecs_defines.hpp"
 
-#include "calmar/core/asserting.hpp"
-
-#include <array>
-#include <unordered_map>
 
 namespace calmar {
     class iComponentList {

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "event.hpp"
 
 namespace calmar {

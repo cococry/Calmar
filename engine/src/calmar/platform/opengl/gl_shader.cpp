@@ -1,7 +1,7 @@
+#include "pch.h"
 #include "gl_shader.hpp"
 
 #include "calmar/core/util.hpp"
-#include "calmar/core/logging.hpp"
 
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>

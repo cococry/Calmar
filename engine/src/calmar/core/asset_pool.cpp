@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "asset_pool.hpp"
 
 namespace calmar {

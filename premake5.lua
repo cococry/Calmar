@@ -43,6 +43,9 @@ project "engine"
 	targetdir ("bin/" .. project_output .. "/%{prj.name}")
 	objdir ("obj/" .. project_output .. "/%{prj.name}")
 
+	pchheader "pch.h"
+	pchsource "engine/src/pch.cpp"
+
 	defines
 	{
 		"NOMINMAX",
@@ -104,6 +107,8 @@ project "engine"
 	{
 		"_CRT_SECURE_NO_WARNINGS"
 	}
+
+
 	filter "system:windows"
 		systemversion "latest"
 

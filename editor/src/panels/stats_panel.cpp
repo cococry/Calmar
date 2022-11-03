@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "stats_panel.hpp"
 
 #include <imgui.h>

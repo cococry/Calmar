@@ -73,7 +73,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOMINMAX;GLFW_INCLUDE_NONE;YAML_CPP_STATIC_DEFINE;_CRT_SECURE_NO_WARNINGS;CALMAR_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM;IMGUI_API=__declspec(dllexport);CALMAR_DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glfw\include;vendor\glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\yaml-cpp\include;vendor\imguizmo;vendor\box2d\include;vendor\mono\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -93,7 +94,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOMINMAX;GLFW_INCLUDE_NONE;YAML_CPP_STATIC_DEFINE;_CRT_SECURE_NO_WARNINGS;CALMAR_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM;IMGUI_API=__declspec(dllexport);CALMAR_RELEASE_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glfw\include;vendor\glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\yaml-cpp\include;vendor\imguizmo;vendor\box2d\include;vendor\mono\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -117,7 +119,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOMINMAX;GLFW_INCLUDE_NONE;YAML_CPP_STATIC_DEFINE;_CRT_SECURE_NO_WARNINGS;CALMAR_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM;IMGUI_API=__declspec(dllexport);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glfw\include;vendor\glad\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\yaml-cpp\include;vendor\imguizmo;vendor\box2d\include;vendor\mono\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -190,6 +193,7 @@
     <ClInclude Include="src\calmar\renderer\texture.hpp" />
     <ClInclude Include="src\calmar\renderer\vertex_array.hpp" />
     <ClInclude Include="src\calmar\scripting\scripting_system.hpp" />
+    <ClInclude Include="src\pch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_fixes.hpp" />
@@ -649,8 +653,9 @@
     <ClCompile Include="src\calmar\renderer\texture.cpp" />
     <ClCompile Include="src\calmar\renderer\vertex_array.cpp" />
     <ClCompile Include="src\calmar\scripting\scripting_system.cpp" />
-    <ClCompile Include="vendor\glad\src\glad.cpp" />
-    <ClCompile Include="vendor\glad\src\glad_wgl.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="vendor\imguizmo\ImGuizmo.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>

@@ -1,8 +1,6 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
-#include <bitset>
+#include "pch.h"
 
 namespace calmar {
     using entity = i32;

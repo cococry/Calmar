@@ -6,8 +6,6 @@
 #include "entity_manager.hpp"
 #include "system_manager.hpp"
 
-#include <memory>
-
 namespace calmar {
     class ecs {
        public:

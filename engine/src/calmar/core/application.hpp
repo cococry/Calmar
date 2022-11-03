@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "defines.hpp"
 #include "window.hpp"
 #include "application_attachment.hpp"
@@ -18,7 +16,6 @@
 
 #include "../../editor/src/editor.hpp"
 
-#include <vector>
 
 namespace calmar {
 

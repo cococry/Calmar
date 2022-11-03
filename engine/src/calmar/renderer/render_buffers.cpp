@@ -1,10 +1,9 @@
+#include "pch.h"
 #include "render_buffers.hpp"
 
 #include "calmar/core/application.hpp"
 
 #include "calmar/platform/opengl/gl_render_buffers.hpp"
-
-#include "calmar/core/application.hpp"
 
 #include <glad/glad.h>
 

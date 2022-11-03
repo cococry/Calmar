@@ -1,16 +1,11 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
 #include "calmar/renderer/texture.hpp"
 #include "calmar/renderer/indexed_atlas_texture.hpp"
 #include "calmar/renderer/orbit_camera.hpp"
 #include "calmar/renderer/vertex_array.hpp"
 #include "calmar/renderer/shader.hpp"
 #include "calmar/renderer/entity_camera.hpp"
-
-#include <glm/glm.hpp>
-#include <memory>
-#include <array>
 
 namespace calmar {
     struct quadVertex {

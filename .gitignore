@@ -16,3 +16,4 @@ bin/editor/
 bim/*.exe
 .vscode/
 .vs/
+obj/

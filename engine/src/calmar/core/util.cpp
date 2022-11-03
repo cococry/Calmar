@@ -1,9 +1,5 @@
+#include "pch.h"
 #include "util.hpp"
-
-#include <fstream>
-#include <sstream>
-
-#include "calmar/core/logging.hpp"
 
 #include "calmar/platform/windows/windows_util.hpp"
 

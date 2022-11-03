@@ -23,6 +23,5 @@ namespace calmar {
         void endImGui();
 
        private:
-        void styleEditorTheme(ImGuiStyle* style);
     };
 }  // namespace calmar

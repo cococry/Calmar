@@ -1,7 +1,5 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "calmar/renderer/vertex_array.hpp"
 
 namespace calmar {

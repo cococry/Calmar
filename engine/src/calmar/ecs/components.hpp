@@ -1,16 +1,14 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
+#include "pch.h"
+
 #include "calmar/renderer/texture.hpp"
 #include "calmar/renderer/indexed_atlas_texture.hpp"
 #include "calmar/renderer/entity_camera.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
-#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <memory>
-#include <string>
 
 namespace calmar {
     struct tagComponent {

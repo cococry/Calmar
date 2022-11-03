@@ -1,16 +1,11 @@
 #pragma once
 
-#include <calmar/core/defines.hpp>
 #include <calmar/core/application_attachment.hpp>
 #include <calmar/renderer/texture.hpp>
 #include <calmar/ecs/scene.hpp>
 #include <calmar/ecs/ecs.hpp>
 
 #include <calmar/renderer/indexed_atlas_texture.hpp>
-
-#include <memory>
-#include <string>
-#include <glm/glm.hpp>
 
 using namespace calmar;
 

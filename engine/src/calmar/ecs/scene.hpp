@@ -2,8 +2,6 @@
 
 #include "system.hpp"
 
-#include <memory>
-#include <vector>
 #include "calmar/renderer/texture.hpp"
 
 #include "components.hpp"

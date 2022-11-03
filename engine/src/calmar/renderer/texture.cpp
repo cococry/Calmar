@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "texture.hpp"
 
 #include "calmar/core/application.hpp"

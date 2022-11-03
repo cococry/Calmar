@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "entity_camera.hpp"
 #include "calmar/core/application.hpp"
 

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "logging.hpp"
 
 std::shared_ptr<spdlog::logger> calmar::logging::mLogger = nullptr;

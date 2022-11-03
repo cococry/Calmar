@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "gl_rendering.hpp"
 
 #include <glad/glad.h>

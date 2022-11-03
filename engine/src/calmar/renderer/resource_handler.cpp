@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "resource_handler.hpp"
 
 #include "calmar/core/asset_pool.hpp"

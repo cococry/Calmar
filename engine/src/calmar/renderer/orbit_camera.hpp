@@ -1,10 +1,6 @@
 #pragma once
 
-#include "calmar/core/defines.hpp"
-
 #include "calmar/event_system/event.hpp"
-
-#include <glm/glm.hpp>
 
 namespace calmar {
     enum class cameraType {
