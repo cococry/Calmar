@@ -21,8 +21,7 @@
     <OutputPath>..\editor\res\scripting\</OutputPath>
     <BaseIntermediateOutputPath>..\editor\res\scripting\obj\Debug\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -34,8 +33,7 @@
     <OutputPath>..\editor\res\scripting\</OutputPath>
     <BaseIntermediateOutputPath>..\editor\res\scripting\obj\Release\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -47,8 +45,7 @@
     <OutputPath>..\editor\res\scripting\</OutputPath>
     <BaseIntermediateOutputPath>..\editor\res\scripting\obj\Distribution\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -59,7 +56,7 @@
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Distribution|x64' ">
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Main.cs" />
+    <Compile Include="Source\Main.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

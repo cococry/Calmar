@@ -205,8 +205,7 @@ project "calmar_scripting"
 
 	files
 	{
-		"{prj.name}/src/**.cs",
-		"{prj.name}/properties/**.cs",
+		"%{wks.location}/calmar_scripting/Source/**.cs",
 	}
 
 	filter "configurations:Debug"

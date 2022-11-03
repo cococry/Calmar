@@ -30,7 +30,7 @@ namespace calmar {
 
         std::streampos end = stream.tellg();
         stream.seekg(0, std::ios::beg);
-        uint32_t size = end - stream.tellg();
+        u32 size = u32(end - stream.tellg());
 
         if (size == 0) {
             CALMAR_WARN("Tried to load bytes of empty file: '{0}'.", filepath);

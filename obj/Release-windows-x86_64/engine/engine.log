@@ -1,5 +1,52 @@
-﻿  scripting_system.cpp
-D:\Dev\Calmar\engine\src\calmar\scripting\scripting_system.cpp(33,23): warning C4244: "Initialisierung": Konvertierung von "std::streamoff" in "uint32_t", möglicher Datenverlust
+﻿  application.cpp
+  asset_pool.cpp
+  logging.cpp
+  random.cpp
+  util.cpp
+  window.cpp
+  component_manager.cpp
+  ecs.cpp
+  entitiy_manager.cpp
+  scene.cpp
+  scene_serializer.cpp
+  system_manager.cpp
+  event_dispatcher.cpp
+  imgui_handler.cpp
+  imgui_unit_build.cpp
+  input.cpp
+  glfw_input.cpp
+  window_glfw.cpp
+  gl_frame_buffer.cpp
+  gl_render_buffers.cpp
+  Code wird generiert...
+  Kompilieren...
+  gl_render_command.cpp
+  gl_rendering.cpp
+  gl_shader.cpp
+  gl_texture.cpp
+  gl_vertex_array.cpp
+  windows_util.cpp
+  batch_renderer_2d.cpp
+  entity_camera.cpp
+  framebuffer.cpp
+  indexed_atlas_texture.cpp
+  orbit_camera.cpp
+  render_buffers.cpp
+  render_command.cpp
+  render_data_types.cpp
+  renderer.cpp
+  resource_handler.cpp
+  shader.cpp
+  texture.cpp
+  vertex_array.cpp
+  scripting_system.cpp
+  Code wird generiert...
+  Kompilieren...
+  glad.cpp
+  glad_wgl.cpp
+  ImGuizmo.cpp
+  stb_image.cpp
+  Code wird generiert...
 opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ist bereits in "GLFW.lib(dwmapi.dll)" definiert; zweite Definition wird ignoriert.
 Winmm.lib(WINMM.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ist bereits in "GLFW.lib(dwmapi.dll)" definiert; zweite Definition wird ignoriert.
 Version.lib(VERSION.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ist bereits in "GLFW.lib(dwmapi.dll)" definiert; zweite Definition wird ignoriert.

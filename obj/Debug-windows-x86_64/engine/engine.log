@@ -40,7 +40,6 @@
   texture.cpp
   vertex_array.cpp
   scripting_system.cpp
-D:\Dev\Calmar\engine\src\calmar\scripting\scripting_system.cpp(33,23): warning C4244: "Initialisierung": Konvertierung von "std::streamoff" in "uint32_t", möglicher Datenverlust
   Code wird generiert...
   Kompilieren...
   glad.cpp

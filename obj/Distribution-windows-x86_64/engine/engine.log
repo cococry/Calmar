@@ -1,0 +1,6 @@
+﻿opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ist bereits in "GLFW.lib(dwmapi.dll)" definiert; zweite Definition wird ignoriert.
+Winmm.lib(WINMM.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ist bereits in "GLFW.lib(dwmapi.dll)" definiert; zweite Definition wird ignoriert.
+Version.lib(VERSION.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ist bereits in "GLFW.lib(dwmapi.dll)" definiert; zweite Definition wird ignoriert.
+Bcrypt.lib(bcrypt.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ist bereits in "GLFW.lib(dwmapi.dll)" definiert; zweite Definition wird ignoriert.
+Ws2_32.lib(WS2_32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ist bereits in "GLFW.lib(dwmapi.dll)" definiert; zweite Definition wird ignoriert.
+  engine.vcxproj -> D:\Dev\Calmar\bin\Distribution-windows-x86_64\engine\engine.lib
