@@ -1,0 +1,84 @@
+scene: untitled
+physicsVelocityIterations: 6
+physicsPositionIterations: 2
+gravityScale: -9.81000042
+entities:
+  - entity: 0
+    tagComponent:
+      tag: Entity
+    transformComponent:
+      position: [-0.0484096706, 0.115426332, 0]
+      rotation: [0, 0, -0.934167743]
+      scale: [1.05120671, 0.999999881, 1]
+    spriteRendererComponent:
+      tint: [0.0733590722, 0.0733590722, 0.0733590722, 1]
+      texture: " "
+    rigidBody2dComponent:
+      bodyType: 0
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 1
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, 3.26395416, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 0.555984557, 0, 1]
+      texture: " "
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+    cSharpScriptComponent:
+      name: Game.Player
+  - entity: 2
+    tagComponent:
+      tag: Entity
+    transformComponent:
+      position: [0, 0, 10.2105551]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    cameraComponent:
+      camera:
+        projectionType: 0
+        perspectiveVerticalFOV: 0.785398185
+        perspectiveNearClip: 0.00999999978
+        perspectiveFarClip: 1000
+        orthographicSize: 10
+        orthographicNearClip: -1
+        orthographicFarClip: 1
+      selectedForRendering: true
+  - entity: 3
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [0, -1.06368244, 0]
+      rotation: [0, 0, 0]
+      scale: [9.335042, 1, 1]
+    spriteRendererComponent:
+      tint: [0, 0.594594479, 1, 1]
+      texture: " "
+    rigidBody2dComponent:
+      bodyType: 0
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]

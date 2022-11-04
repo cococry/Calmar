@@ -36,6 +36,7 @@ namespace calmar {
 
         i32 velocityIterations = 6;
         i32 positionIterations = 2;
+        float gravity = -9.81f;
 
        private:
         std::vector<transformComponent> mEditorTransforms;

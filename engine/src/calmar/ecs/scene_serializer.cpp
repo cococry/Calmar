@@ -205,6 +205,15 @@ namespace calmar {
 
             out << YAML::EndMap;  // map for rigidBody2dComponent
         }
+        if (ECS.hasComponent<cSharpScriptComponent>(entity)) {
+            out << YAML::Key << "cSharpScriptComponent";
+            out << YAML::BeginMap;
+
+            auto& cSharpScriptComp = ECS.getComponent<cSharpScriptComponent>(entity);
+
+            out << YAML::Key << "name" << YAML::Value << cSharpScriptComp.name;
+            out << YAML::EndMap; // map for cSharpScriptComponent
+        }
         out << YAML::EndMap;  // map for the entity
     }
     void sceneSerialzer::serialize(const std::string& filepath) {
@@ -213,6 +222,7 @@ namespace calmar {
         out << YAML::Key << "scene" << YAML::Value << "untitled";
         out << YAML::Key << "physicsVelocityIterations" << YAML::Value << mScene->velocityIterations;
         out << YAML::Key << "physicsPositionIterations" << YAML::Value << mScene->positionIterations;
+        out << YAML::Key << "gravityScale" << YAML::Value << mScene->gravity;
         out << YAML::Key << "entities" << YAML::Value << YAML::BeginSeq;
         for (entity entty : mScene->mEntities) {
             serializeEntity(out, entty);
@@ -323,13 +333,22 @@ namespace calmar {
                     boxCollider2dComp.restitutionThreshold = boxCollider2dComponentNode["restitutionThreshold"].as<float>();
                     boxCollider2dComp.size = boxCollider2dComponentNode["size"].as<glm::vec2>();
                 }
+
+                auto cSharpScriptComponentNode = entty["cSharpScriptComponent"];
+                if (cSharpScriptComponentNode) {
+                    ECS.addComponent(newEntity, cSharpScriptComponent());
+
+                    auto& cSharpScriptComp = ECS.getComponent<cSharpScriptComponent>(newEntity);
+
+                    cSharpScriptComp.name = cSharpScriptComponentNode["name"].as<std::string>();
+                }
             }
         }
 
         return true;
     }
 
-    glm::vec2 sceneSerialzer::deserialzePhysicsSettings(const std::string& filepath) {
+    physicsSettings sceneSerialzer::deserialzePhysicsSettings(const std::string& filepath) {
         YAML::Node data;
         try {
             data = YAML::LoadFile(filepath);
@@ -340,13 +359,14 @@ namespace calmar {
         if (!data["scene"])
             CALMAR_ASSERT_MSG(false, "Failed to load scene data.");
 
-        if (data["physicsVelocityIterations"] && data["physicsPositionIterations"]) {
-            u32 velocityIterations = data["physicsVelocityIterations"].as<u32>();
-            u32 positionIterations = data["physicsPositionIterations"].as<u32>();
+        if (data["physicsVelocityIterations"] && data["physicsPositionIterations"] && data["gravityScale"]) {
+            i32 velocityIterations = data["physicsVelocityIterations"].as<i32>();
+            i32 positionIterations = data["physicsPositionIterations"].as<i32>();
+            float gravityScale = data["gravityScale"].as<float>();
 
-            return {velocityIterations, positionIterations};
+            return {velocityIterations, positionIterations, gravityScale};
         } else {
-            return glm::vec2(6, 2);
+            return { 6, 2, -9.81f };
         }
     }
 

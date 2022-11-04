@@ -4,6 +4,9 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
+
 namespace calmar {
     /*  This static class handles logging in the engine. The logging backend which is
         used is spdlog. The static "init()" method has to be called before any functionality
@@ -26,6 +29,7 @@ namespace calmar {
         static std::shared_ptr<spdlog::logger> mLogger;
     };
 }  // namespace calmar
+
 
 // A simple alias which uses the logging class to log a debug level message with spdlog
 #define CALMAR_DEBUG(...) calmar::logging::getLogger()->debug(__VA_ARGS__)

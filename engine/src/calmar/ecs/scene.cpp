@@ -9,6 +9,7 @@
 #include "calmar/renderer/entity_camera.hpp"
 
 #include "calmar/renderer/resource_handler.hpp"
+#include "calmar/scripting/scripting_system.hpp"
 
 #include <box2d/b2_world.h>
 #include <box2d/b2_body.h>
@@ -106,6 +107,13 @@ namespace calmar {
                 }
             }
         }
+        {
+            for (auto& entty : mEntities) {
+                if (ECS.hasComponent<cSharpScriptComponent>(entty)) {
+                    scriptingSystem::onUpdateEntity(entty);
+                }
+            }
+        }
         if (renderCamera) {
             batchRenderer2d::beginRender(*renderCamera, cameraTransform);
             for (auto const& entty : mEntities) {
@@ -126,8 +134,8 @@ namespace calmar {
                         }
                     }
                 }
-                batchRenderer2d::endRender();
             }
+            batchRenderer2d::endRender();
         }
     }
     entity scene::getRenderCameraEntity() const {
@@ -148,6 +156,7 @@ namespace calmar {
         newScene->mEntities = sceneToCopy->mEntities;
         newScene->velocityIterations = sceneToCopy->velocityIterations;
         newScene->positionIterations = sceneToCopy->positionIterations;
+        newScene->gravity = sceneToCopy->gravity;
 
         return newScene;
     }
@@ -163,7 +172,7 @@ namespace calmar {
     }
 
     void scene::onRuntimeStart() {
-        mPhysicsWorld = new b2World({0.0f, -9.8f});
+        mPhysicsWorld = new b2World({0.0f, gravity});
 
         for (auto& entty : mEntities) {
             mEditorTransforms.push_back(ECS.getComponent<transformComponent>(entty));
@@ -196,6 +205,15 @@ namespace calmar {
                 }
             }
         }
+
+        scriptingSystem::onRuntimeStart(this);
+
+        for (auto& entty : mEntities) {
+            if (ECS.hasComponent<cSharpScriptComponent>(entty)) {
+                scriptingSystem::onCreateEntity(entty);
+            }
+        }
+
     }
 
     void scene::onRuntimeStop() {
@@ -210,5 +228,7 @@ namespace calmar {
         }
         delete mPhysicsWorld;
         mPhysicsWorld = nullptr;
+        
+        scriptingSystem::onRuntimeStop(this);
     }
 }  // namespace calmar

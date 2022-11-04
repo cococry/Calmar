@@ -3,6 +3,10 @@
 #include "scene.hpp"
 
 namespace calmar {
+    struct physicsSettings {
+        i32 velocityIterations, positionIterations;
+        float gravityScale;
+    };
     class sceneSerialzer {
        public:
         sceneSerialzer(const std::shared_ptr<scene>& inScene);
@@ -11,7 +15,7 @@ namespace calmar {
 
         bool deserialize(const std::string& filepath);
 
-        glm::vec2 deserialzePhysicsSettings(const std::string& filepath);
+        physicsSettings deserialzePhysicsSettings(const std::string& filepath);
 
        private:
         std::shared_ptr<scene> mScene;

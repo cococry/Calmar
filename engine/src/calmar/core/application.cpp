@@ -51,6 +51,7 @@ namespace calmar {
         for (applicationAttachment* attachment : mAttachements) {
             attachment->shutdown();
         }
+        scriptingSystem::shutdown();
         delete mImGuiHandler;
     }
 
@@ -166,7 +167,7 @@ namespace calmar {
         entityComponentSystem.registerComponent<indexedTextureComponent>();
         entityComponentSystem.registerComponent<rigidBody2dComponent>();
         entityComponentSystem.registerComponent<boxCollider2dComponent>();
-        entityComponentSystem.registerComponent<circleRendererComponent>();
+        entityComponentSystem.registerComponent<cSharpScriptComponent>();
     }
 
 }  // namespace calmar

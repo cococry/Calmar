@@ -114,13 +114,11 @@ namespace calmar {
         boxCollider2dComponent(const boxCollider2dComponent&) = default;
     };
 
-    struct circleRendererComponent {
-        glm::vec4 color = glm::vec4(1.0f);
-        float thickness = 1.0f;
-        float fade = 0.005f;
+    struct cSharpScriptComponent {
+        std::string name;
 
-        circleRendererComponent() = default;
-        circleRendererComponent(const circleRendererComponent&) = default;
+        cSharpScriptComponent() = default;
+        cSharpScriptComponent(const cSharpScriptComponent&) = default;
     };
 
 }  // namespace calmar

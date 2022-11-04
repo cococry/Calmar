@@ -1,5 +1,5 @@
 workspace "Calmar"
-	startproject "Editor"
+	startproject "editor"
 	architecture "x64"
 
 	configurations 

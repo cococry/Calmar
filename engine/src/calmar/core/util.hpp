@@ -22,6 +22,6 @@ namespace calmar {
        public:
         static std::string getFileContents(const std::string& filepath);
 
-        static std::vector<char> getFileContentsBinary(const std::string& filepath);
+        static char* getFileContentsBytes(const std::string& filepath, u32* oSize);
     };
 }  // namespace calmar

@@ -16,6 +16,8 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
+#include <calmar/scripting/scripting_system.hpp>
+
 namespace calmarEd {
     void sceneHirarchyPanel::init(const std::shared_ptr<scene>& scene) {
         setScene(scene);
@@ -65,7 +67,9 @@ namespace calmarEd {
 
     void sceneHirarchyPanel::renderImGuiEntityNode(entity entty) {
         const auto& tag = ECS.getComponent<tagComponent>(entty);
-        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;
+        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow 
+            | ImGuiTreeNodeFlags_OpenOnDoubleClick 
+            | ImGuiTreeNodeFlags_SpanAvailWidth;
         flags |= mSelectedEntity == entty ? ImGuiTreeNodeFlags_Selected : 0;
         bool opened = ImGui::TreeNodeEx((void*)(intptr_t)entty, flags, "%s", tag.tag.c_str());
 
@@ -100,35 +104,35 @@ namespace calmarEd {
                     ECS.addComponent(entty, spriteRendererComponent());
                     ImGui::CloseCurrentPopup();
                 }
-            }
-            if (!ECS.hasComponent<transformComponent>(mSelectedEntity)) {
+            } if (!ECS.hasComponent<transformComponent>(mSelectedEntity)) {
                 if (ImGui::MenuItem("Transform")) {
                     ECS.addComponent(entty, transformComponent(glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(1.0f)));
                     ImGui::CloseCurrentPopup();
                 }
             }
-
             if (!ECS.hasComponent<cameraComponent>(mSelectedEntity)) {
                 if (ImGui::MenuItem("Camera")) {
                     ECS.addComponent(entty, cameraComponent());
                     ImGui::CloseCurrentPopup();
                 }
-            }
-            if (!ECS.hasComponent<indexedTextureComponent>(mSelectedEntity)) {
+            } if (!ECS.hasComponent<indexedTextureComponent>(mSelectedEntity)) {
                 if (ImGui::MenuItem("Sprite Atlas Texture")) {
                     ECS.addComponent(entty, indexedTextureComponent());
                     ImGui::CloseCurrentPopup();
                 }
-            }
-            if (!ECS.hasComponent<rigidBody2dComponent>(mSelectedEntity)) {
+            } if (!ECS.hasComponent<rigidBody2dComponent>(mSelectedEntity)) {
                 if (ImGui::MenuItem("Rigidbody 2D")) {
                     ECS.addComponent(entty, rigidBody2dComponent());
                     ImGui::CloseCurrentPopup();
                 }
-            }
-            if (!ECS.hasComponent<boxCollider2dComponent>(mSelectedEntity)) {
+            } if (!ECS.hasComponent<boxCollider2dComponent>(mSelectedEntity)) {
                 if (ImGui::MenuItem("Box Collider 2D")) {
                     ECS.addComponent(entty, boxCollider2dComponent());
+                    ImGui::CloseCurrentPopup();
+                }
+            } if (!ECS.hasComponent<cSharpScriptComponent>(mSelectedEntity)) {
+                if (ImGui::MenuItem("C# Script")) {
+                    ECS.addComponent(entty, cSharpScriptComponent());
                     ImGui::CloseCurrentPopup();
                 }
             }
@@ -152,7 +156,11 @@ namespace calmarEd {
 
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
             ImGui::Separator();
-            bool open = ImGui::TreeNodeEx((void*)typeid(spriteRendererComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Transform");
+            bool open = ImGui::TreeNodeEx((void*)typeid(spriteRendererComponent).hash_code(), 
+                ImGuiTreeNodeFlags_DefaultOpen 
+                | ImGuiTreeNodeFlags_Framed 
+                | ImGuiTreeNodeFlags_SpanAvailWidth 
+                | ImGuiTreeNodeFlags_AllowItemOverlap, "Transform");
 
             if (open) {
                 renderImGuiVec3Slider("Position", transform.position, entty);
@@ -170,8 +178,10 @@ namespace calmarEd {
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
             ImGui::Separator();
             bool open = ImGui::TreeNodeEx((void*)typeid(spriteRendererComponent).hash_code(),
-                                          ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed |
-                                              ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap,
+                ImGuiTreeNodeFlags_DefaultOpen 
+                | ImGuiTreeNodeFlags_Framed 
+                | ImGuiTreeNodeFlags_SpanAvailWidth
+                | ImGuiTreeNodeFlags_AllowItemOverlap,
                                           "Sprite Renderer");
 
             ImGui::SameLine();
@@ -235,7 +245,9 @@ namespace calmarEd {
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
             ImGui::Separator();
 
-            bool open = ImGui::TreeNodeEx((void*)typeid(cameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Camera");
+            bool open = ImGui::TreeNodeEx((void*)typeid(cameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen 
+                | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth 
+                | ImGuiTreeNodeFlags_AllowItemOverlap, "Camera");
             ImGui::SameLine();
             if (ImGui::Button("-")) {
                 ECS.removeComponent<cameraComponent>(entty);
@@ -298,7 +310,9 @@ namespace calmarEd {
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
             ImGui::Separator();
 
-            bool open = ImGui::TreeNodeEx((void*)typeid(indexedTextureComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap, "Sprite Atlas Sub-Texture");
+            bool open = ImGui::TreeNodeEx((void*)typeid(indexedTextureComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen 
+                | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth 
+                | ImGuiTreeNodeFlags_AllowItemOverlap, "Sprite Atlas Sub-Texture");
             ImGui::SameLine();
             if (ImGui::Button("-")) {
                 ECS.removeComponent<indexedTextureComponent>(entty);
@@ -459,6 +473,39 @@ namespace calmarEd {
                 ImGui::DragFloat("Friction", &boxCollider2dComp.friction, 0.01f, 0.0f, 1.0f);
                 ImGui::DragFloat("Restitution", &boxCollider2dComp.restitution, 0.01f, 0.0f, 1.0f);
                 ImGui::DragFloat("Restitution Threshold", &boxCollider2dComp.restitutionThreshold, 0.01f, 0.0f, 1.0f);
+
+                ImGui::TreePop();
+            }
+
+            ImGui::PopStyleVar();
+        }
+        if (ECS.hasComponent<cSharpScriptComponent>(entty)) {
+            auto& cSharpScriptComp = ECS.getComponent<cSharpScriptComponent>(entty);
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4, 4 });
+            ImGui::Separator();
+            bool open = ImGui::TreeNodeEx((void*)typeid(cSharpScriptComponent).hash_code(),
+                ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed |
+                ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap,
+                "C# Script");
+
+            ImGui::SameLine();
+            if (ImGui::Button("-")) {
+                ECS.removeComponent<cSharpScriptComponent>(entty);
+            }
+            if (open) {
+                bool classExists = false;
+                if (scriptingSystem::entityClassExists(cSharpScriptComp.name))
+                    classExists = true;
+                static char buffer[256];
+                strcpy(buffer, cSharpScriptComp.name.c_str());
+
+                if (!classExists)
+                    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.8f, 0.2f, 0.3f, 1.0f));
+                if(ImGui::InputText("Class", buffer, sizeof(buffer))) {
+                    cSharpScriptComp.name = buffer;
+                }
+                if (!classExists) 
+                    ImGui::PopStyleColor();
 
                 ImGui::TreePop();
             }

@@ -17,3 +17,8 @@ bim/*.exe
 .vscode/
 .vs/
 obj/
+
+*.sln
+*.vcxproj
+*.csproj
+*.user

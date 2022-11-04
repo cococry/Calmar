@@ -25,7 +25,7 @@ namespace calmar {
     void orbitCamera::update() {
         if (input::isKeyDown(key::LeftAlt)) {
             glm::vec2 mousePos = {input::getMouseX(), input::getMouseY()};
-            glm::vec2 mouseDelta = (mousePos - mData.initialMousePos) * 0.003f;
+            glm::vec2 mouseDelta = (mousePos - mData.initialMousePos) * 0.0015f;
             mData.initialMousePos = mousePos;
 
             if (input::isMouseButtonDown(button::Middle)) {

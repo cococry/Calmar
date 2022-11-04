@@ -1,22 +1,37 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Calmar
 { 
-    public class Main
+    public struct Vector3
     {
-        public float FloatVar { get; set; }
-        public Main()
-        {
-            Console.WriteLine("Main Constructur!");
-        }
-        public void PrintMessage()
-        {
-            Console.WriteLine("Hello World from C#!");
-        }
+        public float x, y, z;
 
-        public void PrintCustomMessage(string msg)
+        public Vector3(float _x, float _y, float _z)
         {
-            Console.WriteLine($"C# says: {msg}");
+            x = _x;
+            y = _y;
+            z = _z;
+        }
+    }
+    public static class InternalCalls
+    {
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static float GetDeltaTime();
+    }
+    public class Entity
+    {
+        public Entity()
+        {
+        }
+       
+    }
+    public class Time
+    {
+        public static float DeltaTime()
+        {
+            return InternalCalls.GetDeltaTime();
         }
     }
 

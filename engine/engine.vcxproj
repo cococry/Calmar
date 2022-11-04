@@ -192,6 +192,7 @@
     <ClInclude Include="src\calmar\renderer\shader.hpp" />
     <ClInclude Include="src\calmar\renderer\texture.hpp" />
     <ClInclude Include="src\calmar\renderer\vertex_array.hpp" />
+    <ClInclude Include="src\calmar\scripting\scripting_base.h" />
     <ClInclude Include="src\calmar\scripting\scripting_system.hpp" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -652,6 +653,7 @@
     <ClCompile Include="src\calmar\renderer\shader.cpp" />
     <ClCompile Include="src\calmar\renderer\texture.cpp" />
     <ClCompile Include="src\calmar\renderer\vertex_array.cpp" />
+    <ClCompile Include="src\calmar\scripting\scripting_base.cpp" />
     <ClCompile Include="src\calmar\scripting\scripting_system.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

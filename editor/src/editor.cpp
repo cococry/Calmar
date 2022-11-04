@@ -341,8 +341,9 @@ namespace calmarEd {
         sceneSerialzer serialzer(newScene);
         if (serialzer.deserialize(path.string())) {
             mActiveScene = mEditorScene;
-            mActiveScene->velocityIterations = static_cast<i32>(serialzer.deserialzePhysicsSettings(path.string()).x);
-            mActiveScene->positionIterations = static_cast<i32>(serialzer.deserialzePhysicsSettings(path.string()).y);
+            mActiveScene->velocityIterations = static_cast<i32>(serialzer.deserialzePhysicsSettings(path.string()).velocityIterations);
+            mActiveScene->positionIterations = static_cast<i32>(serialzer.deserialzePhysicsSettings(path.string()).positionIterations);
+            mActiveScene->gravity = static_cast<float>(serialzer.deserialzePhysicsSettings(path.string()).gravityScale);
             sceneHirarchy.setScene(mActiveScene);
             mScenePath = path;
         }
@@ -390,6 +391,7 @@ namespace calmarEd {
             ImGui::PushItemWidth(55.0f);
             ImGui::DragInt("Velocity Iterations", &mActiveScene->velocityIterations);
             ImGui::DragInt("Position Iterations", &mActiveScene->positionIterations);
+            ImGui::DragFloat("Gravity", &mActiveScene->gravity);
             ImGui::PopItemWidth();
             ImGui::TreePop();
         }

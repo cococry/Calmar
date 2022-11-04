@@ -99,21 +99,28 @@ namespace calmar {
             return true;
         }
     }  // namespace math
-    std::vector<char> util::getFileContentsBinary(const std::string& filepath) {
-        std::ifstream file(filepath, std::ios::ate | std::ios::binary);
+    char* util::getFileContentsBytes(const std::string& filepath, u32* oSize) {
+        std::ifstream stream(filepath, std::ios::binary | std::ios::ate);
 
-        if (!file.is_open()) {
-            CALMAR_ERROR("Failed to open & read file at location '{0}'.", filepath);
+        if (!stream) {
+            CALMAR_ERROR("Failed to open file at location '{0}'.", filepath);
+            return nullptr;
         }
 
-        u64 fileSize = (u64)file.tellg();
-        std::vector<char> buffer(fileSize);
+        std::streampos end = stream.tellg();
+        stream.seekg(0, std::ios::beg);
+        u32 size = u32(end - stream.tellg());
 
-        file.seekg(0);
-        file.read(buffer.data(), fileSize);
+        if (size == 0) {
+            CALMAR_WARN("Tried to load bytes of empty file: '{0}'.", filepath);
+            return nullptr;
+        }
 
-        file.close();
+        char* buffer = new char[size];
+        stream.read((char*)buffer, size);
+        stream.close();
 
+        *oSize = size;
         return buffer;
     }
 }  // namespace calmar

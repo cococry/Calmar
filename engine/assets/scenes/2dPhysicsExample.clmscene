@@ -1,8 +1,9 @@
 scene: untitled
 physicsVelocityIterations: 100
 physicsPositionIterations: 20
+gravityScale: -0.100000001
 entities:
-  - entity: 53
+  - entity: 0
     tagComponent:
       tag: Entity
     transformComponent:
@@ -25,7 +26,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 54
+  - entity: 1
     tagComponent:
       tag: Entity
     transformComponent:
@@ -48,7 +49,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 55
+  - entity: 2
     tagComponent:
       tag: Entity
     transformComponent:
@@ -65,7 +66,7 @@ entities:
         orthographicNearClip: 1
         orthographicFarClip: 1
       selectedForRendering: true
-  - entity: 56
+  - entity: 3
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -88,7 +89,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 57
+  - entity: 4
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -111,7 +112,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 58
+  - entity: 5
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -134,7 +135,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 59
+  - entity: 6
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -157,7 +158,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 60
+  - entity: 7
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -180,7 +181,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 61
+  - entity: 8
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -203,7 +204,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 62
+  - entity: 9
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -226,7 +227,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 63
+  - entity: 10
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -249,7 +250,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 64
+  - entity: 11
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -272,7 +273,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 65
+  - entity: 12
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -295,7 +296,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 66
+  - entity: 13
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -318,7 +319,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 67
+  - entity: 14
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -341,7 +342,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 68
+  - entity: 15
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -364,7 +365,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 69
+  - entity: 16
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -387,7 +388,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 70
+  - entity: 17
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -410,7 +411,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 71
+  - entity: 18
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -433,7 +434,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 72
+  - entity: 19
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -456,7 +457,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 73
+  - entity: 20
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -479,7 +480,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 74
+  - entity: 21
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -502,7 +503,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 75
+  - entity: 22
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -522,7 +523,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 76
+  - entity: 23
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -545,7 +546,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 77
+  - entity: 24
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -568,7 +569,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 78
+  - entity: 25
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -591,7 +592,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 79
+  - entity: 26
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -614,7 +615,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 80
+  - entity: 27
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -637,7 +638,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 81
+  - entity: 28
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -657,7 +658,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 82
+  - entity: 29
     tagComponent:
       tag: Entity
     transformComponent:
@@ -667,7 +668,7 @@ entities:
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
       texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
-  - entity: 83
+  - entity: 30
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -690,7 +691,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 84
+  - entity: 31
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -713,7 +714,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 85
+  - entity: 32
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -736,7 +737,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 86
+  - entity: 33
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -759,7 +760,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 87
+  - entity: 34
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -782,7 +783,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 88
+  - entity: 35
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -805,7 +806,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 89
+  - entity: 36
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -828,7 +829,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 90
+  - entity: 37
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -851,7 +852,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 91
+  - entity: 38
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -874,7 +875,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 92
+  - entity: 39
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -897,7 +898,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 93
+  - entity: 40
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -920,7 +921,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 94
+  - entity: 41
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -943,7 +944,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 95
+  - entity: 42
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -966,7 +967,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 96
+  - entity: 43
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -989,7 +990,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 97
+  - entity: 44
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -1012,7 +1013,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 98
+  - entity: 45
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -1035,7 +1036,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 99
+  - entity: 46
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -1058,7 +1059,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 100
+  - entity: 47
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -1081,7 +1082,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 101
+  - entity: 48
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -1104,7 +1105,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 102
+  - entity: 49
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -1127,7 +1128,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 103
+  - entity: 50
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -1150,7 +1151,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 104
+  - entity: 51
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
@@ -1173,7 +1174,7 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 105
+  - entity: 52
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
