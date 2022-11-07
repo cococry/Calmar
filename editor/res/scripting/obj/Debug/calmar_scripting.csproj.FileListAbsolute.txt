@@ -4,3 +4,9 @@ D:\Dev\Calmar\editor\res\scripting\obj\Debug\calmar_scripting.dll
 D:\Dev\Calmar\editor\res\scripting\obj\Debug\calmar_scripting.pdb
 D:\Dev\Calmar\editor\res\scripting\calmar_scripting.dll
 D:\Dev\Calmar\editor\res\scripting\calmar_scripting.pdb
+C:\Dev\calmar\editor\res\scripting\obj\Debug\calmar_scripting.csproj.AssemblyReference.cache
+C:\Dev\calmar\editor\res\scripting\obj\Debug\calmar_scripting.csproj.CoreCompileInputs.cache
+C:\Dev\calmar\editor\res\scripting\obj\Debug\calmar_scripting.dll
+C:\Dev\calmar\editor\res\scripting\obj\Debug\calmar_scripting.pdb
+C:\Dev\calmar\editor\res\scripting\calmar_scripting.dll
+C:\Dev\calmar\editor\res\scripting\calmar_scripting.pdb

@@ -20,6 +20,8 @@ namespace calmar {
 
         scene* sceneContext = nullptr;
 
+        scriptClass entityClass;
+
         std::unordered_map<std::string, std::shared_ptr<scriptClass>> entityClasses;
         std::unordered_map<entity, std::shared_ptr<scriptInstance>> entityInstances;
     };
@@ -75,6 +77,8 @@ namespace calmar {
         loadCSharpAssemblyClasses(scriptingData->monoCoreAssmbly);
 
         scriptingBase::registerMethods();
+
+        scriptingData->entityClass = scriptClass("Calmar", "Entity");
     }
     void scriptingSystem::shutdown() {
         scriptingData->monoAppDomain = nullptr;
@@ -138,7 +142,6 @@ namespace calmar {
             bool isEntity = mono_class_is_subclass_of(monoClass, entityClass, false);
             if (isEntity) {
                 scriptingData->entityClasses[formattedClassName] = std::make_shared<scriptClass>(nameSpace, name);
-                CALMAR_INFO("Added entity {0}.{1}", nameSpace, name);
             }
         }
     }
@@ -155,7 +158,7 @@ namespace calmar {
         if (ECS.hasComponent<cSharpScriptComponent>(entty)) {
             const auto& cSharpScriptComp = ECS.getComponent<cSharpScriptComponent>(entty);
             if (entityClassExists(cSharpScriptComp.name)) {
-                std::shared_ptr<scriptInstance> instance = std::make_shared<scriptInstance>(scriptingData->entityClasses[cSharpScriptComp.name]);
+                std::shared_ptr<scriptInstance> instance = std::make_shared<scriptInstance>(scriptingData->entityClasses[cSharpScriptComp.name], entty);
                 scriptingData->entityInstances[entty] = instance;
                 instance->invokeInitMethod();
             }
@@ -165,7 +168,7 @@ namespace calmar {
         if (ECS.hasComponent<cSharpScriptComponent>(entty)) {
             const auto& cSharpScriptComp = ECS.getComponent<cSharpScriptComponent>(entty);
             if (entityClassExists(cSharpScriptComp.name)) {
-                std::shared_ptr<scriptInstance> instance = std::make_shared<scriptInstance>(scriptingData->entityClasses[cSharpScriptComp.name]);
+                std::shared_ptr<scriptInstance> instance = std::make_shared<scriptInstance>(scriptingData->entityClasses[cSharpScriptComp.name], entty);
                 scriptingData->entityInstances[entty] = instance;
                 instance->invokeUpdateMethod();
             }
@@ -173,6 +176,9 @@ namespace calmar {
     }
     bool scriptingSystem::entityClassExists(const std::string& className) {
         return scriptingData->entityClasses.find(className) != scriptingData->entityClasses.end();
+    }
+    scene* scriptingSystem::getSceneContext() {
+        return scriptingData->sceneContext;
     }
     scriptClass::scriptClass(const std::string& nameSpace, const std::string& name)
         : mNameSpace(nameSpace), mName(name) {
@@ -192,12 +198,16 @@ namespace calmar {
         return mono_runtime_invoke(method, instance, params, nullptr);
     }
 
-    scriptInstance::scriptInstance(const std::shared_ptr<scriptClass>& script_class) 
+    scriptInstance::scriptInstance(const std::shared_ptr<scriptClass>& script_class, entity entty) 
         : mScriptClass(script_class) {
         mInstance = script_class->instantiate();
 
+        mConstructorWithId = scriptingData->entityClass.getMethod(".ctor", 1);
         mInitMethod = script_class->getMethod("Init", 0);
         mUpdateMethod = script_class->getMethod("Update", 0);
+
+        void* param = &entty;
+        mScriptClass->invokeMethod(mConstructorWithId,mInstance, &param);
     }
 
     void scriptInstance::invokeInitMethod() {

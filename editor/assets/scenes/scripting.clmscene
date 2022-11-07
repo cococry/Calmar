@@ -1,0 +1,34 @@
+scene: untitled
+physicsVelocityIterations: 6
+physicsPositionIterations: 2
+gravityScale: -9.81000042
+entities:
+  - entity: 1
+    tagComponent:
+      tag: Entity
+    transformComponent:
+      position: [0, 0, 0]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: ..\editor\assets\textures\box.png
+    cSharpScriptComponent:
+      name: Game.Player
+  - entity: 2
+    tagComponent:
+      tag: Entity
+    transformComponent:
+      position: [0, 0, 19.9500008]
+      rotation: [0, 0, 0]
+      scale: [1, 1, 1]
+    cameraComponent:
+      camera:
+        projectionType: 0
+        perspectiveVerticalFOV: 0.785398185
+        perspectiveNearClip: 0.00999999978
+        perspectiveFarClip: 1000
+        orthographicSize: 10
+        orthographicNearClip: 1
+        orthographicFarClip: 1
+      selectedForRendering: true

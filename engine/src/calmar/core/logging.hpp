@@ -31,14 +31,19 @@ namespace calmar {
 }  // namespace calmar
 
 
+#ifdef CALMAR_DEBUG_BUILD
 // A simple alias which uses the logging class to log a debug level message with spdlog
 #define CALMAR_DEBUG(...) calmar::logging::getLogger()->debug(__VA_ARGS__)
-
 // A simple alias which uses the logging class to log a trace level message with spdlog
 #define CALMAR_TRACE(...) calmar::logging::getLogger()->trace(__VA_ARGS__)
-
 // A simple alias which uses the logging class to log a info level message with spdlog
+
 #define CALMAR_INFO(...) calmar::logging::getLogger()->info(__VA_ARGS__)
+#else
+#define CALMAR_DEBUG(...)
+#define CALMAR_TRACE(...)
+#define CALMAR_INFO(...)
+#endif // CALMAR_DEBUG_BUILD
 
 // A simple alias which uses the logging class to log a info warn message with spdlog
 #define CALMAR_WARN(...) calmar::logging::getLogger()->warn(__VA_ARGS__)

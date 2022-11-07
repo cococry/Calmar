@@ -1,4 +1,7 @@
 scene: untitled
+physicsVelocityIterations: 100
+physicsPositionIterations: 200
+gravityScale: -0.100000001
 entities:
   - entity: 0
     tagComponent:
@@ -9,7 +12,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -29,7 +32,7 @@ entities:
       scale: [0.999999762, 0.999999762, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -49,7 +52,7 @@ entities:
       scale: [0.999999642, 0.999999642, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -69,7 +72,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -89,7 +92,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -109,7 +112,7 @@ entities:
       scale: [0.999999881, 0.999999881, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -129,7 +132,7 @@ entities:
       scale: [0.999999642, 0.999999642, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -149,7 +152,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -169,7 +172,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -189,7 +192,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -209,7 +212,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -229,7 +232,7 @@ entities:
       scale: [0.999999762, 0.999999762, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -249,7 +252,7 @@ entities:
       scale: [0.999999881, 0.999999881, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -269,7 +272,7 @@ entities:
       scale: [0.999999642, 0.999999642, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -289,7 +292,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -309,7 +312,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -329,7 +332,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -345,7 +348,7 @@ entities:
       tag: Entity
     transformComponent:
       position: [-0.946425915, -7.98292017, 0]
-      rotation: [0, 0, -0.085018225]
+      rotation: [0, 0, 0]
       scale: [21.3293953, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
@@ -374,7 +377,7 @@ entities:
         perspectiveNearClip: 0.00999999978
         perspectiveFarClip: 1000
         orthographicSize: 10
-        orthographicNearClip: -1
+        orthographicNearClip: 1
         orthographicFarClip: 1
       selectedForRendering: true
   - entity: 19
@@ -386,7 +389,7 @@ entities:
       scale: [0.999999821, 0.999999821, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -406,7 +409,7 @@ entities:
       scale: [0.999999821, 0.999999821, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -426,7 +429,7 @@ entities:
       scale: [0.999999762, 0.999999762, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -446,7 +449,7 @@ entities:
       scale: [0.999999762, 0.999999762, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -466,7 +469,7 @@ entities:
       scale: [0.999999762, 0.999999762, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -486,7 +489,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -506,7 +509,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -526,7 +529,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -546,7 +549,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -566,7 +569,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -586,7 +589,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -606,7 +609,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -626,7 +629,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -646,7 +649,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -666,7 +669,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -686,7 +689,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -706,7 +709,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -726,7 +729,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -746,7 +749,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -766,7 +769,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -786,7 +789,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -806,7 +809,7 @@ entities:
       scale: [0.999999762, 0.999999762, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -826,7 +829,7 @@ entities:
       scale: [0.999999821, 0.999999821, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -846,7 +849,7 @@ entities:
       scale: [0.999999881, 0.999999881, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/box.png
+      texture: ..\editor\assets\textures\box.png
     rigidBody2dComponent:
       bodyType: 1
       fixedRotation: false
@@ -861,9 +864,29 @@ entities:
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
-      position: [-3.52947068, -1.26492238, 0]
-      rotation: [0, 0, -0.296161711]
-      scale: [5.88930273, 1, 1]
+      position: [2.24003172, 11.7943535, 0]
+      rotation: [0, 0, -0.296161741]
+      scale: [3.30236292, 1, 1]
+    spriteRendererComponent:
+      tint: [1, 1, 1, 1]
+      texture: " "
+    rigidBody2dComponent:
+      bodyType: 1
+      fixedRotation: false
+    boxCollider2dComponent:
+      density: 1
+      friction: 0.5
+      offset: [0, 0]
+      restitution: 0
+      restitutionThreshold: 0.5
+      size: [0.5, 0.5]
+  - entity: 44
+    tagComponent:
+      tag: Entity (Copy)
+    transformComponent:
+      position: [7.60600471, -0.646289229, 0]
+      rotation: [0, 0, 0.849362373]
+      scale: [5.8893013, 0.999999881, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
       texture: " "
@@ -877,13 +900,13 @@ entities:
       restitution: 0
       restitutionThreshold: 0.5
       size: [0.5, 0.5]
-  - entity: 44
+  - entity: 45
     tagComponent:
       tag: Entity (Copy)
     transformComponent:
-      position: [4.99773216, -1.22518492, 0]
-      rotation: [0, 0, 0.849362373]
-      scale: [5.8893013, 0.999999881, 1]
+      position: [-3.52947068, -1.26492238, 0]
+      rotation: [0, 0, -0.296161711]
+      scale: [5.88930273, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
       texture: " "

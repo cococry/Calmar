@@ -22,6 +22,7 @@ namespace calmar {
         MonoMethod* getMethod(const std::string& name, int paramCount);
 
         MonoObject* invokeMethod(MonoMethod* method, MonoObject* instance, void** params = nullptr);
+
     private:
         std::string mNameSpace = "", mName = "";
         MonoClass* mMonoClass = nullptr;
@@ -44,6 +45,8 @@ namespace calmar {
 
         static bool entityClassExists(const std::string& className);
 
+        static scene* getSceneContext();
+
         static std::unordered_map<std::string, std::shared_ptr<scriptClass>> getEntityClasses();
 
        private:
@@ -57,7 +60,7 @@ namespace calmar {
 
     class scriptInstance {
     public:
-        scriptInstance(const std::shared_ptr<scriptClass>& script_class);
+        scriptInstance(const std::shared_ptr<scriptClass>& script_class, entity entty);
 
         void invokeInitMethod();
         void invokeUpdateMethod();
@@ -68,6 +71,7 @@ namespace calmar {
         MonoObject* mInstance = nullptr;
         MonoMethod* mInitMethod = nullptr;
         MonoMethod* mUpdateMethod = nullptr;
+        MonoMethod* mConstructorWithId= nullptr;
     };
 
 }  // namespace calmar

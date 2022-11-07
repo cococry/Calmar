@@ -9,7 +9,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 46
     tagComponent:
       tag: Entity (Copy)
@@ -19,7 +19,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 47
     tagComponent:
       tag: Entity (Copy)
@@ -29,7 +29,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 48
     tagComponent:
       tag: Entity (Copy)
@@ -39,7 +39,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 49
     tagComponent:
       tag: Entity (Copy)
@@ -49,7 +49,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 50
     tagComponent:
       tag: Entity (Copy)
@@ -59,7 +59,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 51
     tagComponent:
       tag: Entity (Copy)
@@ -69,7 +69,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 52
     tagComponent:
       tag: Entity (Copy)
@@ -79,7 +79,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 53
     tagComponent:
       tag: Entity (Copy)
@@ -89,7 +89,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 54
     tagComponent:
       tag: Entity (Copy)
@@ -99,7 +99,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 55
     tagComponent:
       tag: Entity (Copy)
@@ -109,7 +109,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 56
     tagComponent:
       tag: Entity (Copy)
@@ -119,7 +119,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 57
     tagComponent:
       tag: Entity (Copy)
@@ -129,7 +129,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 58
     tagComponent:
       tag: Entity (Copy)
@@ -139,7 +139,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 59
     tagComponent:
       tag: Entity (Copy)
@@ -149,7 +149,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/playertexture.png
+      texture: assets/textures/playertexture.png
   - entity: 60
     tagComponent:
       tag: Entity (Copy)
@@ -159,7 +159,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 61
     tagComponent:
       tag: Entity (Copy)
@@ -169,7 +169,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 62
     tagComponent:
       tag: Entity (Copy)
@@ -179,7 +179,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 63
     tagComponent:
       tag: Entity (Copy)
@@ -189,7 +189,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/grasstexture.jpg
+      texture: assets/textures/grasstexture.jpg
   - entity: 64
     tagComponent:
       tag: Entity (Copy)
@@ -199,7 +199,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/playertexture.png
+      texture: assets/textures/playertexture.png
   - entity: 65
     tagComponent:
       tag: Entity (Copy)
@@ -209,7 +209,7 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/playertexture.png
+      texture: assets/textures/playertexture.png
   - entity: 66
     tagComponent:
       tag: Entity (Copy)
@@ -219,4 +219,4 @@ entities:
       scale: [1, 1, 1]
     spriteRendererComponent:
       tint: [1, 1, 1, 1]
-      texture: D:/Dev/calmar/engine/assets/textures/playertexture.png
+      texture: assets/textures/playertexture.png

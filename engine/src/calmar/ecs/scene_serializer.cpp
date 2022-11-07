@@ -151,8 +151,10 @@ namespace calmar {
             out << YAML::Key << "tint" << YAML::Value << spriteRendererComp.tint;
             if (spriteRendererComp.texture) {
                 std::string filepath = spriteRendererComp.texture->getData().filepath;
-                std::replace(filepath.begin(), filepath.end(), '\\', '/');
-                out << YAML::Key << "texture" << YAML::Value << filepath;
+                std::filesystem::path filepathFileSystem = std::filesystem::path(filepath);
+                std::filesystem::path relativePath = std::filesystem::relative(filepath, "../assets");
+                std::string relatviePathStr = relativePath.string();
+                out << YAML::Key << "texture" << YAML::Value << relatviePathStr;
             } else {
                 out << YAML::Key << "texture" << YAML::Value << " ";
             }

@@ -1,0 +1,6 @@
+scene: untitled
+physicsVelocityIterations: 6
+physicsPositionIterations: 2
+gravityScale: -9.81000042
+entities:
+  []
